@@ -1,4 +1,4 @@
-﻿% rebase('layout.tpl', title=title, year=year)
+﻿% rebase('layout.tpl', title1=title, year=year)
 
 <!-- Основной портрет Стивена Кинга -->
 <div class="main-portrait">
