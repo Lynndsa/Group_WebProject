@@ -30,6 +30,6 @@ def about():
     """Renders the about page."""
     return dict(
         title='About',
-        message='Your application description page.',
+        message='Gosha poshel nahui',
         year=datetime.now().year
     )
