@@ -1,4 +1,4 @@
-﻿% rebase('layout.tpl', title=title, year=year)
+﻿% rebase('layout.tpl', title1=title, year=year)
 
 <!-- Основной портрет Стивена Кинга -->
 <div class="main-portrait">
@@ -42,7 +42,7 @@
         <h3>Детские годы</h3>
         <div class="gallery-row">
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-child1.jpg" alt="Стивен Кинг в детстве" onclick="openModal(this)">
+                <img src="/static/images/stephenkingchild.jpg" alt="Стивен Кинг в детстве" onclick="openModal(this)">
                 <p class="photo-caption">Стивен в возрасте 5 лет</p>
             </div>
             <div class="gallery-item">
@@ -374,7 +374,3 @@
         }
     });
 </script>
-% rebase('layout.tpl', title1=title, year=year)
-
-<h2>{{ title1 }}.</h2>
-<h3>{{ message }}</h3>
