@@ -1,5 +1,4 @@
-﻿% rebase('layout.tpl', title1=title, year=year)
-
+﻿% rebase('layout.tpl', title=title, year=year)
 <!-- Основной портрет Стивена Кинга -->
 <div class="main-portrait">
     <img src="/static/images/stephenking.jpg" alt="Стивен Кинг" class="portrait-large">
@@ -46,16 +45,16 @@
                 <p class="photo-caption">Стивен в возрасте 5 лет</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-child2.jpg" alt="Стивен Кинг с братом" onclick="openModal(this)">
+                <img src="/static/images/stephenkingwithbro.png" alt="Стивен Кинг с братом" onclick="openModal(this)">
                 <p class="photo-caption">Стивен (слева) со старшим братом Дэвидом</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-child3.jpg" alt="Стивен Кинг в школе" onclick="openModal(this)">
+                <img src="/static/images/stephenkingschool.jpg" alt="Стивен Кинг в школе" onclick="openModal(this)">
                 <p class="photo-caption">Школьные годы, Лиссабон-Фоллс</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-child4.jpg" alt="Стивен Кинг с матерью" onclick="openModal(this)">
-                <p class="photo-caption">Стивен с матерью Нелли Рут</p>
+                <img src="/static/images/stivenkingsmamojibratom.jpg" alt="Стивен Кинг с матерью и братом" onclick="openModal(this)">
+                <p class="photo-caption">Стивен с матерью и братом</p>
             </div>
         </div>
     </div>
@@ -65,20 +64,20 @@
         <h3>За работой</h3>
         <div class="gallery-row">
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-writing1.jpg" alt="Стивен Кинг пишет" onclick="openModal(this)">
+                <img src="/static/images/stivenkinginhisroom.jpg" alt="Стивен Кинг пишет" onclick="openModal(this)">
                 <p class="photo-caption">В своем кабинете, 1980-е</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-writing2.jpg" alt="Стивен Кинг за печатной машинкой" onclick="openModal(this)">
+                <img src="/static/images/stephenkingandhistypewriter.jpg" alt="Стивен Кинг за печатной машинкой" onclick="openModal(this)">
                 <p class="photo-caption">За печатной машинкой, 1970-е</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-writing3.jpg" alt="Стивен Кинг с рукописью" onclick="openModal(this)">
+                <img src="/static/images/stivenkingpishetbook.jpg" alt="Стивен Кинг с рукописью" onclick="openModal(this)">
                 <p class="photo-caption">Работа над рукописью</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-writing4.jpg" alt="Стивен Кинг в библиотеке" onclick="openModal(this)">
-                <p class="photo-caption">В библиотеке за работой</p>
+                <img src="/static/images/stephenkingwork.jpg" alt="Стивен Кинг с своем кабинете дома" onclick="openModal(this)">
+                <p class="photo-caption">Стивен Кинг за работой</p>
             </div>
         </div>
     </div>
@@ -88,19 +87,19 @@
         <h3>Семья</h3>
         <div class="gallery-row">
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-family1.jpg" alt="Стивен Кинг с женой" onclick="openModal(this)">
+                <img src="/static/images/stivenkingwithwife.jpg" alt="Стивен Кинг с женой" onclick="openModal(this)">
                 <p class="photo-caption">С женой Табитой</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-family2.jpg" alt="Стивен Кинг с детьми" onclick="openModal(this)">
+                <img src="/static/images/stivenkingfamily.jpg" alt="Стивен Кинг с детьми" onclick="openModal(this)">
                 <p class="photo-caption">С детьми Наоми, Джо и Оуэном</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-family3.jpg" alt="Стивен Кинг с внуками" onclick="openModal(this)">
-                <p class="photo-caption">С внуками</p>
+                <img src="/static/images/stivenkingfamilynew.jpg" alt="Стивен Кинг вместе со своей семьей, недавнее фото" onclick="openModal(this)">
+                <p class="photo-caption">С семьей</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-family4.jpg" alt="Стивен Кинг и Табита" onclick="openModal(this)">
+                <img src="/static/images/stivenkingwithwifenew.jpeg" alt="Стивен Кинг и Табита" onclick="openModal(this)">
                 <p class="photo-caption">Табита и Стивен, недавнее фото</p>
             </div>
         </div>
@@ -111,19 +110,19 @@
         <h3>На съемочной площадке</h3>
         <div class="gallery-row">
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-movie1.jpg" alt="Стивен Кинг на съемках" onclick="openModal(this)">
+                <img src="/static/images/stivenkingono.jpg" alt="Стивен Кинг на съемках" onclick="openModal(this)">
                 <p class="photo-caption">На съемках "Оно", 1990</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-movie2.jpg" alt="Стивен Кинг режиссирует" onclick="openModal(this)">
+                <img src="/static/images/maxspeed.jpg" alt="Стивен Кинг режиссирует" onclick="openModal(this)">
                 <p class="photo-caption">Режиссирует "Максимальное ускорение"</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-movie3.jpg" alt="Камео в фильме" onclick="openModal(this)">
+                <img src="/static/images/stivenkinginmovie.jpeg" alt="Камео в фильме" onclick="openModal(this)">
                 <p class="photo-caption">Камео в "Калейдоскопе ужасов"</p>
             </div>
             <div class="gallery-item">
-                <img src="/static/images/stephen-king-movie4.jpg" alt="Стивен Кинг с актерами" onclick="openModal(this)">
+                <img src="/static/images/withactor.jpg" alt="Стивен Кинг с актерами" onclick="openModal(this)">
                 <p class="photo-caption">С актерами на съемках</p>
             </div>
         </div>
@@ -343,34 +342,4 @@
         }
     }
 </style>
-
-<!-- Скрипт для модального окна -->
-<script>
-    function openModal(img) {
-        var modal = document.getElementById('modal');
-        var modalImg = document.getElementById('modal-img');
-        var captionText = document.getElementById('caption');
-        
-        modal.style.display = "block";
-        modalImg.src = img.src;
-        captionText.innerHTML = img.alt;
-        
-        // Блокируем прокрутку страницы
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closeModal() {
-        var modal = document.getElementById('modal');
-        modal.style.display = "none";
-        
-        // Возвращаем прокрутку
-        document.body.style.overflow = 'auto';
-    }
-    
-    // Закрытие по клавише ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeModal();
-        }
-    });
-</script>
+<script src="/static/scripts/modal.js"></script>
