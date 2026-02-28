@@ -18,7 +18,7 @@
     </div>
     <div class="col-md-4">
         <h2>Get more libraries</h2>
-        <p>The Python Package Index is a repository of software for the Python programming language.</p>
+        <p>The Python Packageв Index is a repository of software for the Python programming language.</p>
         <p><a class="btn btn-default" href="https://pypi.python.org/pypi">Learn more &raquo;</a></p>
     </div>
     <div class="col-md-4">
