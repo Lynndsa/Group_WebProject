@@ -1,12 +1,11 @@
-﻿
-// Функция для открытия модального окна
+﻿// Функция для открытия модального окна
 function openModal(img) {
     var modal = document.getElementById('modal');
     var modalImg = document.getElementById('modal-img');
     var captionText = document.getElementById('caption');
 
     if (modal && modalImg && captionText) {
-        modal.style.display = "block";
+        modal.style.display = "flex";  
         modalImg.src = img.src;
         captionText.innerHTML = img.alt;
 
@@ -33,12 +32,12 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
-// Закрытие при клике вне изображения (если нужно)
+// Закрытие при клике вне изображения
 document.addEventListener('click', function (e) {
     var modal = document.getElementById('modal');
     var modalImg = document.getElementById('modal-img');
 
-    if (modal && modal.style.display === 'block' && e.target === modal) {
+    if (modal && modal.style.display === 'flex' && e.target === modal) {  // 🔥 Тоже поправил проверку
         closeModal();
     }
 });
