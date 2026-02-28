@@ -10,6 +10,118 @@
     --font-mono: 'Courier Prime', monospace;
 }
 
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid #1a1a1a;
+    z-index: 1000;
+    height: 80px;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main);
+    text-decoration: none;
+    letter-spacing: 2px;
+    transition: opacity 0.3s;
+}
+
+    .logo:hover {
+        opacity: 0.8;
+    }
+
+.logo-accent {
+    color: var(--accent-color);
+}
+
+.nav-menu {
+    display: flex;
+    gap: 40px;
+}
+
+.nav-link {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-main);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+    position: relative;
+}
+
+    .nav-link:hover {
+        color: var(--accent-color);
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--accent-color);
+        transition: width 0.3s;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+/* Отступ для контента из-за фиксированного хедера */
+body {
+    padding-top: 80px;
+}
+
+/* Адаптивность для меню */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 0 20px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-menu {
+        gap: 20px;
+    }
+
+    .nav-link {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu {
+        gap: 15px;
+    }
+
+    .nav-link {
+        font-size: 11px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+}
 * {
     margin: 0;
     padding: 0;
@@ -182,6 +294,8 @@ html, body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
     .gallery-item:hover {
@@ -196,6 +310,7 @@ html, body {
         object-fit: cover;
         display: block;
         transition: transform 0.3s;
+        flex-shrink: 0;
     }
 
     .gallery-item:hover img {
@@ -210,6 +325,8 @@ html, body {
     background: #111;
     font-family: var(--font-sans);
     margin: 0;
+    line-height: 1.4; 
+    flex-grow: 1;
 }
 
 .modal {

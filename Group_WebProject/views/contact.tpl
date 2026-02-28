@@ -1,5 +1,20 @@
-﻿% rebase('layout.tpl', title=title, year=year)
-
+﻿
+<link rel="stylesheet" type="text/css" href="/static/content/bio.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<header class="main-header">
+    <div class="header-container">
+        <a href="/" class="logo">
+            STEPHEN <span class="logo-accent">KING</span>
+        </a>
+        <nav class="nav-menu">
+            <a href="/home class="nav-link">НОВОСТИ</a>
+            <a href="/about" class="nav-link">КНИГИ</a>
+            <a href="/contact" class="nav-link">БИОГРАФИЯ</a>
+        </nav>
+    </div>
+</header>
 <!-- Основной портрет Стивена Кинга -->
 <div class="hero-banner">
     <div class="hero-image">
@@ -48,7 +63,7 @@
         <div class="gallery-row">
             <div class="gallery-item">
                 <img src="/static/images/stephenkingchild.jpg" alt="Стивен Кинг в детстве" onclick="openModal(this)">
-                <p class="photo-caption">Стивен в возрасте 5 лет</p>
+                <p class="photo-caption">Стивен в возрасте 5 лет        </p>
             </div>
             <div class="gallery-item">
                 <img src="/static/images/stephenkingwithbro.png" alt="Стивен Кинг с братом" onclick="openModal(this)">
