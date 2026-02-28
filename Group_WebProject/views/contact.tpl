@@ -1,9 +1,15 @@
 ﻿% rebase('layout.tpl', title=title, year=year)
+
 <!-- Основной портрет Стивена Кинга -->
-<div class="main-portrait">
-    <img src="/static/images/stephenking.jpg" alt="Стивен Кинг" class="portrait-large">
-    <h1 class="page-title">Стивен Эдвин Кинг</h1>
-    <p class="subtitle">1947 — настоящее время</p>
+<div class="hero-banner">
+    <div class="hero-image">
+        <img src="/static/images/Stephenbanner.jpg" alt="Стивен Кинг">
+    </div>
+    <div class="hero-overlay">
+        <h1 class="hero-title">Стивен Эдвин Кинг</h1>
+        <p class="hero-subtitle">1947 — настоящее время</p>
+        <p class="hero-description">Мастер ужасов • Легенда литературы • Король кошмаров</p>
+    </div>
 </div>
 
 <!-- Биография -->
@@ -137,75 +143,169 @@
 </div>
 
 <!-- Стили -->
+
 <style>
-    /* Основной портрет */
-    .main-portrait {
-        text-align: center;
-        margin: 30px 0;
-        padding: 20px;
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        border-radius: 10px;
+    /* === ПЕРЕМЕННЫЕ И БАЗА === */
+    :root {
+        --bg-color: #0a0a0a;
+        --card-bg: #1a1a1a;
+        --accent-color: #bb0a0a;
+        --text-main: #f0f0f0;
+        --text-sec: #a0a0a0;
+        
+        --font-serif: 'Playfair Display', serif;
+        --font-sans: 'Inter', sans-serif;
+        --font-mono: 'Courier Prime', monospace;
     }
     
-    .portrait-large {
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 5px solid white;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        margin-bottom: 20px;
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
     }
     
-    .page-title {
-        color: #333;
-        font-size: 2.5em;
-        margin: 10px 0 5px;
+    html, body {
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        font-family: var(--font-sans);
+        line-height: 1.6;
     }
     
-    .subtitle {
-        color: #666;
-        font-size: 1.2em;
-        font-style: italic;
-    }
-    
-    /* Биография */
-    .about-content {
-        max-width: 800px;
-        margin: 40px auto;
+    .container {
+        background: transparent !important;
+        max-width: 1200px;
+        margin: 0 auto;
         padding: 0 20px;
-        line-height: 1.8;
-        color: #333;
+    }
+    
+    /* === HERO BANNER === */
+   .hero-banner {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    margin-bottom: 60px;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.hero-image::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 1;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 60px 40px 40px;
+    background: linear-gradient(transparent, rgba(10,10,10,0.9));
+    z-index: 2;
+}
+    
+    .hero-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 60px 40px 40px;
+        background: linear-gradient(transparent, rgba(10,10,10,0.95));
+    }
+    
+    .hero-title {
+        font-family: var(--font-serif);
+        font-size: 4em;
+        color: var(--text-main);
+        margin: 0 0 10px;
+        text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+        letter-spacing: 1px;
+    }
+    
+    .hero-subtitle {
+        font-family: var(--font-mono);
+        font-size: 1.3em;
+        color: var(--accent-color);
+        margin: 0 0 15px;
+        letter-spacing: 2px;
+    }
+    
+    .hero-description {
+        font-family: var(--font-sans);
+        font-size: 1.1em;
+        color: var(--text-sec);
+        margin: 0;
+        max-width: 700px;
+    }
+    
+    /* === БИОГРАФИЯ === */
+    .about-content {
+        max-width: 900px;
+        margin: 0 auto 80px;
+        padding: 40px;
+        background: var(--card-bg);
+        border-radius: 10px;
+        border: 1px solid #2a2a2a;
     }
     
     .about-content h3 {
-        color: #007bff;
-        margin-top: 30px;
-        margin-bottom: 15px;
-        border-left: 4px solid #007bff;
+        font-family: var(--font-serif);
+        color: var(--text-main);
+        font-size: 1.5em;
+        margin: 35px 0 15px;
         padding-left: 15px;
+        border-left: 4px solid var(--accent-color);
+    }
+    
+    .about-content h3:first-child {
+        margin-top: 0;
     }
     
     .about-content p {
+        color: var(--text-sec);
+        font-size: 16px;
         margin-bottom: 20px;
         text-align: justify;
+        line-height: 1.8;
     }
     
     .conclusion {
-        font-weight: bold;
+        font-weight: 600;
         font-style: italic;
-        color: #555;
-        border-top: 1px solid #ddd;
+        color: var(--text-main);
+        border-top: 1px solid #333;
         padding-top: 20px;
         margin-top: 30px;
     }
     
-    /* Галерея */
+    /* === ГАЛЕРЕЯ === */
     .gallery-title {
         text-align: center;
-        color: #333;
-        font-size: 2em;
-        margin: 50px 0 30px;
+        font-family: var(--font-serif);
+        font-size: 2.5em;
+        color: var(--text-main);
+        margin: 80px 0 40px;
         position: relative;
     }
     
@@ -213,27 +313,28 @@
         content: "";
         display: block;
         width: 100px;
-        height: 3px;
-        background: #007bff;
-        margin: 15px auto 0;
+        height: 4px;
+        background: var(--accent-color);
+        margin: 20px auto 0;
     }
     
     .photo-gallery {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 20px;
+        padding: 0 20px 60px;
     }
     
     .gallery-section {
-        margin-bottom: 50px;
+        margin-bottom: 60px;
     }
     
     .gallery-section h3 {
-        color: #555;
+        font-family: var(--font-serif);
+        color: var(--text-main);
         font-size: 1.5em;
-        margin-bottom: 20px;
-        padding-left: 10px;
-        border-left: 4px solid #007bff;
+        margin-bottom: 25px;
+        padding-left: 15px;
+        border-left: 4px solid var(--accent-color);
     }
     
     .gallery-row {
@@ -245,93 +346,170 @@
     
     .gallery-item {
         flex: 0 1 calc(25% - 20px);
-        min-width: 200px;
-        background: white;
-        border-radius: 10px;
+        min-width: 250px;
+        background: var(--card-bg);
+        border-radius: 8px;
         overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
+        border: 1px solid #2a2a2a;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
         cursor: pointer;
     }
     
     .gallery-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        transform: translateY(-8px);
+        box-shadow: 0 12px 30px rgba(187, 10, 10, 0.25);
+        border-color: var(--accent-color);
     }
     
     .gallery-item img {
         width: 100%;
-        height: 200px;
+        height: 220px;
         object-fit: cover;
         display: block;
+        transition: transform 0.3s;
+    }
+    
+    .gallery-item:hover img {
+        transform: scale(1.05);
     }
     
     .photo-caption {
-        padding: 10px;
+        padding: 15px;
+        text-align: center;
+        font-size: 14px;
+        color: var(--text-sec);
+        background: #111;
+        font-family: var(--font-sans);
         margin: 0;
-        text-align: center;
-        font-size: 0.9em;
-        color: #555;
-        background: #f8f9fa;
     }
     
-    /* Модальное окно */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.9);
-        overflow: auto;
-    }
+    /* === МОДАЛЬНОЕ ОКНО === */
+   /* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(10, 10, 10, 0.95);
+    overflow: auto;
     
-    .modal-content {
-        margin: auto;
-        display: block;
-        max-width: 90%;
-        max-height: 80%;
-        margin-top: 50px;
-    }
+    /* Центрирование контента */
+    align-items: center;
+    justify-content: center;
+    display: flex; /* Добавляем flex для центрирования */
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    border: 3px solid var(--accent-color);
+    border-radius: 5px;
+    margin: auto;
     
-    .modal-caption {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 700px;
-        text-align: center;
-        color: #ccc;
-        padding: 10px 0;
+    /* Анимация появления */
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from { 
+        transform: scale(0.9); 
+        opacity: 0; 
     }
+    to { 
+        transform: scale(1); 
+        opacity: 1; 
+    }
+}
+
+.modal-caption {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    background: rgba(10,10,10,0.9);
+    padding: 12px 30px;
+    border-radius: 5px;
+    max-width: 80%;
+    text-align: center;
+    border: 1px solid var(--accent-color);
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: var(--text-main);
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+    font-family: var(--font-sans);
+    line-height: 1;
+    z-index: 10001;
+}
+
+.close:hover {
+    color: var(--accent-color);
+}
     
     .close {
         position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
+        top: 20px;
+        right: 40px;
+        color: var(--text-main);
+        font-size: 50px;
         font-weight: bold;
         cursor: pointer;
+        transition: color 0.3s;
+        font-family: var(--font-sans);
+        line-height: 1;
     }
     
     .close:hover {
-        color: #bbb;
+        color: var(--accent-color);
     }
     
-    /* Адаптивность */
+    /* === АДАПТИВНОСТЬ === */
+    @media (max-width: 1024px) {
+        .gallery-item {
+            flex: 0 1 calc(33.33% - 20px);
+        }
+        
+        .hero-title {
+            font-size: 3em;
+        }
+    }
+    
     @media (max-width: 768px) {
         .gallery-item {
             flex: 0 1 calc(50% - 20px);
         }
         
-        .portrait-large {
-            width: 200px;
-            height: 200px;
+        .hero-banner {
+            height: 400px;
         }
         
-        .page-title {
+        .hero-title {
+            font-size: 2.2em;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1em;
+        }
+        
+        .about-content {
+            padding: 25px;
+            margin: 0 15px 60px;
+        }
+        
+        .gallery-title {
             font-size: 2em;
         }
     }
@@ -339,6 +517,22 @@
     @media (max-width: 480px) {
         .gallery-item {
             flex: 0 1 100%;
+        }
+        
+        .hero-banner {
+            height: 350px;
+        }
+        
+        .hero-title {
+            font-size: 1.8em;
+        }
+        
+        .hero-description {
+            font-size: 1em;
+        }
+        
+        .about-content h3 {
+            font-size: 1.3em;
         }
     }
 </style>
