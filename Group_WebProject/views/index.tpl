@@ -7,9 +7,6 @@
 
 <!-- Hero баннер -->
 <div class="hero-banner">
-    <div class="hero-image">
-        <img src="/static/images/Stephenbanner.jpg" alt="Стивен Кинг">
-    </div>
     <div class="hero-overlay">
         <h1 class="hero-title">Добро пожаловать в мир</h1>
         <p class="hero-main-title">Стивена Кинга</p>
@@ -49,78 +46,73 @@
     <!-- Книга 1 -->
     <div class="book-card">
         <div class="book-cover">
-            <img src="/static/images/book-it.jpg" alt="Оно">
+            <img src="/static/images/it_cover.jpg" alt="Оно">
         </div>
         <div class="book-info">
             <h3 class="book-title">ОНО</h3>
             <p class="book-year">1986</p>
             <p class="book-description">Семеро детей из Дерри сталкиваются с древним злом, принимающим облик клоуна Пеннивайза.</p>
-            <a href="/books/it" class="book-link">Подробнее →</a>
+            <a href="/books" class="book-link">Подробнее →</a>
         </div>
     </div>
     
     <!-- Книга 2 -->
     <div class="book-card">
         <div class="book-cover">
-            <img src="/static/images/book-shining.jpg" alt="Сияние">
+            <img src="/static/images/the_shining.jpg" alt="Сияние">
         </div>
         <div class="book-info">
             <h3 class="book-title">Сияние</h3>
             <p class="book-year">1977</p>
             <p class="book-description">Семья писателя остается зимой в изолированном отеле, где просыпаются темные силы.</p>
-            <a href="/books/shining" class="book-link">Подробнее →</a>
         </div>
     </div>
     
     <!-- Книга 3 -->
     <div class="book-card">
         <div class="book-cover">
-            <img src="/static/images/book-greenmile.jpg" alt="Зеленая миля">
+            <img src="/static/images/the_green_mile.jpg" alt="Зеленая миля">
         </div>
         <div class="book-info">
             <h3 class="book-title">Зеленая миля</h3>
             <p class="book-year">1996</p>
             <p class="book-description">История надзирателя и необычного заключенного в блоке смертников.</p>
-            <a href="/books/greenmile" class="book-link">Подробнее →</a>
         </div>
     </div>
     
     <!-- Книга 4 -->
     <div class="book-card">
         <div class="book-cover">
-            <img src="/static/images/book-stand.jpg" alt="Противостояние">
+            <img src="/static/images/the_stand.jpg" alt="Противостояние">
         </div>
         <div class="book-info">
             <h3 class="book-title">Противостояние</h3>
             <p class="book-year">1978</p>
             <p class="book-description">Эпическая битва добра и зла после пандемии, уничтожившей большую часть человечества.</p>
-            <a href="/books/stand" class="book-link">Подробнее →</a>
         </div>
     </div>
     
     <!-- Книга 5 -->
     <div class="book-card">
         <div class="book-cover">
-            <img src="/static/images/book-darktower.jpg" alt="Темная Башня">
+            <img src="/static/images/the_dark_tower.jpg" alt="Темная Башня">
         </div>
         <div class="book-info">
             <h3 class="book-title">Темная Башня</h3>
             <p class="book-year">1982-2012</p>
             <p class="book-description">Эпическая сага о последнем стрелке Роланде и его поисках Темной Башни.</p>
-            <a href="/books/darktower" class="book-link">Подробнее →</a>
         </div>
     </div>
     
     <!-- Книга 6 -->
     <div class="book-card">
         <div class="book-cover">
-            <img src="/static/images/book-petsematary.jpg" alt="Кладбище домашних животных">
+            <img src="/static/images/pet_sematary.jpg" alt="Кладбище домашних животных">
         </div>
         <div class="book-info">
             <h3 class="book-title">Кладбище домашних животных</h3>
             <p class="book-year">1983</p>
             <p class="book-description">Семья обнаруживает древнее кладбище, способное воскрешать мертвых.</p>
-            <a href="/books/petsematary" class="book-link">Подробнее →</a>
         </div>
     </div>
 </div>
@@ -168,15 +160,11 @@
         <span class="section-icon">📖</span>
         <span class="section-title">Все книги</span>
     </a>
-    <a href="/bio" class="section-link">
+    <a href="/contact" class="section-link">
         <span class="section-icon">👤</span>
         <span class="section-title">Биография</span>
     </a>
-    <a href="/gallery" class="section-link">
-        <span class="section-icon">🖼️</span>
-        <span class="section-title">Галерея</span>
-    </a>
-    <a href="/contact" class="section-link">
+    <a href="/creators" class="section-link">
         <span class="section-icon">📧</span>
         <span class="section-title">Контакты</span>
     </a>
