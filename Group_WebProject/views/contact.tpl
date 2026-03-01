@@ -1,9 +1,18 @@
-﻿% rebase('layout.tpl', title=title, year=year)
+% rebase('layout.tpl', title=title, year=year)
+<link rel="stylesheet" type="text/css" href="/static/content/bio.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <!-- Основной портрет Стивена Кинга -->
-<div class="main-portrait">
-    <img src="/static/images/stephenking.jpg" alt="Стивен Кинг" class="portrait-large">
-    <h1 class="page-title">Стивен Эдвин Кинг</h1>
-    <p class="subtitle">1947 — настоящее время</p>
+<div class="hero-banner">
+    <div class="hero-image">
+        <img src="/static/images/Stephenbanner.jpg" alt="Стивен Кинг">
+    </div>
+    <div class="hero-overlay">
+        <h1 class="hero-title">Стивен Эдвин Кинг</h1>
+        <p class="hero-subtitle">1947 — настоящее время</p>
+        <p class="hero-description">Мастер ужасов • Легенда литературы • Король кошмаров</p>
+    </div>
 </div>
 
 <!-- Биография -->
@@ -42,7 +51,7 @@
         <div class="gallery-row">
             <div class="gallery-item">
                 <img src="/static/images/stephenkingchild.jpg" alt="Стивен Кинг в детстве" onclick="openModal(this)">
-                <p class="photo-caption">Стивен в возрасте 5 лет</p>
+                <p class="photo-caption">Стивен в возрасте 5 лет        </p>
             </div>
             <div class="gallery-item">
                 <img src="/static/images/stephenkingwithbro.png" alt="Стивен Кинг с братом" onclick="openModal(this)">
@@ -136,210 +145,4 @@
     <div id="caption" class="modal-caption"></div>
 </div>
 
-<!-- Стили -->
-<style>
-    /* Основной портрет */
-    .main-portrait {
-        text-align: center;
-        margin: 30px 0;
-        padding: 20px;
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        border-radius: 10px;
-    }
-    
-    .portrait-large {
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 5px solid white;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        margin-bottom: 20px;
-    }
-    
-    .page-title {
-        color: #333;
-        font-size: 2.5em;
-        margin: 10px 0 5px;
-    }
-    
-    .subtitle {
-        color: #666;
-        font-size: 1.2em;
-        font-style: italic;
-    }
-    
-    /* Биография */
-    .about-content {
-        max-width: 800px;
-        margin: 40px auto;
-        padding: 0 20px;
-        line-height: 1.8;
-        color: #333;
-    }
-    
-    .about-content h3 {
-        color: #007bff;
-        margin-top: 30px;
-        margin-bottom: 15px;
-        border-left: 4px solid #007bff;
-        padding-left: 15px;
-    }
-    
-    .about-content p {
-        margin-bottom: 20px;
-        text-align: justify;
-    }
-    
-    .conclusion {
-        font-weight: bold;
-        font-style: italic;
-        color: #555;
-        border-top: 1px solid #ddd;
-        padding-top: 20px;
-        margin-top: 30px;
-    }
-    
-    /* Галерея */
-    .gallery-title {
-        text-align: center;
-        color: #333;
-        font-size: 2em;
-        margin: 50px 0 30px;
-        position: relative;
-    }
-    
-    .gallery-title:after {
-        content: "";
-        display: block;
-        width: 100px;
-        height: 3px;
-        background: #007bff;
-        margin: 15px auto 0;
-    }
-    
-    .photo-gallery {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-    
-    .gallery-section {
-        margin-bottom: 50px;
-    }
-    
-    .gallery-section h3 {
-        color: #555;
-        font-size: 1.5em;
-        margin-bottom: 20px;
-        padding-left: 10px;
-        border-left: 4px solid #007bff;
-    }
-    
-    .gallery-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-    }
-    
-    .gallery-item {
-        flex: 0 1 calc(25% - 20px);
-        min-width: 200px;
-        background: white;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
-        cursor: pointer;
-    }
-    
-    .gallery-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    }
-    
-    .gallery-item img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
-        display: block;
-    }
-    
-    .photo-caption {
-        padding: 10px;
-        margin: 0;
-        text-align: center;
-        font-size: 0.9em;
-        color: #555;
-        background: #f8f9fa;
-    }
-    
-    /* Модальное окно */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0,0,0,0.9);
-        overflow: auto;
-    }
-    
-    .modal-content {
-        margin: auto;
-        display: block;
-        max-width: 90%;
-        max-height: 80%;
-        margin-top: 50px;
-    }
-    
-    .modal-caption {
-        margin: auto;
-        display: block;
-        width: 80%;
-        max-width: 700px;
-        text-align: center;
-        color: #ccc;
-        padding: 10px 0;
-    }
-    
-    .close {
-        position: absolute;
-        top: 15px;
-        right: 35px;
-        color: #f1f1f1;
-        font-size: 40px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    
-    .close:hover {
-        color: #bbb;
-    }
-    
-    /* Адаптивность */
-    @media (max-width: 768px) {
-        .gallery-item {
-            flex: 0 1 calc(50% - 20px);
-        }
-        
-        .portrait-large {
-            width: 200px;
-            height: 200px;
-        }
-        
-        .page-title {
-            font-size: 2em;
-        }
-    }
-    
-    @media (max-width: 480px) {
-        .gallery-item {
-            flex: 0 1 100%;
-        }
-    }
-</style>
 <script src="/static/scripts/modal.js"></script>
