@@ -1,4 +1,4 @@
-% rebase('layout.tpl', title='Главная - Фан-сайт Стивена Кинга', year=2024)
+% rebase('layout.tpl', title=title, year=year)
 
 <link rel="stylesheet" type="text/css" href="/static/content/bio.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
