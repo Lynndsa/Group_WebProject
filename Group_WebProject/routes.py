@@ -11,6 +11,7 @@ from datetime import datetime
 def home():
     """Renders the home page."""
     return dict(
+        title='Home page',
         year=datetime.now().year
     )
 
