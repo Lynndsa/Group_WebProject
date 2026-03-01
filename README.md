@@ -56,21 +56,6 @@ stephen-king-site/
 ├── README.txt              # Этот файл
 └── requirements.txt        # Зависимости Python
 
-УСТАНОВКА И ЗАПУСК
-------------------
-1. Клонирование репозитория:
-
-   cd stephen-king-site
-
-2. Установка зависимостей:
-   pip install -r requirements.txt
-
-3. Запуск приложения:
-   python app.py
-
-4. Открыть в браузере:
-   Перейдите по адресу: http://localhost:8080/
-
 ФУНКЦИОНАЛ
 ----------
 Страница      URL       Описание
