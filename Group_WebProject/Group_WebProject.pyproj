@@ -55,6 +55,10 @@
     <Content Include="static\images\it1990_losers.jpg" />
     <Content Include="static\images\it1990_pennywise.jpg" />
     <Content Include="static\images\it1990_sewer.jpg" />
+    <Content Include="static\images\it2017_bathroom.jpg" />
+    <Content Include="static\images\it2017_losers.jpg" />
+    <Content Include="static\images\it2017_pennywise.jpg" />
+    <Content Include="static\images\it2017_projector.jpg" />
     <Content Include="static\images\it_cover.jpg" />
     <Content Include="static\scripts\bootstrap.js" />
     <Content Include="static\scripts\bootstrap.min.js" />
