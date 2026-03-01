@@ -21,87 +21,69 @@
     <div class="row">
         <!-- Разработчик 1 -->
         <div class="col-md-4">
-            <div class="developer-card" style="background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 30px; text-align: center; margin-bottom: 30px; transition: transform 0.3s, border-color 0.3s;">
-                <div style="width: 150px; height: 150px; border-radius: 50%; background: #2a0a0a; margin: 0 auto 20px; border: 3px solid #8b0000; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                    <!-- Место для фото разработчика -->
-                    <span style="font-size: 60px; color: #8b0000;">👤</span>
+            <div class="developer-card" style="background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 30px; text-align: center; margin-bottom: 30px;">
+                <!-- ФОТОГРАФИЯ -->
+                <div style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; border: 3px solid #8b0000; overflow: hidden;">
+                    <img src="/static/images/third_dev.jpg" alt="Имя разработчика" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                
-                <!-- ПОЛЕ 1: Имя и роль -->
-                <div style="margin-bottom: 20px;">
-                    <h3 style="color: #8b0000; font-family: 'Playfair Display', serif; margin-bottom: 5px;">Лада</h3>
+    
+                <!-- Имя и роль -->
+                <h3 style="color: #8b0000; font-family: 'Playfair Display', serif;">Лада</h3>
+    
+                <!-- Описание -->
+                <div style="background: #0a0a0a; padding: 15px; border-radius: 5px; margin: 20px 0;">
                 </div>
-                
-                <!-- ПОЛЕ 2: О разработчике -->
-                <div style="background: #0a0a0a; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: left;">
-                    <p style="color: #ccc; margin: 0;">
-                        
-                    </p>
-                </div>
-                
-                <!-- ПОЛЕ 3: Контакты / соцсети -->
-                <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
-                    <span style="color: #8b0000;">GitHub</span>
-                    <span style="color: #8b0000;">Telegram</span>
-                    <span style="color: #8b0000;">Email</span>
+    
+                <!-- Контакты -->
+                <div style="display: flex; justify-content: center; gap: 15px;">
+                    <a href="#" style="color: #8b0000;">GitHub</a>
+                    <a href="#" style="color: #8b0000;">Telegram</a>
                 </div>
             </div>
         </div>
         
         <!-- Разработчик 2 -->
         <div class="col-md-4">
-            <div class="developer-card" style="background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 30px; text-align: center; margin-bottom: 30px; transition: transform 0.3s, border-color 0.3s;">
-                <div style="width: 150px; height: 150px; border-radius: 50%; background: #2a0a0a; margin: 0 auto 20px; border: 3px solid #8b0000; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                    <!-- Место для фото разработчика -->
-                    <span style="font-size: 60px; color: #8b0000;">👤</span>
+            <div class="developer-card" style="background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 30px; text-align: center; margin-bottom: 30px;">
+                <!-- ФОТОГРАФИЯ -->
+                <div style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; border: 3px solid #8b0000; overflow: hidden;">
+                    <img src="/static/images/second_dev.jpg" alt="Имя разработчика" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                
-                <!-- ПОЛЕ 1: Имя и роль -->
-                <div style="margin-bottom: 20px;">
-                    <h3 style="color: #8b0000; font-family: 'Playfair Display', serif; margin-bottom: 5px;">Настя</h3>
+    
+                <!-- Имя и роль -->
+                <h3 style="color: #8b0000; font-family: 'Playfair Display', serif;">Настя</h3>
+    
+                <!-- Описание -->
+                <div style="background: #0a0a0a; padding: 15px; border-radius: 5px; margin: 20px 0;">
                 </div>
-                
-                <!-- ПОЛЕ 2: О разработчике -->
-                <div style="background: #0a0a0a; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: left;">
-                    <p style="color: #ccc; margin: 0;">
-                        
-                    </p>
-                </div>
-                
-                <!-- ПОЛЕ 3: Контакты / соцсети -->
-                <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
-                    <span style="color: #8b0000;">GitHub</span>
-                    <span style="color: #8b0000;">Telegram</span>
-                    <span style="color: #8b0000;">Email</span>
+    
+                <!-- Контакты -->
+                <div style="display: flex; justify-content: center; gap: 15px;">
+                    <a href="#" style="color: #8b0000;">GitHub</a>
+                    <a href="#" style="color: #8b0000;">Telegram</a>
                 </div>
             </div>
         </div>
         
         <!-- Разработчик 3 -->
         <div class="col-md-4">
-            <div class="developer-card" style="background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 30px; text-align: center; margin-bottom: 30px; transition: transform 0.3s, border-color 0.3s;">
-                <div style="width: 150px; height: 150px; border-radius: 50%; background: #2a0a0a; margin: 0 auto 20px; border: 3px solid #8b0000; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                    <!-- Место для фото разработчика -->
-                    <span style="font-size: 60px; color: #8b0000;">👤</span>
+            <div class="developer-card" style="background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 30px; text-align: center; margin-bottom: 30px;">
+                <!-- ФОТОГРАФИЯ -->
+                <div style="width: 150px; height: 150px; border-radius: 50%; margin: 0 auto 20px; border: 3px solid #8b0000; overflow: hidden;">
+                    <img src="/static/images/first_dev.jpg" alt="Имя разработчика" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                
-                <!-- ПОЛЕ 1: Имя и роль -->
-                <div style="margin-bottom: 20px;">
-                    <h3 style="color: #8b0000; font-family: 'Playfair Display', serif; margin-bottom: 5px;">Андрей</h3>
+    
+                <!-- Имя и роль -->
+                <h3 style="color: #8b0000; font-family: 'Playfair Display', serif;">Андрей</h3>
+    
+                <!-- Описание -->
+                <div style="background: #0a0a0a; padding: 15px; border-radius: 5px; margin: 20px 0;">
                 </div>
-                
-                <!-- ПОЛЕ 2: О разработчике -->
-                <div style="background: #0a0a0a; padding: 15px; border-radius: 5px; margin-bottom: 20px; text-align: left;">
-                    <p style="color: #ccc; margin: 0;">
-                        
-                    </p>
-                </div>
-                
-                <!-- ПОЛЕ 3: Контакты / соцсети -->
-                <div style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
-                    <span style="color: #8b0000;">GitHub</span>
-                    <span style="color: #8b0000;">Telegram</span>
-                    <span style="color: #8b0000;">Email</span>
+    
+                <!-- Контакты -->
+                <div style="display: flex; justify-content: center; gap: 15px;">
+                    <a href="#" style="color: #8b0000;">GitHub</a>
+                    <a href="#" style="color: #8b0000;">Telegram</a>
                 </div>
             </div>
         </div>
