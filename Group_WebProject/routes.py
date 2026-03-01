@@ -17,9 +17,9 @@ def home():
 @route('/contact')
 @view('contact')
 def contact():
-    """Renders the contact page."""
+    """Renders the bio page."""
     return dict(
-        title='Contact',
+        title='Bio',
         message='Your contact page.',
         year=datetime.now().year
     )
@@ -27,9 +27,17 @@ def contact():
 @route('/books')
 @view('books')
 def about():
-    """Renders the about page."""
+    """Renders the books page."""
     return dict(
         title='Books',
+        message='Your application description page.',
+        year=datetime.now().year
+    )
+@route('/creators')
+@view('creators')
+def creators():
+    return dict(
+        title = 'Contact',
         message='Your application description page.',
         year=datetime.now().year
     )
