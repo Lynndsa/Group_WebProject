@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - My Bottle Application</title>
+    <title>{{ title }}</title>
     
     <link rel="stylesheet" type="text/css" href="/static/content/bootstrap.min.css" />
     <script src="/static/scripts/modernizr-2.6.2.js"></script>
@@ -26,8 +26,9 @@
                 STEPHEN <span class="logo-accent">KING</span>
             </a>
             <nav class="nav-menu">
-                <a href="/about" class="nav-link">КНИГИ</a>
+                <a href="/books" class="nav-link">КНИГИ</a>
                 <a href="/contact" class="nav-link">БИОГРАФИЯ</a>
+                <a href="/creators" class="nav-link">КОНТАКТЫ</a>
             </nav>
         </div>
     </header>

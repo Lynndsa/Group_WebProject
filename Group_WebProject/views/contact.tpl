@@ -1,4 +1,4 @@
-
+% rebase('layout.tpl', title=title, year=year)
 <link rel="stylesheet" type="text/css" href="/static/content/bio.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,8 +9,9 @@
             STEPHEN <span class="logo-accent">KING</span>
         </a>
         <nav class="nav-menu">
-            <a href="/about" class="nav-link">КНИГИ</a>
+            <a href="/books" class="nav-link">КНИГИ</a>
             <a href="/contact" class="nav-link">БИОГРАФИЯ</a>
+            <a href="/creators" class="nav-link">КОНТАКТЫ</a>
         </nav>
     </div>
 </header>
