@@ -19,21 +19,18 @@ def wsgi_app():
     when the site is published to Microsoft Azure."""
     return bottle.default_app()
 
-if __name__ == '__main__':
+# STATIC ROUTE ДОЛЖЕН БЫТЬ ЗДЕСЬ (не внутри if __name__)
+@bottle.route('/static/<filepath:path>')
+def server_static(filepath):
+    """Handler for static files."""
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
     STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static').replace('\\', '/')
-    HOST = os.environ.get('SERVER_HOST', 'localhost')
-    try:
-        PORT = int(os.environ.get('SERVER_PORT', '0000'))
-    except ValueError:
-        PORT = 8080
+    return bottle.static_file(filepath, root=STATIC_ROOT)
 
-    @bottle.route('/static/<filepath:path>')
-    def server_static(filepath):
-        """Handler for static files, used with the development server.
-        When running under a production server such as IIS or Apache,
-        the server should be configured to serve the static files."""
-        return bottle.static_file(filepath, root=STATIC_ROOT)
+if __name__ == '__main__':
+    # ИСПРАВЛЕННЫЕ HOST И PORT
+    HOST = '0.0.0.0'  # Важно для Render!
+    PORT = int(os.environ.get('PORT', 8080))  # PORT, не SERVER_PORT!
 
     # Starts a local test server.
     bottle.run(server='wsgiref', host=HOST, port=PORT)
