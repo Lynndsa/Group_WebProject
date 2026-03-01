@@ -1,4 +1,4 @@
-﻿
+
 <link rel="stylesheet" type="text/css" href="/static/content/bio.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,7 +9,6 @@
             STEPHEN <span class="logo-accent">KING</span>
         </a>
         <nav class="nav-menu">
-            <a href="/home class="nav-link">НОВОСТИ</a>
             <a href="/about" class="nav-link">КНИГИ</a>
             <a href="/contact" class="nav-link">БИОГРАФИЯ</a>
         </nav>
