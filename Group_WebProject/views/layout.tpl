@@ -11,7 +11,7 @@
     
 
     <link rel="stylesheet" type="text/css" href="/static/content/bio.css">
-    <link rel="stylesheet" href="/static/content/style.css">
+    <link rel="stylesheet" href="/static/content/bio.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
