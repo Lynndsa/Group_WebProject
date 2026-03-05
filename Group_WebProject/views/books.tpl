@@ -2,7 +2,7 @@
 
 <!-- Заголовок книги -->
 <div class="book-header">
-    <h1 class="book-title">ОНО</h1>
+    <h1 class="book-title--large">ОНО</h1>
     <p class="book-original-title">It</p>
 </div>
 
