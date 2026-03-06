@@ -473,54 +473,61 @@ html, body {
 
 
 /*Настя*/
-/* ===== ОБЩИЕ СТИЛИ ===== */
+/* =========================================
+   1. ОБЩИЕ СТИЛИ И СБРОС (RESET & GLOBAL)
+   ========================================= */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; /* Убираем внешние отступы у всех элементов */
+    padding: 0; /* Убираем внутренние отступы у всех элементов */
+    box-sizing: border-box; /* Размеры элементов включают padding и border */
 }
 
 body {
-    background: #000;
-    color: #e0e0e0;
-    font-family: 'Georgia', 'Times New Roman', serif;
-    line-height: 1.6;
-    overflow-x: hidden;
+    background: #000; /* Черный фон страницы */
+    color: #e0e0e0; /* Светло-серый цвет текста */
+    font-family: 'Georgia', 'Times New Roman', serif; /* Шрифт с засечками для классического стиля */
+    line-height: 1.6; /* Высота строки для читаемости */
+    overflow-x: hidden; /* Скрываем горизонтальную прокрутку */
 }
 
-/* ===== ЗАГОЛОВОК КНИГИ ===== */
+/* =========================================
+   2. ЗАГОЛОВОК КНИГИ (BOOK HEADER)
+   ========================================= */
 .book-header {
-    position: relative;
-    text-align: center;
-    padding: 80px 20px 60px;
-    background: linear-gradient(180deg, #0a0a0a 0%, #000 100%);
-    border-bottom: 2px solid #8b0000;
+    position: relative; /* Для позиционирования псевдоэлементов */
+    text-align: center; /* Центрирование текста */
+    padding: 80px 20px 60px; /* Отступы: верх, бока, низ */
+    background: linear-gradient(180deg, #0a0a0a 0%, #000 100%); /* Градиент сверху вниз */
+    border-bottom: 2px solid #8b0000; /* Темно-красная линия снизу */
 }
 
+    /* Декоративная линия сверху заголовка */
     .book-header::before {
         content: '';
         position: absolute;
         top: 0;
         left: 50%;
-        transform: translateX(-50%);
+        transform: translateX(-50%); /* Центрирование по горизонтали */
         width: 200px;
         height: 3px;
-        background: linear-gradient(90deg, transparent, #c41e3a, transparent);
+        background: linear-gradient(90deg, transparent, #c41e3a, transparent); /* Линия с прозрачными краями */
     }
-/* Анимация названия книги*/
+
+/* Анимация названия книги */
 .book-title--large {
-    font-size: 6em;
-    font-weight: 900;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 20px;
+    font-size: 6em; /* Очень крупный шрифт */
+    font-weight: 900; /* Жирное начертание */
+    color: #fff; /* Белый цвет текста */
+    text-transform: uppercase; /* Все буквы заглавные */
+    letter-spacing: 20px; /* Большой межбуквенный интервал */
     margin: 0;
-    text-shadow: 0 0 10px rgba(196, 30, 58, 0.8), 0 0 20px rgba(196, 30, 58, 0.5), 0 0 30px rgba(196, 30, 58, 0.3);
-    animation: glow 3s ease-in-out infinite alternate;
+    text-shadow: 0 0 10px rgba(196, 30, 58, 0.8), 0 0 20px rgba(196, 30, 58, 0.5), 0 0 30px rgba(196, 30, 58, 0.3); /* Эффект свечения */
+    animation: glow 3s ease-in-out infinite alternate; /* Запуск анимации */
     position: relative;
-    z-index: 1;
+    z-index: 1; /* Поднимаем над декоративными элементами */
 }
 
+/* Ключевые кадры анимации свечения */
 @keyframes glow {
     from {
         text-shadow: 0 0 10px rgba(196, 30, 58, 0.8), 0 0 20px rgba(196, 30, 58, 0.5), 0 0 30px rgba(196, 30, 58, 0.3);
@@ -531,78 +538,86 @@ body {
     }
 }
 
+/* Оригинальное название (на иностранном языке) */
 .book-original-title {
     font-size: 2.5em;
-    color: #8b0000;
-    font-style: italic;
+    color: #8b0000; /* Темно-красный цвет */
+    font-style: italic; /* Курсив */
     letter-spacing: 15px;
     margin-top: 20px;
-    opacity: 0.9;
+    opacity: 0.9; /* Немного прозрачный */
 }
 
-/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+/* =========================================
+   3. ОСНОВНОЙ КОНТЕНТ (LAYOUT)
+   ========================================= */
 .book-main-content {
-    display: flex;
-    gap: 60px;
-    max-width: 1400px;
-    margin: 60px auto;
-    padding: 0 40px;
+    display: flex; /* Flexbox для колонок */
+    gap: 60px; /* Расстояние между колонками */
+    max-width: 1400px; /* Ограничение ширины контента */
+    margin: 60px auto; /* Центрирование блока по горизонтали */
+    padding: 0 40px; /* Внутренние отступы */
 }
 
+/* Левая колонка с обложкой */
 .book-cover-section {
-    flex: 0 0 400px;
-    position: sticky;
-    top: 40px;
-    height: fit-content;
+    flex: 0 0 400px; /* Фиксированная ширина 400px */
+    position: sticky; /* "Липкое" позиционирование при скролле */
+    top: 40px; /* Отступ сверху при залипании */
+    height: fit-content; /* Высота по содержимому */
 }
 
+/* Стиль обложки книги */
 .book-cover-large {
     width: 100%;
     height: auto;
-    border-radius: 3px;
-    box-shadow: 0 20px 60px rgba(196, 30, 58, 0.4), 0 0 0 1px rgba(196, 30, 58, 0.3);
+    border-radius: 3px; /* Слегка скругленные углы */
+    box-shadow: 0 20px 60px rgba(196, 30, 58, 0.4), 0 0 0 1px rgba(196, 30, 58, 0.3); /* Тень и тонкая рамка */
     margin-bottom: 30px;
-    transition: all 0.4s ease;
+    transition: all 0.4s ease; /* Плавная анимация при наведении */
     border: 2px solid #1a1a1a;
 }
 
+    /* Эффект при наведении на обложку */
     .book-cover-large:hover {
         box-shadow: 0 25px 70px rgba(196, 30, 58, 0.6), 0 0 0 2px rgba(196, 30, 58, 0.5);
-        transform: translateY(-5px);
+        transform: translateY(-5px); /* Легкий подъем вверх */
     }
 
+/* Блок с мета-информацией (автор, год и т.д.) */
 .book-meta-info {
-    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%); /* Градиентный фон */
     padding: 30px;
-    border-left: 4px solid #c41e3a;
+    border-left: 4px solid #c41e3a; /* Красный акцент слева */
     border-radius: 3px;
 }
 
     .book-meta-info p {
         margin: 15px 0;
-        color: #aaa;
+        color: #aaa; /* Серый текст */
         font-size: 1em;
         line-height: 1.8;
         padding-bottom: 15px;
-        border-bottom: 1px solid #222;
+        border-bottom: 1px solid #222; /* Разделительная линия */
     }
 
         .book-meta-info p:last-child {
-            border-bottom: none;
+            border-bottom: none; /* Убираем линию у последнего элемента */
         }
 
     .book-meta-info strong {
-        color: #c41e3a;
+        color: #c41e3a; /* Красные заголовки полей */
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 2px;
         font-size: 0.9em;
     }
 
-/* ===== АННОТАЦИЯ ===== */
-/* ===== АННОТАЦИЯ ===== */
+/* =========================================
+   4. АННОТАЦИЯ (ANNOTATION)
+   ========================================= */
 .book-annotation-section {
-    flex: 1;
+    flex: 1; /* Занимает все оставшееся место */
     background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
     padding: 50px;
     border: 1px solid #1a1a1a;
@@ -610,6 +625,7 @@ body {
     position: relative;
 }
 
+    /* Декоративная линия сверху блока аннотации */
     .book-annotation-section::before {
         content: '';
         position: absolute;
@@ -633,13 +649,13 @@ body {
     }
 
     .book-annotation-section p {
-        line-height: 2;
+        line-height: 2; /* Увеличенный интервал для удобства чтения */
         color: #ccc;
         margin-bottom: 25px;
-        text-align: justify;
+        text-align: justify; /* Выравнивание по ширине */
         font-size: 1.1em;
-        text-indent: 30px;
-        font-family: 'Arial', 'Helvetica', sans-serif;
+        text-indent: 30px; /* Отступ первой строки */
+        font-family: 'Arial', 'Helvetica', sans-serif; /* Sans-serif для основного текста */
         font-weight: 400;
         letter-spacing: 0.5px;
     }
@@ -653,18 +669,19 @@ body {
         font-family: 'Georgia', 'Times New Roman', serif;
     }
 
+/* Список тем (тегов) */
 .book-themes {
     list-style: none;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* Две колонки */
     gap: 15px;
 }
 
     .book-themes li {
         padding: 15px 20px;
         background: #0f0f0f;
-        border-left: 3px solid #c41e3a;
+        border-left: 3px solid #c41e3a; /* Красный маркер слева */
         color: #bbb;
         transition: all 0.3s ease;
         position: relative;
@@ -674,6 +691,7 @@ body {
         letter-spacing: 0.5px;
     }
 
+        /* Эффект заполнения фона при наведении */
         .book-themes li::before {
             content: '';
             position: absolute;
@@ -686,15 +704,18 @@ body {
         }
 
         .book-themes li:hover {
-            padding-left: 30px;
+            padding-left: 30px; /* Сдвиг текста вправо */
             color: #fff;
             background: #1a1a1a;
         }
 
             .book-themes li:hover::before {
-                width: 100%;
+                width: 100%; /* Заполнение фона */
             }
-/* ===== СЕКЦИИ ===== */
+
+/* =========================================
+   5. ЗАГОЛОВКИ СЕКЦИЙ (SECTION TITLES)
+   ========================================= */
 .section-title,
 .gallery-title {
     text-align: center;
@@ -708,6 +729,7 @@ body {
     padding-bottom: 30px;
 }
 
+    /* Декоративная линия под заголовком секции */
     .section-title::after,
     .gallery-title::after {
         content: '';
@@ -720,13 +742,15 @@ body {
         background: linear-gradient(90deg, transparent, #c41e3a, transparent);
     }
 
-/* ===== КАРТОЧКИ ФИЛЬМОВ ===== */
+/* =========================================
+   6. КАРТОЧКИ ФИЛЬМОВ (MOVIE CARDS)
+   ========================================= */
 .movies-section {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 40px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Адаптивная сетка */
     gap: 40px;
 }
 
@@ -739,6 +763,7 @@ body {
     position: relative;
 }
 
+    /* Верхняя цветная полоска на карточке */
     .movie-card::before {
         content: '';
         position: absolute;
@@ -747,18 +772,18 @@ body {
         right: 0;
         height: 3px;
         background: linear-gradient(90deg, #8b0000, #c41e3a, #8b0000);
-        transform: scaleX(0);
+        transform: scaleX(0); /* Изначально скрыта (сжата) */
         transition: transform 0.4s ease;
     }
 
     .movie-card:hover {
-        transform: translateY(-10px);
+        transform: translateY(-10px); /* Подъем карточки */
         border-color: #8b0000;
         box-shadow: 0 20px 60px rgba(196, 30, 58, 0.3);
     }
 
         .movie-card:hover::before {
-            transform: scaleX(1);
+            transform: scaleX(1); /* Появление полоски */
         }
 
 .movie-header {
@@ -778,6 +803,7 @@ body {
     text-transform: uppercase;
 }
 
+/* Бейдж с годом выпуска */
 .movie-year {
     font-size: 1.8em;
     font-weight: 700;
@@ -816,7 +842,9 @@ body {
     line-height: 1.9;
 }
 
-/* ===== ГАЛЕРЕЯ ===== */
+/* =========================================
+   7. ГАЛЕРЕЯ (GALLERY)
+   ========================================= */
 .photo-gallery {
     max-width: 1400px;
     margin: 0 auto;
@@ -832,14 +860,15 @@ body {
         font-size: 2em;
         margin-bottom: 30px;
         padding-left: 20px;
-        border-left: 4px solid #8b0000;
+        border-left: 4px solid #8b0000; /* Акцент слева */
         letter-spacing: 4px;
         text-transform: uppercase;
     }
 
+/* Сетка изображений */
 .gallery-row {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* 4 колонки */
     gap: 25px;
 }
 
@@ -854,24 +883,24 @@ body {
 }
 
     .gallery-item:hover {
-        transform: translateY(-8px) scale(1.02);
+        transform: translateY(-8px) scale(1.02); /* Увеличение и подъем */
         border-color: #c41e3a;
         box-shadow: 0 15px 40px rgba(196, 30, 58, 0.4);
-        z-index: 10;
+        z-index: 10; /* Поверх остальных */
     }
 
     .gallery-item img {
         width: 100%;
         height: 280px;
-        object-fit: cover;
+        object-fit: cover; /* Заполнение области без искажений */
         display: block;
         transition: all 0.4s ease;
-        filter: grayscale(20%);
+        filter: grayscale(20%); /* Частичное обесцвечивание */
     }
 
     .gallery-item:hover img {
-        filter: grayscale(0%);
-        transform: scale(1.1);
+        filter: grayscale(0%); /* Возврат цвета */
+        transform: scale(1.1); /* Зум изображения */
     }
 
 .photo-caption {
@@ -891,16 +920,18 @@ body {
     background: #1a1a1a;
 }
 
-/* ===== МОДАЛЬНОЕ ОКНО ===== */
+/* =========================================
+   8. МОДАЛЬНОЕ ОКНО (MODAL)
+   ========================================= */
 .modal {
-    display: none;
+    display: none; /* Скрыто по умолчанию */
     position: fixed;
-    z-index: 1000;
+    z-index: 1000; /* Поверх всего */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.98);
+    background: rgba(0, 0, 0, 0.98); /* Почти черный фон */
     overflow: auto;
     animation: fadeIn 0.3s ease;
 }
@@ -952,6 +983,7 @@ body {
     text-transform: uppercase;
 }
 
+/* Кнопка закрытия (крестик) */
 .close {
     position: absolute;
     top: 30px;
@@ -973,30 +1005,35 @@ body {
     .close:hover {
         color: #c41e3a;
         border-color: #c41e3a;
-        transform: rotate(90deg);
+        transform: rotate(90deg); /* Поворот при наведении */
     }
 
-/* ===== АДАПТИВНОСТЬ ===== */
+/* =========================================
+   9. АДАПТИВНОСТЬ (MEDIA QUERIES)
+   ========================================= */
+
+/* Планшеты и небольшие ноутбуки */
 @media (max-width: 1200px) {
     .gallery-row {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr); /* 3 колонки вместо 4 */
     }
 }
 
+/* Планшеты (вертикальные) */
 @media (max-width: 968px) {
     .book-main-content {
-        flex-direction: column;
+        flex-direction: column; /* Вертикальное расположение */
         gap: 40px;
     }
 
     .book-cover-section {
         flex: none;
-        position: relative;
+        position: relative; /* Отключаем липкость */
         top: 0;
     }
 
     .movies-section {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* 1 колонка фильмов */
     }
 
     .book-title {
@@ -1005,6 +1042,7 @@ body {
     }
 }
 
+/* Смартфоны (горизонтальные) */
 @media (max-width: 768px) {
     .book-title {
         font-size: 3em;
@@ -1023,7 +1061,7 @@ body {
     }
 
     .gallery-row {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки галереи */
     }
 
     .book-annotation-section {
@@ -1031,6 +1069,7 @@ body {
     }
 }
 
+/* Смартфоны (вертикальные) */
 @media (max-width: 480px) {
     .book-title {
         font-size: 2.2em;
@@ -1038,39 +1077,41 @@ body {
     }
 
     .gallery-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* 1 колонка галереи */
     }
 
     .movie-header {
-        flex-direction: column;
+        flex-direction: column; /* Вертикальный хедер фильма */
         text-align: center;
         gap: 20px;
     }
 
     .book-themes {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* 1 колонка тегов */
     }
 }
 
-/* ===== СКРОЛЛБАР ===== */
+/* =========================================
+   10. СКРОЛЛБАР (CUSTOM SCROLLBAR)
+   ========================================= */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 10px; /* Ширина полосы прокрутки */
 }
 
 ::-webkit-scrollbar-track {
-    background: #0a0a0a;
+    background: #0a0a0a; /* Цвет фона трека */
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #8b0000;
+    background: #8b0000; /* Цвет ползунка */
     border-radius: 5px;
 }
 
     ::-webkit-scrollbar-thumb:hover {
-        background: #c41e3a;
+        background: #c41e3a; /* Цвет ползунка при наведении */
     }
 
-/* ===== ВЫДЕЛЕНИЕ ТЕКСТА ===== */
+``` /* ===== ВЫДЕЛЕНИЕ ТЕКСТА ===== */
 ::selection {
     background: rgba(196, 30, 58, 0.3);
     color: #fff;
