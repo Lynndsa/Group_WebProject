@@ -37,7 +37,7 @@
                 <!-- Контакты -->
                 <div style="display: flex; justify-content: center; gap: 15px;">
                     <a href="#" style="color: #8b0000;">GitHub</a>
-                    <a href="#" style="color: #8b0000;">Telegram</a>
+                    <a href="https://t.me/ladushsha" style="color: #8b0000;">Telegram</a>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                 <!-- Контакты -->
                 <div style="display: flex; justify-content: center; gap: 15px;">
                     <a href="#" style="color: #8b0000;">GitHub</a>
-                    <a href="#" style="color: #8b0000;">Telegram</a>
+                    <a href="https://t.me/anasiasiaaa" style="color: #8b0000;">Telegram</a>
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@
                 <!-- Контакты -->
                 <div style="display: flex; justify-content: center; gap: 15px;">
                     <a href="#" style="color: #8b0000;">GitHub</a>
-                    <a href="#" style="color: #8b0000;">Telegram</a>
+                    <a href="https://t.me/souldarkers" style="color: #8b0000;">Telegram</a>
                 </div>
             </div>
         </div>

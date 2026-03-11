@@ -537,7 +537,7 @@ html, body {
     padding: 20px;
 }
 
-.book-title {
+.book-title1 {
     font-family: 'Playfair Display', serif;
     font-size: 20px;
     font-weight: 700;
@@ -660,7 +660,7 @@ html, body {
 }
 
 /* Навигационные секции */
-.nav-sections {
+.nav-sections1 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -668,7 +668,7 @@ html, body {
     margin: 40px 0;
 }
 
-.section-link {
+.section-link1 {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -680,23 +680,23 @@ html, body {
     transition: all 0.3s ease;
 }
 
-    .section-link:hover {
+    .section-link1:hover {
         border-color: #8b0000;
         transform: translateY(-2px);
         text-decoration: none;
     }
 
-.section-icon {
-    font-size: 24px;
+.section-icon1 {
+    font-size: 20px;
 }
 
-.section-title {
+.section-title1 {
     color: #fff;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 600;
 }
 
-.section-link:hover .section-title {
+.section-link1:hover .section-title {
     color: #8b0000;
 }
 
@@ -726,8 +726,8 @@ html, body {
     }
 
     .section-link {
-        width: 100%;
-        max-width: 300px;
+        width: 50%;
+        max-width: 200px;
         justify-content: center;
     }
 }
