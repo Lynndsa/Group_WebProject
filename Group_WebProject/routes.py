@@ -5,9 +5,10 @@ from bottle import route, view, request
 from datetime import datetime
 import json
 import os
+from bottle import static_file
 
 # Импортируем валидаторы
-from validators import validate_article_form, validate_phone
+from validator import validate_article_form, validate_phone
 
 # Путь к файлу с данными статей
 ARTICLES_FILE = 'articles.json'
@@ -22,10 +23,9 @@ def load_articles():
             return []
     return []
 
-def save_articles(articles):
-    """Сохранение статей в JSON файл"""
-    with open(ARTICLES_FILE, 'w', encoding='utf-8') as f:
-        json.dump(articles, f, ensure_ascii=False, indent=4)
+@route('/static/<filename:path>')
+def send_static(filename):
+    return static_file(filename, root='./static')
 
 
 @route('/')
@@ -49,6 +49,40 @@ def about():
 def creators():
     return dict(title='Contact', message='Your application description page.', year=datetime.now().year)
 
+@route('/reviews')
+@view('reviews')
+def reviews_mock():
+    mock_reviews = [
+        {
+            'book_title': 'Оно',
+            'author': 'Иван Петров',
+            'review_text': 'Очень страшная и атмосферная книга. Не мог оторваться!',
+            'date': '2024-05-01',
+            'phone': '+7 (999) 123-45-67',
+            'rating': '8'
+        },
+        {
+            'book_title': 'Зеленая миля',
+            'author': 'Анна С.',
+            'review_text': 'Грустная, но невероятно добрая история.',
+            'date': '2024-04-28',
+            'phone': '',
+            'rating': '9'
+        }
+    ]
+    
+    # Собираем уникальные названия книг из отзывов для выпадающего списка
+    books_list = sorted(list(set([r['book_title'] for r in mock_reviews])))
+
+    return dict(
+        title='Отзывы о книгах',
+        year=datetime.now().year,
+        reviews=mock_reviews,
+        books_list=books_list,  # ️ ОБЯЗАТЕЛЬНО ПЕРЕДАЁМ СПИСОК КНИГ
+        errors={},
+        form_data={},
+        success_message=None  
+    )
 
 # ==================== СТАТЬИ ====================
 
@@ -98,7 +132,6 @@ def add_article():
             form_data=form_data
         )
     
-    # Всё ок — добавляем статью
     new_id = max([article['id'] for article in articles_list], default=0) + 1
     new_article = {
         'id': new_id,
