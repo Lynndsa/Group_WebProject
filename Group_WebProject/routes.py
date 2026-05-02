@@ -42,3 +42,11 @@ def creators():
         message='Your application description page.',
         year=datetime.now().year
     )
+@route('/articles')
+@view('articles')
+def creators():
+    return dict(
+        title = 'Contact',
+        message='Your application description page.',
+        year=datetime.now().year
+    )

@@ -518,7 +518,7 @@ html, body {
     }
 
 .book-cover {
-    height: 250px;
+    height: 300px;
     overflow: hidden;
 }
 
@@ -594,7 +594,7 @@ html, body {
     }
 
 .fact-icon {
-    font-size: 40px;
+    font-size: 60px;
     margin-bottom: 15px;
 }
 
@@ -740,6 +740,17 @@ html, body {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     margin: 10px 0;
 }
+.developer-card:hover {
+    transform: translateY(-10px);
+    border-color: #8b0000 !important;
+    box-shadow: 0 10px 30px rgba(139, 0, 0, 0.3);
+}
+
+.developer-card:hover .dev-photo {
+    border-color: #8b0000;
+}
+
+
 
 @media (max-width: 768px) {
     .hero-main-title {
