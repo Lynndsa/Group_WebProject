@@ -1,4 +1,4 @@
-% rebase('layout.tpl', title='Разработчики - Фан-сайт Стивена Кинга', year=2024)
+% rebase('layout.tpl', title='Разработчики - Фан-сайт Стивена Кинга', year=year)
 
 <link rel="stylesheet" type="text/css" href="/static/content/bio.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,7 +37,7 @@
                 <!-- Контакты -->
                 <div style="display: flex; justify-content: center; gap: 15px;">
                     <a href="#" style="color: #8b0000;">GitHub</a>
-                    <a href="#" style="color: #8b0000;">Telegram</a>
+                    <a href="https://t.me/ladushsha" style="color: #8b0000;">Telegram</a>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                 <!-- Контакты -->
                 <div style="display: flex; justify-content: center; gap: 15px;">
                     <a href="#" style="color: #8b0000;">GitHub</a>
-                    <a href="#" style="color: #8b0000;">Telegram</a>
+                    <a href="https://t.me/anasiasiaaa" style="color: #8b0000;">Telegram</a>
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@
                 <!-- Контакты -->
                 <div style="display: flex; justify-content: center; gap: 15px;">
                     <a href="#" style="color: #8b0000;">GitHub</a>
-                    <a href="#" style="color: #8b0000;">Telegram</a>
+                    <a href="https://t.me/souldarkers" style="color: #8b0000;">Telegram</a>
                 </div>
             </div>
         </div>
@@ -96,18 +96,6 @@
     </div>
 </div>
 
-<!-- Добавим немного стилей для эффектов -->
-<style>
-    .developer-card:hover {
-        transform: translateY(-10px);
-        border-color: #8b0000 !important;
-        box-shadow: 0 10px 30px rgba(139, 0, 0, 0.3);
-    }
-    
-    .developer-card:hover .dev-photo {
-        border-color: #8b0000;
-    }
-</style>
 
 <script src="/static/scripts/jquery-1.10.2.js"></script>
 <script src="/static/scripts/bootstrap.js"></script>

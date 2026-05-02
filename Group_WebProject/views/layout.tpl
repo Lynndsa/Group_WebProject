@@ -28,6 +28,7 @@
             <nav class="nav-menu">
                 <a href="/books" class="nav-link">КНИГИ</a>
                 <a href="/contact" class="nav-link">БИОГРАФИЯ</a>
+                <a href="/articles" class="nav-link">СТАТЬИ</a>
                 <a href="/creators" class="nav-link">КОНТАКТЫ</a>
             </nav>
         </div>

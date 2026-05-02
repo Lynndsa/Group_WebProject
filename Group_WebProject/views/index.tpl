@@ -49,7 +49,7 @@
             <img src="/static/images/it_cover.jpg" alt="Оно">
         </div>
         <div class="book-info">
-            <h3 class="book-title">ОНО</h3>
+            <h3 class="book-title1">ОНО</h3>
             <p class="book-year">1986</p>
             <p class="book-description">Семеро детей из Дерри сталкиваются с древним злом, принимающим облик клоуна Пеннивайза.</p>
             <a href="/books" class="book-link">Подробнее →</a>
@@ -62,7 +62,7 @@
             <img src="/static/images/the_shining.jpg" alt="Сияние">
         </div>
         <div class="book-info">
-            <h3 class="book-title">Сияние</h3>
+            <h3 class="book-title1">Сияние</h3>
             <p class="book-year">1977</p>
             <p class="book-description">Семья писателя остается зимой в изолированном отеле, где просыпаются темные силы.</p>
         </div>
@@ -74,7 +74,7 @@
             <img src="/static/images/the_green_mile.jpg" alt="Зеленая миля">
         </div>
         <div class="book-info">
-            <h3 class="book-title">Зеленая миля</h3>
+            <h3 class="book-title1">Зеленая миля</h3>
             <p class="book-year">1996</p>
             <p class="book-description">История надзирателя и необычного заключенного в блоке смертников.</p>
         </div>
@@ -86,7 +86,7 @@
             <img src="/static/images/the_stand.jpg" alt="Противостояние">
         </div>
         <div class="book-info">
-            <h3 class="book-title">Противостояние</h3>
+            <h3 class="book-title1">Противостояние</h3>
             <p class="book-year">1978</p>
             <p class="book-description">Эпическая битва добра и зла после пандемии, уничтожившей большую часть человечества.</p>
         </div>
@@ -98,7 +98,7 @@
             <img src="/static/images/the_dark_tower.jpg" alt="Темная Башня">
         </div>
         <div class="book-info">
-            <h3 class="book-title">Темная Башня</h3>
+            <h3 class="book-title1">Темная Башня</h3>
             <p class="book-year">1982-2012</p>
             <p class="book-description">Эпическая сага о последнем стрелке Роланде и его поисках Темной Башни.</p>
         </div>
@@ -110,7 +110,7 @@
             <img src="/static/images/pet_sematary.jpg" alt="Кладбище домашних животных">
         </div>
         <div class="book-info">
-            <h3 class="book-title">Кладбище домашних животных</h3>
+            <h3 class="book-title1">Кладбище домашних животных</h3>
             <p class="book-year">1983</p>
             <p class="book-description">Семья обнаруживает древнее кладбище, способное воскрешать мертвых.</p>
         </div>
@@ -155,18 +155,18 @@
 </div>
 
 <!-- Быстрые ссылки -->
-<div class="nav-sections">
-    <a href="/books" class="section-link">
-        <span class="section-icon">📖</span>
-        <span class="section-title">Все книги</span>
+<div class="nav-sections1">
+    <a href="/books" class="section-link1">
+        <span class="section-icon1">📖</span>
+        <span class="section-title1">Все книги</span>
     </a>
-    <a href="/contact" class="section-link">
-        <span class="section-icon">👤</span>
-        <span class="section-title">Биография</span>
+    <a href="/contact" class="section-link1">
+        <span class="section-icon1">👤</span>
+        <span class="section-title1">Биография</span>
     </a>
-    <a href="/creators" class="section-link">
-        <span class="section-icon">📧</span>
-        <span class="section-title">Контакты</span>
+    <a href="/creators" class="section-link1">
+        <span class="section-icon1">📧</span>
+        <span class="section-title1">Контакты</span>
     </a>
 </div>
 
