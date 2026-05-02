@@ -36,10 +36,10 @@ document.addEventListener('click', function (e) {
     }
 });
 
-// Инициализация - убеждаемся что модалка закрыта при загрузке
+// Инициализация 
 document.addEventListener('DOMContentLoaded', function () {
     var modal = document.getElementById('modal');
     if (modal) {
-        modal.style.display = "none";  // Гарантированно закрываем
+        modal.style.display = "none";  //  закрываем
     }
 });

@@ -1,155 +1,161 @@
-
+﻿/* === ОСНОВНЫЕ ПЕРЕМЕННЫЕ (Цветовая схема и шрифты) === */
 :root {
-    --bg-color: #0a0a0a;
-    --card-bg: #1a1a1a;
-    --accent-color: #bb0a0a;
-    --text-main: #f0f0f0;
-    --text-sec: #a0a0a0;
-    --font-serif: 'Playfair Display', serif;
-    --font-sans: 'Inter', sans-serif;
-    --font-mono: 'Courier Prime', monospace;
+    --bg-color: #0a0a0a; /* Основной цвет фона (почти черный) */
+    --card-bg: #1a1a1a; /* Фон для карточек и блоков (темно-серый) */
+    --accent-color: #bb0a0a; /* Акцентный цвет (темно-красный) */
+    --text-main: #f0f0f0; /* Основной цвет текста (светло-серый) */
+    --text-sec: #a0a0a0; /* Второстепенный цвет текста (серый) */
+    --font-serif: 'Playfair Display', serif; /* Шрифт с засечками для заголовков */
+    --font-sans: 'Inter', sans-serif; /* Гротеск для основного текста */
+    --font-mono: 'Courier Prime', monospace; /* Моноширинный шрифт */
 }
 
+/* === ШАПКА САЙТА (ФИКСИРОВАННАЯ) === */
 .main-header {
-    position: fixed;
+    position: fixed; /* Фиксированное позиционирование */
     top: 0;
     left: 0;
     right: 0;
-    background-color: var(--bg-color);
-    border-bottom: 1px solid #1a1a1a;
-    z-index: 1000;
-    height: 80px;
+    background-color: var(--bg-color); /* Цвет фона из переменной */
+    border-bottom: 1px solid #1a1a1a; /* Тонкая разделительная линия */
+    z-index: 1000; /* Высокий z-index, чтобы быть поверх контента */
+    height: 80px; /* Фиксированная высота шапки */
 }
 
 .header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    max-width: 1200px; /* Ограничение ширины контейнера */
+    margin: 0 auto; /* Центрирование */
+    padding: 0 40px; /* Отступы по бокам */
+    height: 100%; /* Высота равна высоте родителя (.main-header) */
+    display: flex; /* Используем Flexbox для расположения */
+    justify-content: space-between; /* Элементы прижаты к краям: лого слева, меню справа */
+    align-items: center; /* Выравнивание по вертикали по центру */
 }
 
+/* === ЛОГОТИП === */
 .logo {
-    font-family: var(--font-serif);
+    font-family: var(--font-serif); /* Шрифт с засечками */
     font-size: 24px;
-    font-weight: 700;
-    color: var(--text-main);
-    text-decoration: none;
-    letter-spacing: 2px;
-    transition: opacity 0.3s;
+    font-weight: 700; /* Жирное начертание */
+    color: var(--text-main); /* Основной цвет текста */
+    text-decoration: none; /* Убираем подчеркивание ссылки */
+    letter-spacing: 2px; /* Межбуквенный интервал */
+    transition: opacity 0.3s; /* Плавное изменение прозрачности при наведении */
 }
 
     .logo:hover {
-        opacity: 0.8;
+        opacity: 0.8; /* Эффект полупрозрачности при наведении */
     }
 
 .logo-accent {
-    color: var(--accent-color);
+    color: var(--accent-color); /* Красный цвет для части логотипа */
 }
 
+/* === НАВИГАЦИОННОЕ МЕНЮ === */
 .nav-menu {
-    display: flex;
-    gap: 40px;
+    display: flex; /* Горизонтальное расположение пунктов */
+    gap: 40px; /* Расстояние между пунктами меню */
 }
 
 .nav-link {
-    font-family: var(--font-sans);
+    font-family: var(--font-sans); /* Основной шрифт */
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 400; /* Нормальное начертание */
     color: var(--text-main);
     text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: color 0.3s;
-    position: relative;
+    text-transform: uppercase; /* Заглавные буквы */
+    letter-spacing: 1px; /* Межбуквенный интервал */
+    transition: color 0.3s; /* Плавное изменение цвета */
+    position: relative; /* Для позиционирования псевдоэлемента (подчеркивания) */
 }
 
     .nav-link:hover {
-        color: var(--accent-color);
+        color: var(--accent-color); /* Красный цвет при наведении */
     }
 
+    /* Анимация подчеркивания при наведении */
     .nav-link::after {
-        content: '';
+        content: ''; /* Обязательно для псевдоэлемента */
         position: absolute;
-        bottom: -5px;
+        bottom: -5px; /* Расположение под текстом */
         left: 0;
-        width: 0;
-        height: 2px;
-        background-color: var(--accent-color);
-        transition: width 0.3s;
+        width: 0; /* Изначально ширина 0 (не видно) */
+        height: 2px; /* Толщина линии */
+        background-color: var(--accent-color); /* Красный цвет */
+        transition: width 0.3s; /* Плавное расширение */
     }
 
     .nav-link:hover::after {
-        width: 100%;
+        width: 100%; /* При наведении линия расширяется на всю ширину */
     }
 
 /* Отступ для контента из-за фиксированного хедера */
 body {
-    padding-top: 80px;
+    padding-top: 80px; /* Чтобы контент не скрывался под шапкой */
 }
 
-/* Адаптивность для меню */
+/* === АДАПТИВНОСТЬ ШАПКИ ДЛЯ РАЗНЫХ ЭКРАНОВ === */
 @media (max-width: 768px) {
     .header-container {
-        padding: 0 20px;
+        padding: 0 20px; /* Уменьшаем боковые отступы */
     }
 
     .logo {
-        font-size: 20px;
+        font-size: 20px; /* Уменьшаем логотип */
     }
 
     .nav-menu {
-        gap: 20px;
+        gap: 20px; /* Уменьшаем расстояние между пунктами */
     }
 
     .nav-link {
-        font-size: 12px;
+        font-size: 12px; /* Уменьшаем шрифт */
     }
 }
 
 @media (max-width: 480px) {
     .nav-menu {
-        gap: 15px;
+        gap: 15px; /* Еще меньше расстояние */
     }
 
     .nav-link {
-        font-size: 11px;
+        font-size: 11px; /* Еще меньше шрифт */
     }
 
     .logo {
-        font-size: 18px;
+        font-size: 18px; /* Еще меньше логотип */
     }
 }
+
+/* === ГЛОБАЛЬНЫЕ СБРОСЫ И БАЗОВЫЕ СТИЛИ === */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin: 0; /* Убираем отступы у всех элементов */
+    padding: 0; /* Убираем внутренние отступы у всех элементов */
+    box-sizing: border-box; /* Учитываем padding и border в ширине элемента */
 }
 
 html, body {
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    font-family: var(--font-sans);
-    line-height: 1.6;
+    background-color: var(--bg-color); /* Темный фон всей страницы */
+    color: var(--text-main); /* Основной цвет текста */
+    font-family: var(--font-sans); /* Основной шрифт по умолчанию */
+    line-height: 1.6; /* Межстрочный интервал */
 }
 
 .container {
-    background: transparent !important;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    background: transparent !important; /* Принудительно прозрачный фон (перебивает другие стили) */
+    max-width: 1200px; /* Максимальная ширина контейнера */
+    margin: 0 auto; /* Центрирование */
+    padding: 0 20px; /* Боковые отступы */
 }
 
-/* === HERO BANNER === */
+/* === HERO BANNER (БОЛЬШОЙ БАННЕР В ШАПКЕ СТРАНИЦЫ) === */
 .hero-banner {
-    position: relative;
+    position: relative; /* Для позиционирования оверлея поверх изображения */
     width: 100%;
-    height: 500px;
-    overflow: hidden;
-    margin-bottom: 60px;
-    background: #0a0a0a;
+    height: 500px; /* Фиксированная высота баннера */
+    overflow: hidden; /* Скрываем все, что выходит за границы */
+    margin-bottom: 60px; /* Отступ снизу */
+    background: #0a0a0a; /* Цвет фона, на случай если изображение не загрузится */
 }
 
 .hero-image {
@@ -160,102 +166,105 @@ html, body {
     .hero-image img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
-        object-position: center center;
-        -webkit-backface-visibility: hidden;
+        object-fit: cover; /* Изображение покрывает всю область, обрезаясь при необходимости */
+        object-position: center center; /* Центрирование изображения */
+        -webkit-backface-visibility: hidden; /* Сглаживание артефактов в WebKit-браузерах */
         backface-visibility: hidden;
     }
 
 .hero-overlay {
-    position: absolute;
-    bottom: 0;
+    position: absolute; /* Абсолютное позиционирование поверх изображения */
+    bottom: 0; /* Прижат к низу */
     left: 0;
     right: 0;
-    padding: 60px 40px 40px;
-    background: linear-gradient(to top, #0a0a0a 0%, transparent 100%);
-    z-index: 2;
+    padding: 60px 40px 40px; /* Отступы: большой сверху (для градиента), меньше по бокам и снизу */
+    background: linear-gradient(to top, #0a0a0a 0%, transparent 100%); /* Градиент от черного к прозрачному для плавного перехода */
+    z-index: 2; /* Выше, чем изображение */
 }
 
 .hero-title {
     font-family: var(--font-serif);
-    font-size: 4em;
+    font-size: 4em; /* Относительный размер шрифта */
     color: var(--text-main);
-    margin: 0 0 10px;
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+    margin: 0 0 10px; /* Отступы: сверху 0, справа 0, снизу 10px */
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8); /* Тень для читаемости на светлых участках */
     letter-spacing: 1px;
 }
 
 .hero-subtitle {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono); /* Моноширинный шрифт */
     font-size: 1.3em;
-    color: var(--accent-color);
+    color: var(--accent-color); /* Красный цвет */
     margin: 0 0 15px;
-    letter-spacing: 2px;
+    letter-spacing: 2px; /* Увеличенный интервал */
 }
 
 .hero-description {
     font-family: var(--font-sans);
     font-size: 1.1em;
-    color: var(--text-sec);
+    color: var(--text-sec); /* Серый цвет */
     margin: 0;
-    max-width: 700px;
+    max-width: 700px; /* Ограничение ширины для удобочитаемости */
 }
 
+/* === БЛОК "ОБ АВТОРЕ" === */
 .about-content {
     max-width: 900px;
-    margin: 0 auto 80px;
+    margin: 0 auto 80px; /* Центрирование и отступ снизу */
     padding: 40px;
-    background: var(--card-bg);
-    border-radius: 10px;
-    border: 1px solid #2a2a2a;
+    background: var(--card-bg); /* Темный фон карточки */
+    border-radius: 10px; /* Скругление углов */
+    border: 1px solid #2a2a2a; /* Тонкая серая рамка */
 }
 
     .about-content h3 {
         font-family: var(--font-serif);
         color: var(--text-main);
         font-size: 1.5em;
-        margin: 35px 0 15px;
+        margin: 35px 0 15px; /* Большой отступ сверху для разделения секций */
         padding-left: 15px;
-        border-left: 4px solid var(--accent-color);
+        border-left: 4px solid var(--accent-color); /* Красная вертикальная полоса слева */
     }
 
         .about-content h3:first-child {
-            margin-top: 0;
+            margin-top: 0; /* Убираем верхний отступ у первого заголовка */
         }
 
     .about-content p {
-        color: var(--text-sec);
+        color: var(--text-sec); /* Серый цвет текста */
         font-size: 16px;
         margin-bottom: 20px;
-        text-align: justify;
-        line-height: 1.8;
+        text-align: justify; /* Выравнивание по ширине */
+        line-height: 1.8; /* Увеличенный межстрочный интервал для удобства чтения */
     }
 
 .conclusion {
     font-weight: 600;
     font-style: italic;
-    color: var(--text-main);
-    border-top: 1px solid #333;
+    color: var(--text-main); /* Белый цвет для выделения */
+    border-top: 1px solid #333; /* Разделительная линия сверху */
     padding-top: 20px;
     margin-top: 30px;
 }
 
+/* === ЗАГОЛОВОК ГАЛЕРЕИ === */
 .gallery-title {
     text-align: center;
     font-family: var(--font-serif);
     font-size: 2.5em;
     color: var(--text-main);
     margin: 80px 0 40px;
-    position: relative;
+    position: relative; /* Для позиционирования декоративной линии */
 }
 
+    /* Красная линия под заголовком */
     .gallery-title:after {
         content: "";
         display: block;
         width: 100px;
         height: 4px;
         background: var(--accent-color);
-        margin: 20px auto 0;
+        margin: 20px auto 0; /* Центрирование линии */
     }
 
 .photo-gallery {
@@ -274,47 +283,48 @@ html, body {
         font-size: 1.5em;
         margin-bottom: 25px;
         padding-left: 15px;
-        border-left: 4px solid var(--accent-color);
+        border-left: 4px solid var(--accent-color); /* Красная полоса слева */
     }
 
+/* === СЕТКА ГАЛЕРЕИ === */
 .gallery-row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    flex-wrap: wrap; /* Перенос элементов на новую строку */
+    gap: 20px; /* Расстояние между элементами */
+    justify-content: center; /* Центрирование по горизонтали */
 }
 
 .gallery-item {
-    flex: 0 1 calc(25% - 20px);
-    min-width: 250px;
+    flex: 0 1 calc(25% - 20px); /* Ширина: 25% минус отступы (4 колонки) */
+    min-width: 250px; /* Минимальная ширина для адаптивности */
     background: var(--card-bg);
     border-radius: 8px;
-    overflow: hidden;
+    overflow: hidden; /* Скрываем углы изображения под радиусом */
     border: 1px solid #2a2a2a;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Тень */
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; /* Плавные эффекты */
+    cursor: pointer; /* Указатель, как на ссылку */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Вертикальное расположение (изображение + подпись) */
 }
 
     .gallery-item:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 30px rgba(187, 10, 10, 0.25);
-        border-color: var(--accent-color);
+        transform: translateY(-8px); /* Поднимаем вверх при наведении */
+        box-shadow: 0 12px 30px rgba(187, 10, 10, 0.25); /* Красноватая тень */
+        border-color: var(--accent-color); /* Красная рамка */
     }
 
     .gallery-item img {
         width: 100%;
-        height: 220px;
-        object-fit: cover;
+        height: 220px; /* Фиксированная высота изображения */
+        object-fit: cover; /* Покрытие области без искажений */
         display: block;
-        transition: transform 0.3s;
-        flex-shrink: 0;
+        transition: transform 0.3s; /* Плавное увеличение */
+        flex-shrink: 0; /* Запрещаем сжатие */
     }
 
     .gallery-item:hover img {
-        transform: scale(1.05);
+        transform: scale(1.05); /* Увеличение изображения при наведении на карточку */
     }
 
 .photo-caption {
@@ -322,36 +332,38 @@ html, body {
     text-align: center;
     font-size: 14px;
     color: var(--text-sec);
-    background: #111;
+    background: #111; /* Чуть темнее фона карточки */
     font-family: var(--font-sans);
     margin: 0;
-    line-height: 1.4; 
-    flex-grow: 1;
+    line-height: 1.4;
+    flex-grow: 1; /* Занимает все доступное место по вертикали */
 }
 
+/* === МОДАЛЬНОЕ ОКНО (ДЛЯ ПРОСМОТРА ФОТО) === */
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 10000;
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Фиксированное поверх всего */
+    z-index: 10000; /* Очень высокий слой */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(10, 10, 10, 0.95);
-    overflow: auto;
-    align-items: center;
-    justify-content: center;
+    background-color: rgba(10, 10, 10, 0.95); /* Почти черный полупрозрачный фон */
+    overflow: auto; /* Прокрутка, если контент не помещается */
+    align-items: center; /* Центрирование по вертикали (для flex) */
+    justify-content: center; /* Центрирование по горизонтали (для flex) */
 }
 
 .modal-content {
     max-width: 90%;
     max-height: 90vh;
-    border: 3px solid var(--accent-color);
+    border: 3px solid var(--accent-color); /* Красная рамка */
     border-radius: 5px;
-    margin: auto;
-    animation: zoomIn 0.3s ease;
+    margin: auto; /* Центрирование */
+    animation: zoomIn 0.3s ease; /* Анимация появления */
 }
 
+/* Ключевые кадры для анимации появления */
 @keyframes zoomIn {
     from {
         transform: scale(0.9);
@@ -365,10 +377,10 @@ html, body {
 }
 
 .modal-caption {
-    position: absolute;
+    position: absolute; /* Абсолютное позиционирование внутри modal */
     bottom: 30px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); /* Смещение для точного центрирования */
     color: var(--text-main);
     font-family: var(--font-sans);
     font-size: 16px;
@@ -380,6 +392,7 @@ html, body {
     border: 1px solid var(--accent-color);
 }
 
+/* Кнопка закрытия модального окна */
 .close {
     position: absolute;
     top: 20px;
@@ -391,16 +404,17 @@ html, body {
     transition: color 0.3s;
     font-family: var(--font-sans);
     line-height: 1;
-    z-index: 10001;
+    z-index: 10001; /* Выше, чем modal */
 }
 
     .close:hover {
-        color: var(--accent-color);
+        color: var(--accent-color); /* Красный при наведении */
     }
 
+/* === АДАПТИВНОСТЬ ГАЛЕРЕИ === */
 @media (max-width: 1024px) {
     .gallery-item {
-        flex: 0 1 calc(33.33% - 20px);
+        flex: 0 1 calc(33.33% - 20px); /* 3 колонки на средних экранах */
     }
 
     .hero-title {
@@ -410,7 +424,7 @@ html, body {
 
 @media (max-width: 768px) {
     .gallery-item {
-        flex: 0 1 calc(50% - 20px);
+        flex: 0 1 calc(50% - 20px); /* 2 колонки на планшетах */
     }
 
     .hero-banner {
@@ -437,7 +451,7 @@ html, body {
 
 @media (max-width: 480px) {
     .gallery-item {
-        flex: 0 1 100%;
+        flex: 0 1 100%; /* 1 колонка на мобильных */
     }
 
     .hero-banner {
@@ -457,10 +471,663 @@ html, body {
     }
 }
 
+
+/*Настя*/
+/* =========================================
+   1. ОБЩИЕ СТИЛИ И СБРОС (RESET & GLOBAL)
+   ========================================= */
+* {
+    margin: 0; /* Убираем внешние отступы у всех элементов */
+    padding: 0; /* Убираем внутренние отступы у всех элементов */
+    box-sizing: border-box; /* Размеры элементов включают padding и border */
+}
+
+body {
+    background: #000; /* Черный фон страницы */
+    color: #e0e0e0; /* Светло-серый цвет текста */
+    font-family: 'Georgia', 'Times New Roman', serif; /* Шрифт с засечками для классического стиля */
+    line-height: 1.6; /* Высота строки для читаемости */
+    overflow-x: hidden; /* Скрываем горизонтальную прокрутку */
+}
+
+/* =========================================
+   2. ЗАГОЛОВОК КНИГИ (BOOK HEADER)
+   ========================================= */
+.book-header {
+    position: relative; /* Для позиционирования псевдоэлементов */
+    text-align: center; /* Центрирование текста */
+    padding: 80px 20px 60px; /* Отступы: верх, бока, низ */
+    background: linear-gradient(180deg, #0a0a0a 0%, #000 100%); /* Градиент сверху вниз */
+    border-bottom: 2px solid #8b0000; /* Темно-красная линия снизу */
+}
+
+    /* Декоративная линия сверху заголовка */
+    .book-header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%); /* Центрирование по горизонтали */
+        width: 200px;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, #c41e3a, transparent); /* Линия с прозрачными краями */
+    }
+
+/* Анимация названия книги */
+.book-title--large {
+    font-size: 6em; /* Очень крупный шрифт */
+    font-weight: 900; /* Жирное начертание */
+    color: #fff; /* Белый цвет текста */
+    text-transform: uppercase; /* Все буквы заглавные */
+    letter-spacing: 20px; /* Большой межбуквенный интервал */
+    margin: 0;
+    text-shadow: 0 0 10px rgba(196, 30, 58, 0.8), 0 0 20px rgba(196, 30, 58, 0.5), 0 0 30px rgba(196, 30, 58, 0.3); /* Эффект свечения */
+    animation: glow 3s ease-in-out infinite alternate; /* Запуск анимации */
+    position: relative;
+    z-index: 1; /* Поднимаем над декоративными элементами */
+}
+
+/* Ключевые кадры анимации свечения */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px rgba(196, 30, 58, 0.8), 0 0 20px rgba(196, 30, 58, 0.5), 0 0 30px rgba(196, 30, 58, 0.3);
+    }
+
+    to {
+        text-shadow: 0 0 20px rgba(196, 30, 58, 1), 0 0 30px rgba(196, 30, 58, 0.8), 0 0 40px rgba(196, 30, 58, 0.6);
+    }
+}
+
+/* Оригинальное название (на иностранном языке) */
+.book-original-title {
+    font-size: 2.5em;
+    color: #8b0000; /* Темно-красный цвет */
+    font-style: italic; /* Курсив */
+    letter-spacing: 15px;
+    margin-top: 20px;
+    opacity: 0.9; /* Немного прозрачный */
+}
+
+/* =========================================
+   3. ОСНОВНОЙ КОНТЕНТ (LAYOUT)
+   ========================================= */
+.book-main-content {
+    display: flex; /* Flexbox для колонок */
+    gap: 60px; /* Расстояние между колонками */
+    max-width: 1400px; /* Ограничение ширины контента */
+    margin: 60px auto; /* Центрирование блока по горизонтали */
+    padding: 0 40px; /* Внутренние отступы */
+}
+
+/* Левая колонка с обложкой */
+.book-cover-section {
+    flex: 0 0 400px; /* Фиксированная ширина 400px */
+    position: sticky; /* "Липкое" позиционирование при скролле */
+    top: 40px; /* Отступ сверху при залипании */
+    height: fit-content; /* Высота по содержимому */
+}
+
+/* Стиль обложки книги */
+.book-cover-large {
+    width: 100%;
+    height: auto;
+    border-radius: 3px; /* Слегка скругленные углы */
+    box-shadow: 0 20px 60px rgba(196, 30, 58, 0.4), 0 0 0 1px rgba(196, 30, 58, 0.3); /* Тень и тонкая рамка */
+    margin-bottom: 30px;
+    transition: all 0.4s ease; /* Плавная анимация при наведении */
+    border: 2px solid #1a1a1a;
+}
+
+    /* Эффект при наведении на обложку */
+    .book-cover-large:hover {
+        box-shadow: 0 25px 70px rgba(196, 30, 58, 0.6), 0 0 0 2px rgba(196, 30, 58, 0.5);
+        transform: translateY(-5px); /* Легкий подъем вверх */
+    }
+
+/* Блок с мета-информацией (автор, год и т.д.) */
+.book-meta-info {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%); /* Градиентный фон */
+    padding: 30px;
+    border-left: 4px solid #c41e3a; /* Красный акцент слева */
+    border-radius: 3px;
+}
+
+    .book-meta-info p {
+        margin: 15px 0;
+        color: #aaa; /* Серый текст */
+        font-size: 1em;
+        line-height: 1.8;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #222; /* Разделительная линия */
+    }
+
+        .book-meta-info p:last-child {
+            border-bottom: none; /* Убираем линию у последнего элемента */
+        }
+
+    .book-meta-info strong {
+        color: #c41e3a; /* Красные заголовки полей */
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.9em;
+    }
+
+/* =========================================
+   4. АННОТАЦИЯ (ANNOTATION)
+   ========================================= */
+.book-annotation-section {
+    flex: 1; /* Занимает все оставшееся место */
+    background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+    padding: 50px;
+    border: 1px solid #1a1a1a;
+    border-radius: 3px;
+    position: relative;
+}
+
+    /* Декоративная линия сверху блока аннотации */
+    .book-annotation-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #8b0000, transparent);
+    }
+
+    .book-annotation-section h2 {
+        color: #c41e3a;
+        font-size: 2.5em;
+        margin: 0 0 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #1a1a1a;
+        letter-spacing: 8px;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-family: 'Georgia', 'Times New Roman', serif;
+    }
+
+    .book-annotation-section p {
+        line-height: 2; /* Увеличенный интервал для удобства чтения */
+        color: #ccc;
+        margin-bottom: 25px;
+        text-align: justify; /* Выравнивание по ширине */
+        font-size: 1.1em;
+        text-indent: 30px; /* Отступ первой строки */
+        font-family: 'Arial', 'Helvetica', sans-serif; /* Sans-serif для основного текста */
+        font-weight: 400;
+        letter-spacing: 0.5px;
+    }
+
+    .book-annotation-section h3 {
+        color: #c41e3a;
+        margin: 40px 0 25px;
+        font-size: 1.8em;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        font-family: 'Georgia', 'Times New Roman', serif;
+    }
+
+/* Список тем (тегов) */
+.book-themes {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Две колонки */
+    gap: 15px;
+}
+
+    .book-themes li {
+        padding: 15px 20px;
+        background: #0f0f0f;
+        border-left: 3px solid #c41e3a; /* Красный маркер слева */
+        color: #bbb;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        font-family: 'Arial', 'Helvetica', sans-serif;
+        font-size: 1em;
+        letter-spacing: 0.5px;
+    }
+
+        /* Эффект заполнения фона при наведении */
+        .book-themes li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: rgba(196, 30, 58, 0.1);
+            transition: width 0.3s ease;
+        }
+
+        .book-themes li:hover {
+            padding-left: 30px; /* Сдвиг текста вправо */
+            color: #fff;
+            background: #1a1a1a;
+        }
+
+            .book-themes li:hover::before {
+                width: 100%; /* Заполнение фона */
+            }
+
+/* =========================================
+   5. ЗАГОЛОВКИ СЕКЦИЙ (SECTION TITLES)
+   ========================================= */
+.section-title,
+.gallery-title {
+    text-align: center;
+    color: #fff;
+    font-size: 3em;
+    margin: 100px 0 60px;
+    letter-spacing: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 30px;
+}
+
+    /* Декоративная линия под заголовком секции */
+    .section-title::after,
+    .gallery-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 300px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #c41e3a, transparent);
+    }
+
+/* =========================================
+   6. КАРТОЧКИ ФИЛЬМОВ (MOVIE CARDS)
+   ========================================= */
+.movies-section {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Адаптивная сетка */
+    gap: 40px;
+}
+
+.movie-card {
+    background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+    border: 1px solid #1a1a1a;
+    border-radius: 3px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+    /* Верхняя цветная полоска на карточке */
+    .movie-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #8b0000, #c41e3a, #8b0000);
+        transform: scaleX(0); /* Изначально скрыта (сжата) */
+        transition: transform 0.4s ease;
+    }
+
+    .movie-card:hover {
+        transform: translateY(-10px); /* Подъем карточки */
+        border-color: #8b0000;
+        box-shadow: 0 20px 60px rgba(196, 30, 58, 0.3);
+    }
+
+        .movie-card:hover::before {
+            transform: scaleX(1); /* Появление полоски */
+        }
+
+.movie-header {
+    background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #1a1a1a;
+}
+
+.movie-title {
+    margin: 0;
+    font-size: 2.2em;
+    color: #fff;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+/* Бейдж с годом выпуска */
+.movie-year {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #8b0000, #c41e3a);
+    padding: 10px 25px;
+    border-radius: 3px;
+    letter-spacing: 3px;
+    box-shadow: 0 5px 15px rgba(196, 30, 58, 0.4);
+}
+
+.movie-details {
+    padding: 30px;
+}
+
+    .movie-details p {
+        margin: 15px 0;
+        color: #aaa;
+        line-height: 1.8;
+        font-size: 1em;
+    }
+
+    .movie-details strong {
+        color: #c41e3a;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.9em;
+    }
+
+.movie-description {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #1a1a1a;
+    font-style: italic;
+    color: #999;
+    line-height: 1.9;
+}
+
+/* =========================================
+   7. ГАЛЕРЕЯ (GALLERY)
+   ========================================= */
+.photo-gallery {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 40px 60px;
+}
+
+.gallery-section {
+    margin-bottom: 80px;
+}
+
+    .gallery-section h3 {
+        color: #c41e3a;
+        font-size: 2em;
+        margin-bottom: 30px;
+        padding-left: 20px;
+        border-left: 4px solid #8b0000; /* Акцент слева */
+        letter-spacing: 4px;
+        text-transform: uppercase;
+    }
+
+/* Сетка изображений */
+.gallery-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 колонки */
+    gap: 25px;
+}
+
+.gallery-item {
+    position: relative;
+    background: #0a0a0a;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid #1a1a1a;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+    .gallery-item:hover {
+        transform: translateY(-8px) scale(1.02); /* Увеличение и подъем */
+        border-color: #c41e3a;
+        box-shadow: 0 15px 40px rgba(196, 30, 58, 0.4);
+        z-index: 10; /* Поверх остальных */
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 280px;
+        object-fit: cover; /* Заполнение области без искажений */
+        display: block;
+        transition: all 0.4s ease;
+        filter: grayscale(20%); /* Частичное обесцвечивание */
+    }
+
+    .gallery-item:hover img {
+        filter: grayscale(0%); /* Возврат цвета */
+        transform: scale(1.1); /* Зум изображения */
+    }
+
+.photo-caption {
+    padding: 15px;
+    margin: 0;
+    text-align: center;
+    font-size: 0.9em;
+    color: #888;
+    background: #0f0f0f;
+    border-top: 1px solid #1a1a1a;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+}
+
+.gallery-item:hover .photo-caption {
+    color: #c41e3a;
+    background: #1a1a1a;
+}
+
+/* =========================================
+   8. МОДАЛЬНОЕ ОКНО (MODAL)
+   ========================================= */
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed;
+    z-index: 1000; /* Поверх всего */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.98); /* Почти черный фон */
+    overflow: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 85%;
+    margin-top: 30px;
+    border: 3px solid #8b0000;
+    border-radius: 3px;
+    box-shadow: 0 0 60px rgba(196, 30, 58, 0.5);
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+    color: #c41e3a;
+    padding: 25px 0;
+    font-size: 1.3em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* Кнопка закрытия (крестик) */
+.close {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    color: #8b0000;
+    font-size: 60px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #1a1a1a;
+    border-radius: 50%;
+}
+
+    .close:hover {
+        color: #c41e3a;
+        border-color: #c41e3a;
+        transform: rotate(90deg); /* Поворот при наведении */
+    }
+
+/* =========================================
+   9. АДАПТИВНОСТЬ (MEDIA QUERIES)
+   ========================================= */
+
+/* Планшеты и небольшие ноутбуки */
+@media (max-width: 1200px) {
+    .gallery-row {
+        grid-template-columns: repeat(3, 1fr); /* 3 колонки вместо 4 */
+    }
+}
+
+/* Планшеты (вертикальные) */
+@media (max-width: 968px) {
+    .book-main-content {
+        flex-direction: column; /* Вертикальное расположение */
+        gap: 40px;
+    }
+
+    .book-cover-section {
+        flex: none;
+        position: relative; /* Отключаем липкость */
+        top: 0;
+    }
+
+    .movies-section {
+        grid-template-columns: 1fr; /* 1 колонка фильмов */
+    }
+
+    .book-title {
+        font-size: 4em;
+        letter-spacing: 10px;
+    }
+}
+
+/* Смартфоны (горизонтальные) */
+@media (max-width: 768px) {
+    .book-title {
+        font-size: 3em;
+        letter-spacing: 5px;
+    }
+
+    .book-original-title {
+        font-size: 1.8em;
+        letter-spacing: 8px;
+    }
+
+    .section-title,
+    .gallery-title {
+        font-size: 2em;
+        letter-spacing: 5px;
+    }
+
+    .gallery-row {
+        grid-template-columns: repeat(2, 1fr); /* 2 колонки галереи */
+    }
+
+    .book-annotation-section {
+        padding: 30px;
+    }
+}
+
+/* Смартфоны (вертикальные) */
+@media (max-width: 480px) {
+    .book-title {
+        font-size: 2.2em;
+        letter-spacing: 3px;
+    }
+
+    .gallery-row {
+        grid-template-columns: 1fr; /* 1 колонка галереи */
+    }
+
+    .movie-header {
+        flex-direction: column; /* Вертикальный хедер фильма */
+        text-align: center;
+        gap: 20px;
+    }
+
+    .book-themes {
+        grid-template-columns: 1fr; /* 1 колонка тегов */
+    }
+}
+
+/* =========================================
+   10. СКРОЛЛБАР (CUSTOM SCROLLBAR)
+   ========================================= */
+::-webkit-scrollbar {
+    width: 10px; /* Ширина полосы прокрутки */
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a; /* Цвет фона трека */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #8b0000; /* Цвет ползунка */
+    border-radius: 5px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #c41e3a; /* Цвет ползунка при наведении */
+    }
+
+``` /* ===== ВЫДЕЛЕНИЕ ТЕКСТА ===== */
+::selection {
+    background: rgba(196, 30, 58, 0.3);
+    color: #fff;
+}
+
+::-moz-selection {
+    background: rgba(196, 30, 58, 0.3);
+    color: #fff;
+}
+
+
+/* === БЛОК СТАТИСТИКИ === */
 .stats-container {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    justify-content: space-around; /* Равномерное распределение */
+    flex-wrap: wrap; /* Перенос на новую строку */
     margin: 40px 0;
     gap: 20px;
 }
@@ -468,23 +1135,23 @@ html, body {
 .stat-item {
     text-align: center;
     padding: 20px;
-    background: rgba(139, 0, 0, 0.1);
-    border: 1px solid #8b0000;
+    background: rgba(139, 0, 0, 0.1); /* Полупрозрачный красный фон */
+    border: 1px solid #8b0000; /* Красная рамка */
     border-radius: 8px;
     min-width: 150px;
     transition: transform 0.3s ease;
 }
 
     .stat-item:hover {
-        transform: translateY(-5px);
-        background: rgba(139, 0, 0, 0.2);
+        transform: translateY(-5px); /* Поднятие при наведении */
+        background: rgba(139, 0, 0, 0.2); /* Более плотный красный фон */
     }
 
 .stat-number {
     font-family: 'Playfair Display', serif;
     font-size: 36px;
     font-weight: 700;
-    color: #8b0000;
+    color: #8b0000; /* Красный цвет */
     line-height: 1.2;
 }
 
@@ -492,19 +1159,19 @@ html, body {
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #aaa;
+    color: #aaa; /* Серый цвет */
 }
 
-/* Сетка книг */
+/* === СЕТКА КНИГ === */
 .books-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Адаптивная сетка */
     gap: 30px;
     margin: 40px 0;
 }
 
 .book-card {
-    background: #1a1a1a;
+    background: #1a1a1a; /* Цвет фона карточки */
     border: 1px solid #333;
     border-radius: 8px;
     overflow: hidden;
@@ -512,25 +1179,25 @@ html, body {
 }
 
     .book-card:hover {
-        transform: translateY(-5px);
-        border-color: #8b0000;
-        box-shadow: 0 5px 20px rgba(139, 0, 0, 0.3);
+        transform: translateY(-5px); /* Поднятие при наведении */
+        border-color: #8b0000; /* Красная рамка */
+        box-shadow: 0 5px 20px rgba(139, 0, 0, 0.3); /* Красноватая тень */
     }
 
 .book-cover {
-    height: 300px;
-    overflow: hidden;
+    height: 250px; /* Фиксированная высота обложки */
+    overflow: hidden; /* Скрываем выступающие части */
 }
 
     .book-cover img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: cover; /* Покрытие области без искажений */
         transition: transform 0.3s ease;
     }
 
 .book-card:hover .book-cover img {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Увеличение изображения при наведении */
 }
 
 .book-info {
@@ -546,7 +1213,7 @@ html, body {
 }
 
 .book-year {
-    color: #8b0000;
+    color: #8b0000; /* Красный цвет */
     font-size: 14px;
     margin-bottom: 10px;
 }
@@ -567,14 +1234,14 @@ html, body {
 }
 
     .book-link:hover {
-        color: #ff6b6b;
+        color: #ff6b6b; /* Светло-красный при наведении */
         text-decoration: none;
     }
 
-/* Сетка фактов */
+/* === СЕТКА ФАКТОВ === */
 .facts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Адаптивная сетка */
     gap: 20px;
     margin: 40px 0;
 }
@@ -589,12 +1256,12 @@ html, body {
 }
 
     .fact-card:hover {
-        border-color: #8b0000;
-        transform: translateY(-5px);
+        border-color: #8b0000; /* Красная рамка */
+        transform: translateY(-5px); /* Поднятие */
     }
 
 .fact-icon {
-    font-size: 60px;
+    font-size: 40px; /* Размер иконки-эмодзи */
     margin-bottom: 15px;
 }
 
@@ -611,24 +1278,25 @@ html, body {
     margin: 0;
 }
 
-/* Секция цитаты */
+/* === СЕКЦИЯ С ЦИТАТОЙ === */
 .quote-section {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d0a0a 100%);
-    border-left: 4px solid #8b0000;
-    border-right: 4px solid #8b0000;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d0a0a 100%); /* Градиент от серого к темно-красному */
+    border-left: 4px solid #8b0000; /* Красная рамка слева */
+    border-right: 4px solid #8b0000; /* Красная рамка справа */
     padding: 50px 30px;
     margin: 50px 0;
     text-align: center;
-    position: relative;
+    position: relative; /* Для псевдоэлементов-кавычек */
 }
 
+    /* Большие декоративные кавычки */
     .quote-section::before,
     .quote-section::after {
         content: '"';
         font-family: 'Playfair Display', serif;
         font-size: 60px;
         color: #8b0000;
-        opacity: 0.3;
+        opacity: 0.3; /* Полупрозрачные */
         position: absolute;
     }
 
@@ -640,7 +1308,7 @@ html, body {
     .quote-section::after {
         bottom: 20px;
         right: 20px;
-        transform: rotate(180deg);
+        transform: rotate(180deg); /* Переворачиваем кавычку */
     }
 
 .quote-text {
@@ -654,7 +1322,7 @@ html, body {
 }
 
 .quote-author {
-    color: #8b0000;
+    color: #8b0000; /* Красный цвет */
     font-size: 18px;
     font-weight: 600;
 }
@@ -675,14 +1343,14 @@ html, body {
     padding: 15px 30px;
     background: #1a1a1a;
     border: 1px solid #333;
-    border-radius: 40px;
+    border-radius: 40px; /* Скругленные края (пилюля) */
     text-decoration: none;
     transition: all 0.3s ease;
 }
 
-    .section-link1:hover {
-        border-color: #8b0000;
-        transform: translateY(-2px);
+    .section-link:hover {
+        border-color: #8b0000; /* Красная рамка */
+        transform: translateY(-2px); /* Небольшое поднятие */
         text-decoration: none;
     }
 
@@ -696,14 +1364,14 @@ html, body {
     font-weight: 600;
 }
 
-.section-link1:hover .section-title {
-    color: #8b0000;
+.section-link:hover .section-title {
+    color: #8b0000; /* Красный цвет текста при наведении */
 }
 
-/* Адаптивность */
+/* === ДОПОЛНИТЕЛЬНАЯ АДАПТИВНОСТЬ === */
 @media (max-width: 768px) {
     .stats-container {
-        flex-direction: column;
+        flex-direction: column; /* Вертикальное расположение */
         align-items: center;
     }
 
@@ -713,7 +1381,7 @@ html, body {
     }
 
     .books-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Одна колонка */
     }
 
     .quote-text {
@@ -721,7 +1389,7 @@ html, body {
     }
 
     .nav-sections {
-        flex-direction: column;
+        flex-direction: column; /* Вертикальное расположение */
         align-items: center;
     }
 
@@ -732,12 +1400,13 @@ html, body {
     }
 }
 
+/* === ГЛАВНЫЙ ЗАГОЛОВОК (ВЕРОЯТНО, ДЛЯ БАННЕРА) === */
 .hero-main-title {
     font-family: 'Playfair Display', serif;
     font-size: 60px;
-    font-weight: 900;
+    font-weight: 900; /* Максимальная жирность */
     color: #fff;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Тень для читаемости */
     margin: 10px 0;
 }
 .developer-card:hover {
@@ -754,6 +1423,6 @@ html, body {
 
 @media (max-width: 768px) {
     .hero-main-title {
-        font-size: 40px;
+        font-size: 40px; /* Уменьшение на планшетах */
     }
 }
