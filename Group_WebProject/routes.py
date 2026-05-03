@@ -8,13 +8,13 @@ import os
 from bottle import static_file
 
 # Импортируем валидаторы
-from validator import validate_article_form, validate_phone
+from validator import validate_article_form, validate_phone, validate_review_form
 
-# Путь к файлу с данными статей
+# Путь к файлу с данными 
 ARTICLES_FILE = 'articles.json'
-
+REVIEWS_FILE = 'reviews.json'
+# Загрузка статьей
 def load_articles():
-    """Загрузка статей из JSON файла"""
     if os.path.exists(ARTICLES_FILE):
         try:
             with open(ARTICLES_FILE, 'r', encoding='utf-8') as f:
@@ -23,9 +23,31 @@ def load_articles():
             return []
     return []
 
-@route('/static/<filename:path>')
-def send_static(filename):
-    return static_file(filename, root='./static')
+# Сохранение статьей
+def save_articles(articles_list):
+    with open(ARTICLES_FILE, 'w', encoding='utf-8') as f:
+        json.dump(articles_list, f, ensure_ascii=False, indent=4)
+
+#Загрузка отзывов
+def load_reviews():
+    if os.path.exists(REVIEWS_FILE):
+        try:
+            with open(REVIEWS_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            return []
+    return []
+
+# Сохранение отзывов
+def save_reviews(reviews_list):
+    with open(REVIEWS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(reviews_list, f, ensure_ascii=False, indent=4)
+
+# Сохранение книг
+def get_books_list(reviews_list):
+    # Собираем уникальные названия книг для фильтра
+    titles = {r['book_title'] for r in reviews_list if r.get('book_title')}
+    return sorted(list(titles))
 
 
 @route('/')
@@ -48,41 +70,6 @@ def about():
 @view('creators')
 def creators():
     return dict(title='Contact', message='Your application description page.', year=datetime.now().year)
-
-@route('/reviews')
-@view('reviews')
-def reviews_mock():
-    mock_reviews = [
-        {
-            'book_title': 'Оно',
-            'author': 'Иван Петров',
-            'review_text': 'Очень страшная и атмосферная книга. Не мог оторваться!',
-            'date': '2024-05-01',
-            'phone': '+7 (999) 123-45-67',
-            'rating': '8'
-        },
-        {
-            'book_title': 'Зеленая миля',
-            'author': 'Анна С.',
-            'review_text': 'Грустная, но невероятно добрая история.',
-            'date': '2024-04-28',
-            'phone': '',
-            'rating': '9'
-        }
-    ]
-    
-    # Собираем уникальные названия книг из отзывов для выпадающего списка
-    books_list = sorted(list(set([r['book_title'] for r in mock_reviews])))
-
-    return dict(
-        title='Отзывы о книгах',
-        year=datetime.now().year,
-        reviews=mock_reviews,
-        books_list=books_list,  # ️ ОБЯЗАТЕЛЬНО ПЕРЕДАЁМ СПИСОК КНИГ
-        errors={},
-        form_data={},
-        success_message=None  
-    )
 
 # ==================== СТАТЬИ ====================
 
@@ -155,3 +142,71 @@ def add_article():
         errors={},
         form_data={}
     )
+# ==================== ОТЗЫВЫ  ====================
+@route('/reviews')
+@view('reviews')
+def reviews_get():
+    reviews_list = load_reviews()
+    reviews_list.sort(key=lambda x: x.get('date', ''), reverse=True)
+    
+    return dict(
+        title='Отзывы о книгах',
+        year=datetime.now().year,
+        reviews=reviews_list,
+        books_list=get_books_list(reviews_list),
+        errors={},
+        form_data={},
+        success_message=None
+    )
+
+@route('/reviews', method='POST')
+@view('reviews')
+def reviews_post():
+    reviews_list = load_reviews()
+    
+    # Собираем данные из формы
+    form_data = {
+        'book_title': request.forms.getunicode('book_title', '').strip(),
+        'author':     request.forms.getunicode('author', '').strip(),
+        'review_text':request.forms.getunicode('review_text', '').strip(),
+        'rating':     request.forms.getunicode('rating', '').strip(),
+        'phone':      request.forms.getunicode('phone', '').strip(),
+        'date':       datetime.now().strftime('%Y-%m-%d')  # Дата ставится автоматически
+    }
+    
+    errors = validate_review_form(form_data)
+    
+    # Вспомогательная функция для рендера (чтобы не дублировать код)
+    def render(**kwargs):
+        return dict(
+            title='Отзывы о книгах',
+            year=datetime.now().year,
+            reviews=reviews_list,
+            books_list=get_books_list(reviews_list),
+            errors=kwargs.get('errors', {}),
+            form_data=kwargs.get('form_data', {}),
+            success_message=kwargs.get('success_message')
+        )
+    
+    # Если есть ошибки → возвращаем форму с подсветкой
+    if errors:
+        return render(errors=errors, form_data=form_data)
+    
+    # Формируем новый отзыв
+    new_id = max((r.get('id', 0) for r in reviews_list), default=0) + 1
+    new_review = {
+        'id': new_id,
+        'book_title': form_data['book_title'],
+        'author':     form_data['author'],
+        'review_text':form_data['review_text'],
+        'rating':     int(form_data['rating']),
+        'phone':      form_data['phone'],
+        'date':       form_data['date']
+    }
+    
+    reviews_list.append(new_review)
+    save_reviews(reviews_list)
+    reviews_list.sort(key=lambda x: x.get('date', ''), reverse=True)
+    
+    # Возвращаем страницу с очищенной формой и сообщением об успехе
+    return render(success_message='Отзыв успешно опубликован!')
