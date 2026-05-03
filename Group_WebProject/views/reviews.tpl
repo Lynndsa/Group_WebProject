@@ -41,7 +41,6 @@
             
             <form action="/reviews" method="POST" class="article-form">
                 
-                <!-- В ФОРМЕ: поле для ручного ввода названия -->
                 <div class="form-group">
                     <label for="book_title">Название книги:</label>
                     <input type="text" id="book_title" name="book_title" 
@@ -101,7 +100,6 @@
         <section class="display-column">
             <h2>Все отзывы</h2>
             
-            <!-- В ФИЛЬТРАХ: выпадающий список книг -->
             <div class="filters-bar">
                 <select id="filter-title">
                     <option value="">Все книги</option>
@@ -120,13 +118,16 @@
                     <option value="5">5 и ниже</option>
                 </select>
                 
-                <button type="button" class="submit-btn" style="padding: 12px 24px; font-size: 0.9em;">Применить</button>
+                <!-- ДОБАВЛЕН id="apply-filters" -->
+                <button type="button" id="apply-filters" class="submit-btn" style="padding: 12px 24px; font-size: 0.9em;">Применить</button>
             </div>
 
-            <!-- Сетка карточек -->
             <div class="reviews-grid-large">
                 % for review in reviews:
-                <article class="review-card-large">
+                <!-- ДОБАВЛЕНЫ data-атрибуты для JS -->
+                <article class="review-card-large" 
+                         data-book="{{ review['book_title'] }}" 
+                         data-rating="{{ review.get('rating', '') }}">
                     <span class="card-rating-badge">{{ review.get('rating', '—') }}/10</span>
                     
                     <div class="card-header">
@@ -145,12 +146,11 @@
                 </article>
                 % end
                 
-                % if not reviews:
-                <div style="grid-column: 1/-1; text-align: center; padding: 60px; color: #666; border: 2px dashed #333; border-radius: 8px;">
-                    <div style="font-size: 3em; margin-bottom: 10px;">📚</div>
-                    <p>Отзывов пока нет. Будьте первым!</p>
+                <!-- ДОБАВЛЕН id и display:none -->
+                <div id="no-reviews-msg" style="display:none; grid-column: 1/-1; text-align: center; padding: 60px; color: #666; border: 2px dashed #333; border-radius: 8px;">
+                    <div style="font-size: 3em; margin-bottom: 10px;">🔍</div>
+                    <p>По выбранным фильтрам отзывов не найдено.</p>
                 </div>
-                % end
             </div>
         </section>
     </div>
@@ -158,6 +158,9 @@
     <footer class="footer">
         <p>&copy; {{ year }} Отзывы о книгах. Все права защищены.</p>
     </footer>
+
+    <!-- Подключение внешнего скрипта -->
+    <script src="/static/scripts/reviews.js"></script>
 
 </body>
 </html>
