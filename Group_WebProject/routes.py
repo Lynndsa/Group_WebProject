@@ -1,12 +1,14 @@
 """
 Routes and views for the bottle application.
 """
-
-from bottle import route, view, request, template
+from bottle import route, view, request
 from datetime import datetime
 import json
 import os
-import re
+from bottle import static_file
+
+# Импортируем валидаторы
+from validator import validate_article_form, validate_phone
 
 # Путь к файлу с данными статей
 ARTICLES_FILE = 'articles.json'
@@ -21,66 +23,72 @@ def load_articles():
             return []
     return []
 
-def save_articles(articles):
-    """Сохранение статей в JSON файл"""
-    with open(ARTICLES_FILE, 'w', encoding='utf-8') as f:
-        json.dump(articles, f, ensure_ascii=False, indent=4)
+@route('/static/<filename:path>')
+def send_static(filename):
+    return static_file(filename, root='./static')
 
-def validate_phone(phone):
-    """Валидация номера телефона"""
-    pattern = r'^(\+7|8)\s*\(?\d{3}\)?\s*\d{3}[\s-]?\d{2}[\s-]?\d{2}$'
-    return re.match(pattern, phone) is not None
-
-def validate_date(date_str):
-    """Валидация даты в формате YYYY-MM-DD"""
-    try:
-        datetime.strptime(date_str, '%Y-%m-%d')
-        return True
-    except ValueError:
-        return False
 
 @route('/')
 @route('/home')
 @view('index')
 def home():
-    """Renders the home page."""
-    return dict(
-        title='Home page',
-        year=datetime.now().year
-    )
+    return dict(title='Home page', year=datetime.now().year)
 
 @route('/contact')
 @view('contact')
 def contact():
-    """Renders the bio page."""
-    return dict(
-        title='Bio',
-        message='Your contact page.',
-        year=datetime.now().year
-    )
+    return dict(title='Bio', message='Your contact page.', year=datetime.now().year)
 
 @route('/books')
 @view('books')
 def about():
-    """Renders the books page."""
-    return dict(
-        title='Books',
-        message='Your application description page.',
-        year=datetime.now().year
-    )
+    return dict(title='Books', message='Your application description page.', year=datetime.now().year)
 
 @route('/creators')
 @view('creators')
 def creators():
+    return dict(title='Contact', message='Your application description page.', year=datetime.now().year)
+
+@route('/reviews')
+@view('reviews')
+def reviews_mock():
+    mock_reviews = [
+        {
+            'book_title': 'Оно',
+            'author': 'Иван Петров',
+            'review_text': 'Очень страшная и атмосферная книга. Не мог оторваться!',
+            'date': '2024-05-01',
+            'phone': '+7 (999) 123-45-67',
+            'rating': '8'
+        },
+        {
+            'book_title': 'Зеленая миля',
+            'author': 'Анна С.',
+            'review_text': 'Грустная, но невероятно добрая история.',
+            'date': '2024-04-28',
+            'phone': '',
+            'rating': '9'
+        }
+    ]
+    
+    # Собираем уникальные названия книг из отзывов для выпадающего списка
+    books_list = sorted(list(set([r['book_title'] for r in mock_reviews])))
+
     return dict(
-        title='Contact',
-        message='Your application description page.',
-        year=datetime.now().year
+        title='Отзывы о книгах',
+        year=datetime.now().year,
+        reviews=mock_reviews,
+        books_list=books_list,  # ️ ОБЯЗАТЕЛЬНО ПЕРЕДАЁМ СПИСОК КНИГ
+        errors={},
+        form_data={},
+        success_message=None  
     )
+
+# ==================== СТАТЬИ ====================
 
 @route('/articles')
 @view('articles')
-def articles():
+def articles_page():
     """Отображение страницы со статьями"""
     articles_list = load_articles()
     articles_list.sort(key=lambda x: x['date'], reverse=True)
@@ -99,50 +107,20 @@ def articles():
 def add_article():
     """Обработка добавления новой статьи"""
     articles_list = load_articles()
-    errors = {}
     
-    # Получаем данные из формы
-    author = request.forms.getunicode('author', '').strip()
-    title = request.forms.getunicode('title', '').strip()
-    description = request.forms.getunicode('description', '').strip()
-    date = request.forms.getunicode('date', '').strip()
-    phone = request.forms.getunicode('phone', '').strip()
-    
+    # Собираем данные формы
     form_data = {
-        'author': author,
-        'title': title,
-        'description': description,
-        'date': date,
-        'phone': phone
+        'author': request.forms.getunicode('author', '').strip(),
+        'title': request.forms.getunicode('title', '').strip(),
+        'description': request.forms.getunicode('description', '').strip(),
+        'date': request.forms.getunicode('date', '').strip(),
+        'phone': request.forms.getunicode('phone', '').strip()
     }
     
-    # Валидация
-    if not author:
-        errors['author'] = 'Поле Автор обязательно для заполнения'
-    elif len(author) < 2:
-        errors['author'] = 'Имя автора должно содержать минимум 2 символа'
+    # Вызываем валидацию из отдельного модуля
+    errors = validate_article_form(form_data)
     
-    if not title:
-        errors['title'] = 'Поле Наименование статьи обязательно для заполнения'
-    elif len(title) < 5:
-        errors['title'] = 'Название статьи должно содержать минимум 5 символов'
-    
-    if not description:
-        errors['description'] = 'Поле Описание обязательно для заполнения'
-    elif len(description) < 20:
-        errors['description'] = 'Описание должно содержать минимум 20 символов'
-    
-    if not date:
-        errors['date'] = 'Поле Дата обязательно для заполнения'
-    elif not validate_date(date):
-        errors['date'] = 'Дата должна быть в формате ГГГГ-ММ-ДД'
-    
-    if not phone:
-        errors['phone'] = 'Поле Телефон обязательно для заполнения'
-    elif not validate_phone(phone):
-        errors['phone'] = 'Телефон должен быть в формате +7 (XXX) XXX-XX-XX'
-    
-    # Если есть ошибки - показываем форму снова с введёнными данными
+    # Если есть ошибки — показываем форму с данными и ошибками
     if errors:
         articles_list.sort(key=lambda x: x['date'], reverse=True)
         return dict(
@@ -154,27 +132,26 @@ def add_article():
             form_data=form_data
         )
     
-    # Если ошибок нет - добавляем статью
     new_id = max([article['id'] for article in articles_list], default=0) + 1
     new_article = {
         'id': new_id,
-        'author': author,
-        'title': title,
-        'description': description,
-        'date': date,
-        'phone': phone
+        'author': form_data['author'],
+        'title': form_data['title'],
+        'description': form_data['description'],
+        'date': form_data['date'],
+        'phone': form_data['phone']
     }
     
     articles_list.append(new_article)
     articles_list.sort(key=lambda x: x['date'], reverse=True)
     save_articles(articles_list)
     
-    # Возвращаем страницу с очищенной формой и обновлённым списком
+    # Возвращаем страницу с очищенной формой
     return dict(
         title='Полезные статьи',
         message='Страница полезных статей',
         year=datetime.now().year,
         articles=articles_list,
         errors={},
-        form_data={}  # Пустые данные формы = очищенная форма
+        form_data={}
     )
