@@ -33,7 +33,7 @@ def validate_description(description: str, min_letters: int = 10) -> tuple[bool,
     # Считаем ТОЛЬКО буквы (кириллица и латиница)
     letters = re.findall(r'[а-яА-ЯёЁ]', description)
     if len(letters) < min_letters:
-        return False, f'Текст должен содержать минимум русских {min_letters} букв '
+        return False, f'Текст должен содержать минимум {min_letters} русских букв'
         
     # Разрешаем буквы, цифры, пробелы, пунктуацию и кавычки (включая «» для цитат)
     allowed_pattern = r'^[а-яА-ЯёЁ0-9\s.,!?;:\-\'"()\[\]«»]+$'
