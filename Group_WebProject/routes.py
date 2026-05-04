@@ -1,19 +1,19 @@
-"""
-Routes and views for the bottle application.
-"""
-from bottle import route, view, request
+
+import re 
+from bottle import route, view, request, static_file
 from datetime import datetime
 import json
 import os
-from bottle import static_file
 
-# Импортируем валидаторы
-from validator import validate_article_form, validate_phone, validate_review_form
+# Импортируем валидаторы (убедись, что файл называется validators.py)
+from validator import validate_article_form, validate_review_form
 
 # Путь к файлу с данными 
 ARTICLES_FILE = 'articles.json'
 REVIEWS_FILE = 'reviews.json'
-# Загрузка статьей
+
+# ==================== УТИЛИТЫ ====================
+
 def load_articles():
     if os.path.exists(ARTICLES_FILE):
         try:
@@ -23,12 +23,10 @@ def load_articles():
             return []
     return []
 
-# Сохранение статьей
 def save_articles(articles_list):
     with open(ARTICLES_FILE, 'w', encoding='utf-8') as f:
         json.dump(articles_list, f, ensure_ascii=False, indent=4)
 
-#Загрузка отзывов
 def load_reviews():
     if os.path.exists(REVIEWS_FILE):
         try:
@@ -38,18 +36,44 @@ def load_reviews():
             return []
     return []
 
-# Сохранение отзывов
 def save_reviews(reviews_list):
     with open(REVIEWS_FILE, 'w', encoding='utf-8') as f:
         json.dump(reviews_list, f, ensure_ascii=False, indent=4)
 
-# Сохранение книг
-def get_books_list(reviews_list):
-    # Собираем уникальные названия книг для фильтра
-    titles = {r['book_title'] for r in reviews_list if r.get('book_title')}
+def normalize_phone(phone: str) -> str:
+    """Приводит любой валидный российский номер к формату +7XXXXXXXXXX"""
+    digits = re.sub(r'\D', '', phone) 
+    if len(digits) == 11:
+        if digits.startswith('8'):
+            digits = '7' + digits[1:]
+    elif len(digits) == 10:
+        digits = '7' + digits
+    return f'+{digits}' if len(digits) == 11 else phone
+
+def find_user_by_phone(users_list, phone):
+    """Ищет пользователя по нормализованному телефону"""
+    target = normalize_phone(phone)
+    for i, user in enumerate(users_list):
+        if normalize_phone(user.get('phone', '')) == target:
+            return i
+    return -1
+
+def get_books_list(users_list):
+    """Собирает уникальные названия книг из всех отзывов всех пользователей"""
+    titles = set()
+    for user in users_list:
+        for review in user.get('reviews', []):
+            if review.get('book_title'):
+                titles.add(review['book_title'])
     return sorted(list(titles))
 
 
+@route('/static/<filename:path>')
+def send_static(filename):
+    return static_file(filename, root='./static')
+
+
+# маршруты
 @route('/')
 @route('/home')
 @view('index')
@@ -71,12 +95,11 @@ def about():
 def creators():
     return dict(title='Contact', message='Your application description page.', year=datetime.now().year)
 
-# ==================== СТАТЬИ ====================
 
+# СТАТЬИ 
 @route('/articles')
 @view('articles')
 def articles_page():
-    """Отображение страницы со статьями"""
     articles_list = load_articles()
     articles_list.sort(key=lambda x: x['date'], reverse=True)
     
@@ -92,10 +115,8 @@ def articles_page():
 @route('/articles', method='POST')
 @view('articles')
 def add_article():
-    """Обработка добавления новой статьи"""
     articles_list = load_articles()
     
-    # Собираем данные формы
     form_data = {
         'author': request.forms.getunicode('author', '').strip(),
         'title': request.forms.getunicode('title', '').strip(),
@@ -104,10 +125,8 @@ def add_article():
         'phone': request.forms.getunicode('phone', '').strip()
     }
     
-    # Вызываем валидацию из отдельного модуля
     errors = validate_article_form(form_data)
     
-    # Если есть ошибки — показываем форму с данными и ошибками
     if errors:
         articles_list.sort(key=lambda x: x['date'], reverse=True)
         return dict(
@@ -133,7 +152,6 @@ def add_article():
     articles_list.sort(key=lambda x: x['date'], reverse=True)
     save_articles(articles_list)
     
-    # Возвращаем страницу с очищенной формой
     return dict(
         title='Полезные статьи',
         message='Страница полезных статей',
@@ -142,18 +160,20 @@ def add_article():
         errors={},
         form_data={}
     )
-# ==================== ОТЗЫВЫ  ====================
+
+
+#ОТЗЫВЫ
 @route('/reviews')
 @view('reviews')
 def reviews_get():
-    reviews_list = load_reviews()
-    reviews_list.sort(key=lambda x: x.get('date', ''), reverse=True)
+    users_list = load_reviews()
+    users_list.sort(key=lambda u: max((r.get('date', '') for r in u.get('reviews', [])), default=''), reverse=True)
     
     return dict(
         title='Отзывы о книгах',
         year=datetime.now().year,
-        reviews=reviews_list,
-        books_list=get_books_list(reviews_list),
+        users=users_list,
+        books_list=get_books_list(users_list),
         errors={},
         form_data={},
         success_message=None
@@ -162,51 +182,72 @@ def reviews_get():
 @route('/reviews', method='POST')
 @view('reviews')
 def reviews_post():
-    reviews_list = load_reviews()
+    users_list = load_reviews()
     
-    # Собираем данные из формы
     form_data = {
         'book_title': request.forms.getunicode('book_title', '').strip(),
         'author':     request.forms.getunicode('author', '').strip(),
         'review_text':request.forms.getunicode('review_text', '').strip(),
         'rating':     request.forms.getunicode('rating', '').strip(),
         'phone':      request.forms.getunicode('phone', '').strip(),
-        'date':       datetime.now().strftime('%Y-%m-%d')  # Дата ставится автоматически
+        'date':       datetime.now().strftime('%Y-%m-%d')
     }
     
     errors = validate_review_form(form_data)
     
-    # Вспомогательная функция для рендера (чтобы не дублировать код)
+    #  ПРОВЕРКА УНИКАЛЬНОСТИ + НОРМАЛИЗАЦИЯ
+    if not errors:
+        form_data['phone'] = normalize_phone(form_data['phone'])  # Приводим к +7...
+        user_idx = find_user_by_phone(users_list, form_data['phone'])
+        
+        if user_idx != -1:
+            existing_author = users_list[user_idx].get('author')
+            if existing_author != form_data['author']:
+                errors['phone'] = f'Номер {form_data["phone"]} уже зарегистрирован на пользователя "{existing_author}"'
+    
     def render(**kwargs):
         return dict(
             title='Отзывы о книгах',
             year=datetime.now().year,
-            reviews=reviews_list,
-            books_list=get_books_list(reviews_list),
+            users=users_list,
+            books_list=get_books_list(users_list),
             errors=kwargs.get('errors', {}),
             form_data=kwargs.get('form_data', {}),
             success_message=kwargs.get('success_message')
         )
     
-    # Если есть ошибки → возвращаем форму с подсветкой
     if errors:
         return render(errors=errors, form_data=form_data)
     
-    # Формируем новый отзыв
-    new_id = max((r.get('id', 0) for r in reviews_list), default=0) + 1
+    # Генерация ID
+    max_id = 0
+    for u in users_list:
+        for r in u.get('reviews', []):
+            if r.get('id', 0) > max_id: max_id = r.get('id', 0)
+    new_id = max_id + 1
+    
     new_review = {
         'id': new_id,
         'book_title': form_data['book_title'],
         'author':     form_data['author'],
         'review_text':form_data['review_text'],
         'rating':     int(form_data['rating']),
-        'phone':      form_data['phone'],
+        'phone':      form_data['phone'],  
         'date':       form_data['date']
     }
     
-    reviews_list.append(new_review)
-    save_reviews(reviews_list)
-    reviews_list.sort(key=lambda x: x.get('date', ''), reverse=True)
+    user_idx = find_user_by_phone(users_list, form_data['phone'])
+    if user_idx != -1:
+        users_list[user_idx]['reviews'].append(new_review)
+        users_list[user_idx]['reviews'].sort(key=lambda x: x.get('date', ''), reverse=True)
+    else:
+        users_list.append({
+            'phone': form_data['phone'],
+            'author': form_data['author'],
+            'reviews': [new_review]
+        })
     
-    # Возвращаем страницу с очищенной формой и сообщением об успехе
+    save_reviews(users_list)
+    users_list.sort(key=lambda u: max((r.get('date', '') for r in u.get('reviews', [])), default=''), reverse=True)
+    
     return render(success_message='Отзыв успешно опубликован!')

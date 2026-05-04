@@ -1,4 +1,4 @@
-// static/scripts/reviews.js
+
 document.addEventListener('DOMContentLoaded', () => {
     const filterTitle = document.getElementById('filter-title');
     const filterRating = document.getElementById('filter-rating');
@@ -34,7 +34,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Срабатывает по кнопке "Применить"
     applyBtn.addEventListener('click', applyFilters);
 
-    // Раскомментируй, если захочешь мгновенную фильтрацию без кнопки:
-    // filterTitle.addEventListener('change', applyFilters);
-    // filterRating.addEventListener('change', applyFilters);
 });

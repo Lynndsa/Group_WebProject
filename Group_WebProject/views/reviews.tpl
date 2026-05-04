@@ -118,13 +118,13 @@
                     <option value="5">5 и ниже</option>
                 </select>
                 
-                <!-- ДОБАВЛЕН id="apply-filters" -->
                 <button type="button" id="apply-filters" class="submit-btn" style="padding: 12px 24px; font-size: 0.9em;">Применить</button>
             </div>
 
+            <!-- ИЗМЕНЁННЫЙ БЛОК: вложенный цикл для новой структуры JSON -->
             <div class="reviews-grid-large">
-                % for review in reviews:
-                <!-- ДОБАВЛЕНЫ data-атрибуты для JS -->
+                % for user in users:
+                  % for review in user['reviews']:
                 <article class="review-card-large" 
                          data-book="{{ review['book_title'] }}" 
                          data-rating="{{ review.get('rating', '') }}">
@@ -140,15 +140,22 @@
                     <div class="card-footer">
                         <span class="card-author"> {{ review['author'] }}</span>
                         % if review.get('phone'):
-                        <span class="article-phone">📞 {{ review['phone'] }}</span>
+                        <span class="article-phone"> {{ review['phone'] }}</span>
                         % end
                     </div>
                 </article>
+                  % end
                 % end
                 
-                <!-- ДОБАВЛЕН id и display:none -->
+                % if not users:
+                <div style="grid-column: 1/-1; text-align: center; padding: 60px; color: #666; border: 2px dashed #333; border-radius: 8px;">
+                    <div style="font-size: 3em; margin-bottom: 10px;">📚</div>
+                    <p>Отзывов пока нет. Будьте первым!</p>
+                </div>
+                % end
+                
                 <div id="no-reviews-msg" style="display:none; grid-column: 1/-1; text-align: center; padding: 60px; color: #666; border: 2px dashed #333; border-radius: 8px;">
-                    <div style="font-size: 3em; margin-bottom: 10px;">🔍</div>
+                    <div style="font-size: 3em; margin-bottom: 10px;"></div>
                     <p>По выбранным фильтрам отзывов не найдено.</p>
                 </div>
             </div>
@@ -159,7 +166,6 @@
         <p>&copy; {{ year }} Отзывы о книгах. Все права защищены.</p>
     </footer>
 
-    <!-- Подключение внешнего скрипта -->
     <script src="/static/scripts/reviews.js"></script>
 
 </body>
