@@ -12,8 +12,7 @@ from validator import validate_article_form, validate_review_form
 ARTICLES_FILE = 'articles.json'
 REVIEWS_FILE = 'reviews.json'
 
-# ==================== УТИЛИТЫ ====================
-
+#работа с файлами
 def load_articles():
     if os.path.exists(ARTICLES_FILE):
         try:
@@ -40,8 +39,8 @@ def save_reviews(reviews_list):
     with open(REVIEWS_FILE, 'w', encoding='utf-8') as f:
         json.dump(reviews_list, f, ensure_ascii=False, indent=4)
 
+#обработка телефона
 def normalize_phone(phone: str) -> str:
-    """Приводит любой валидный российский номер к формату +7XXXXXXXXXX"""
     digits = re.sub(r'\D', '', phone) 
     if len(digits) == 11:
         if digits.startswith('8'):
@@ -49,25 +48,23 @@ def normalize_phone(phone: str) -> str:
     elif len(digits) == 10:
         digits = '7' + digits
     return f'+{digits}' if len(digits) == 11 else phone
-
+# поиск пользователя по номеру телефона
 def find_user_by_phone(users_list, phone):
-    """Ищет пользователя по нормализованному телефону"""
     target = normalize_phone(phone)
     for i, user in enumerate(users_list):
         if normalize_phone(user.get('phone', '')) == target:
             return i
     return -1
 
+#список список названия книг
 def get_books_list(users_list):
-    """Собирает уникальные названия книг из всех отзывов всех пользователей"""
     titles = set()
     for user in users_list:
         for review in user.get('reviews', []):
             if review.get('book_title'):
                 titles.add(review['book_title'])
     return sorted(list(titles))
-
-
+#подгрузка скриптов
 @route('/static/<filename:path>')
 def send_static(filename):
     return static_file(filename, root='./static')
@@ -162,10 +159,11 @@ def add_article():
     )
 
 
-#ОТЗЫВЫ
+# ОТЗЫВЫ
 @route('/reviews')
 @view('reviews')
 def reviews_get():
+    # Загружаем и сортируем пользователей по дате последнего отзыва
     users_list = load_reviews()
     users_list.sort(key=lambda u: max((r.get('date', '') for r in u.get('reviews', [])), default=''), reverse=True)
     
@@ -173,7 +171,7 @@ def reviews_get():
         title='Отзывы о книгах',
         year=datetime.now().year,
         users=users_list,
-        books_list=get_books_list(users_list),
+        books_list=get_books_list(users_list),  # Уникальные названия для фильтра
         errors={},
         form_data={},
         success_message=None
@@ -184,27 +182,31 @@ def reviews_get():
 def reviews_post():
     users_list = load_reviews()
     
+    # собираем данные формы
     form_data = {
         'book_title': request.forms.getunicode('book_title', '').strip(),
         'author':     request.forms.getunicode('author', '').strip(),
         'review_text':request.forms.getunicode('review_text', '').strip(),
         'rating':     request.forms.getunicode('rating', '').strip(),
         'phone':      request.forms.getunicode('phone', '').strip(),
-        'date':       datetime.now().strftime('%Y-%m-%d')
+        'date':       datetime.now().strftime('%Y-%m-%d')  # Авто-дата
     }
     
+    #валидация полей
     errors = validate_review_form(form_data)
     
-    #  ПРОВЕРКА УНИКАЛЬНОСТИ + НОРМАЛИЗАЦИЯ
+    #проверка уникальности телефона 
     if not errors:
-        form_data['phone'] = normalize_phone(form_data['phone'])  # Приводим к +7...
+        form_data['phone'] = normalize_phone(form_data['phone'])  # +7...
         user_idx = find_user_by_phone(users_list, form_data['phone'])
         
+        #если телефон уже есть, но имя не совпадает — ошибка
         if user_idx != -1:
             existing_author = users_list[user_idx].get('author')
             if existing_author != form_data['author']:
                 errors['phone'] = f'Номер {form_data["phone"]} уже зарегистрирован на пользователя "{existing_author}"'
     
+    #функция-сборщик данных 
     def render(**kwargs):
         return dict(
             title='Отзывы о книгах',
@@ -216,26 +218,29 @@ def reviews_post():
             success_message=kwargs.get('success_message')
         )
     
+    #если есть ошибки — возвращаем форму с подсветкой
     if errors:
         return render(errors=errors, form_data=form_data)
     
-    # Генерация ID
+    #генерация ID для нового отзыва
     max_id = 0
     for u in users_list:
         for r in u.get('reviews', []):
             if r.get('id', 0) > max_id: max_id = r.get('id', 0)
     new_id = max_id + 1
     
+    #формируем объект отзыва
     new_review = {
         'id': new_id,
         'book_title': form_data['book_title'],
         'author':     form_data['author'],
         'review_text':form_data['review_text'],
-        'rating':     int(form_data['rating']),
+        'rating':     int(form_data['rating']),  # Преобразуем строку в число
         'phone':      form_data['phone'],  
         'date':       form_data['date']
     }
     
+    #добавляем отзыв существующему пользователю или создаём нового
     user_idx = find_user_by_phone(users_list, form_data['phone'])
     if user_idx != -1:
         users_list[user_idx]['reviews'].append(new_review)
@@ -248,6 +253,7 @@ def reviews_post():
         })
     
     save_reviews(users_list)
+    # Пересортировка пользователей для корректного отображения
     users_list.sort(key=lambda u: max((r.get('date', '') for r in u.get('reviews', [])), default=''), reverse=True)
     
     return render(success_message='Отзыв успешно опубликован!')
