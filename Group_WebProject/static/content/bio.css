@@ -1204,7 +1204,7 @@ body {
     padding: 20px;
 }
 
-.book-title {
+.book-title1 {
     font-family: 'Playfair Display', serif;
     font-size: 20px;
     font-weight: 700;
@@ -1327,8 +1327,8 @@ body {
     font-weight: 600;
 }
 
-/* === НАВИГАЦИОННЫЕ ССЫЛКИ-РАЗДЕЛЫ === */
-.nav-sections {
+/* Навигационные секции */
+.nav-sections1 {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -1336,7 +1336,7 @@ body {
     margin: 40px 0;
 }
 
-.section-link {
+.section-link1 {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -1354,13 +1354,13 @@ body {
         text-decoration: none;
     }
 
-.section-icon {
-    font-size: 24px;
+.section-icon1 {
+    font-size: 20px;
 }
 
-.section-title {
+.section-title1 {
     color: #fff;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 600;
 }
 
@@ -1394,8 +1394,8 @@ body {
     }
 
     .section-link {
-        width: 100%;
-        max-width: 300px;
+        width: 50%;
+        max-width: 200px;
         justify-content: center;
     }
 }
@@ -1409,6 +1409,17 @@ body {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Тень для читаемости */
     margin: 10px 0;
 }
+.developer-card:hover {
+    transform: translateY(-10px);
+    border-color: #8b0000 !important;
+    box-shadow: 0 10px 30px rgba(139, 0, 0, 0.3);
+}
+
+.developer-card:hover .dev-photo {
+    border-color: #8b0000;
+}
+
+
 
 @media (max-width: 768px) {
     .hero-main-title {

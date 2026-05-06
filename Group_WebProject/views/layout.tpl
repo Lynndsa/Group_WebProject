@@ -12,6 +12,8 @@
 
     <link rel="stylesheet" type="text/css" href="/static/content/bio.css">
     <link rel="stylesheet" href="/static/content/bio.css">
+    <link rel="stylesheet" href="/static/content/style.css">
+    <link rel="stylesheet" href="/static/content/reviews.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -27,7 +29,9 @@
             </a>
             <nav class="nav-menu">
                 <a href="/books" class="nav-link">КНИГИ</a>
+                <a href="/reviews" class="nav-link">ОТЗЫВЫ</a>
                 <a href="/contact" class="nav-link">БИОГРАФИЯ</a>
+                <a href="/articles" class="nav-link">СТАТЬИ</a>
                 <a href="/creators" class="nav-link">КОНТАКТЫ</a>
             </nav>
         </div>
@@ -45,6 +49,7 @@
     <script src="/static/scripts/jquery-1.10.2.js"></script>
     <script src="/static/scripts/bootstrap.js"></script>
     <script src="/static/scripts/respond.js"></script>
+
 
 </body>
 </html>

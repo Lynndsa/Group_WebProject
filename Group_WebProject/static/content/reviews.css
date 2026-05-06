@@ -1,0 +1,158 @@
+/* =========================================
+   СТРАНИЦА ОТЗЫВОВ (reviews.css)
+   ========================================= */
+
+/* Общая сетка страницы: Форма слева (480px), Отзывы справа */
+.reviews-layout {
+    display: grid;
+    grid-template-columns: 480px 1fr;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    align-items: start;
+}
+
+/* Скроллбар для колонки формы */
+.form-column::-webkit-scrollbar {
+    width: 6px;
+}
+
+.form-column::-webkit-scrollbar-track {
+    background: #0a0a0a;
+    border-radius: 3px;
+}
+
+.form-column::-webkit-scrollbar-thumb {
+    background: #8b0000;
+    border-radius: 3px;
+}
+
+    .form-column::-webkit-scrollbar-thumb:hover {
+        background: #c41e3a;
+    }
+
+.display-column h2 {
+    margin-bottom: 20px;
+}
+
+/* Панель фильтров */
+.filters-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding: 15px;
+    background: #0f0f0f;
+    border: 1px solid #1a1a1a;
+    border-radius: 6px;
+    flex-wrap: wrap;
+}
+
+    .filters-bar input,
+    .filters-bar select {
+        padding: 12px;
+        background: #0a0a0a;
+        border: 1px solid #333;
+        color: #e0e0e0;
+        border-radius: 4px;
+        flex: 1;
+        min-width: 140px;
+        font-family: inherit;
+    }
+
+        .filters-bar input:focus,
+        .filters-bar select:focus {
+            outline: none;
+            border-color: #8b0000;
+        }
+
+/* Сетка карточек отзывов */
+.reviews-grid-large {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 25px;
+}
+
+/* Большая карточка отзыва */
+.review-card-large {
+    background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+    border: 1px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 25px;
+    position: relative;
+    transition: all 0.3s ease;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .review-card-large:hover {
+        transform: translateY(-5px);
+        border-color: #8b0000;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+
+/* Бейдж с рейтингом */
+.card-rating-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #8b0000, #c41e3a);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.95em;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 10px rgba(139, 0, 0, 0.4);
+}
+
+.card-header {
+    margin-bottom: 15px;
+    padding-right: 70px; /* Отступ справа, чтобы текст не заезжал под бейдж */
+}
+
+    .card-header h3 {
+        font-size: 1.4em;
+        color: #fff;
+        margin-bottom: 5px;
+    }
+
+.card-text {
+    color: #ccc;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    flex-grow: 1;
+    font-style: italic;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #222;
+    font-size: 0.9em;
+    color: #888;
+}
+
+.card-author {
+    color: #c41e3a;
+    font-weight: 600;
+}
+
+.card-date {
+    color: #666;
+    font-family: 'Courier Prime', monospace;
+}
+
+/* Адаптивность */
+@media (max-width: 950px) {
+    .reviews-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .form-column {
+        position: static;
+    }
+}
