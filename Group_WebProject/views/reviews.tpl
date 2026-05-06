@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+% rebase('layout.tpl', title=title, year=year)
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
