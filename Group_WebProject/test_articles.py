@@ -1,25 +1,22 @@
 import unittest
 import validator as val
 
-class Test_test_articles(unittest.TestCase):
-    def test_title_T(self):
-        list_title_T = [
-            "An",
-            "",
-            "AJ",
-            "Ken"
-        ]
-        for title in list_title_T:
-            self.assertTrue(val.validate_title(title))
-    def test_title_F(self):
-        list_title_F = [
-            "3",
-            "1",
-            "2",
-            "9",
-            "  d  "
-        ]
-        for title in list_title_F:
-            self.assertFalse(val.validate_title(title))
+class TestAuthorField_article(unittest.TestCase):
+    def test_valid_author(self):
+        is_valid, _ = val.validate_author("Семен")
+        self.assertTrue(is_valid)
+    def test_nonvalid_author(self):
+        is_valid, _ = val.validate_author("Andrey")
+        self.assertFalse(is_valid)
+    def test_short_author(self):
+        is_valid, _ = val.validate_author("а")
+        self.assertFalse(is_valid)
+class TestTitleField_article(unittest.TestCase):
+    def test_valid_title(self):
+        is_valid, _ = val.validate_title("Просмотр")
+        self.assertTrue(is_valid)
+    def test_short_title(self):
+        is_valid, _ = val.validate_title("Прос")
+        self.assertFalse(is_valid)
 if __name__ == '__main__':
     unittest.main()
