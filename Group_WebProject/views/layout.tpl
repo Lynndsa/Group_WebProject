@@ -32,7 +32,9 @@
                 <a href="/reviews" class="nav-link">ОТЗЫВЫ</a>
                 <a href="/contact" class="nav-link">БИОГРАФИЯ</a>
                 <a href="/articles" class="nav-link">СТАТЬИ</a>
+                <a href="/add_book_page" class="nav-link">НОВИНКИ</a>
                 <a href="/creators" class="nav-link">КОНТАКТЫ</a>
+               
             </nav>
         </div>
     </header>
