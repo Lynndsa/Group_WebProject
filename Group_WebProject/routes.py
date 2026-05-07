@@ -1,16 +1,17 @@
 
 import re 
-from bottle import route, view, request, static_file
+from bottle import route, view, request, static_file, template, redirect, post, run
 from datetime import datetime
+from validator import validate_article_form, validate_review_form
 import json
 import os
-
-# Импортируем валидаторы (убедись, что файл называется validators.py)
-from validator import validate_article_form, validate_review_form
+import uuid
 
 # Путь к файлу с данными 
 ARTICLES_FILE = 'articles.json'
 REVIEWS_FILE = 'reviews.json'
+BOOKS_FILE = 'books.json'  # Файл для хранения данных
+STATIC_DIR = './static'
 
 #работа с файлами
 def load_articles():
@@ -257,3 +258,75 @@ def reviews_post():
     users_list.sort(key=lambda u: max((r.get('date', '') for r in u.get('reviews', [])), default=''), reverse=True)
     
     return render(success_message='Отзыв успешно опубликован!')
+
+# НОВИНКИ
+
+# ===== ФУНКЦИИ ДЛЯ РАБОТЫ С JSON =====
+def load_books():
+    """Загрузить книги из JSON файла"""
+    if not os.path.exists(BOOKS_FILE):
+        return []  # Если файла нет — возвращаем пустой список
+    
+    try:
+        with open(BOOKS_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (json.JSONDecodeError, IOError):
+        return []  # Если ошибка — возвращаем пустой список
+
+def save_books(books):
+    """Сохранить книги в JSON файл"""
+    
+    with open(BOOKS_FILE, 'w', encoding='utf-8') as f:
+        json.dump(books, f, ensure_ascii=False, indent=2)
+
+# ===== МАРШРУТЫ =====
+@route('/static/<filepath:path>')
+def server_static(filepath):
+    return static_file(filepath, root=STATIC_DIR)
+
+@route('/')
+def index():
+    return template('index', title='Главная', year=2026, encoding='utf-8')
+
+@route('/add_book_page')
+def show_add_form():
+    books = load_books()  # ← Загружаем из файла при каждом открытии
+    return template('add_book', title='Добавить книгу',  books=books, year=2026, encoding='utf-8')
+
+@post('/add_book')
+def save_new_book():
+    # Получаем данные из формы
+    title = request.forms.get('title')
+    release_date = request.forms.get('release_date')
+    description = request.forms.get('description')
+    rating = request.forms.get('rating')
+    
+    # Обработка фото
+    upload = request.files.get('cover')
+    cover_url = "/static/images/default_book.jpg"
+    
+    if upload:
+        ext = upload.filename.split('.')[-1]
+        # ✅ Генерируем уникальное имя
+        unique_id = uuid.uuid4().hex[:8]  # Первые 8 символов UUID
+        new_filename = f"book_{unique_id}.{ext}"
+    
+        save_path = os.path.join(STATIC_DIR, 'images', 'books', new_filename)
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+    
+        upload.save(save_path)  # ← Теперь ошибки не будет
+        cover_url = f"/static/images/books/{new_filename}"
+    
+    # Загружаем текущие книги, добавляем новую, сохраняем
+    books = load_books()
+    books.append({
+        'title': title,
+        'release_date': release_date,
+        'description': description,
+        'rating': rating,
+        'cover': cover_url
+    })
+    save_books(books)  # ← Сохраняем в JSON файл!
+    
+    redirect('/add_book_page')
+

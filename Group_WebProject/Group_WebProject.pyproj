@@ -48,6 +48,7 @@
     <Folder Include="views\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="books.json" />
     <Content Include="requirements.txt" />
     <Content Include="static\content\bio.css">
       <SubType>Code</SubType>
