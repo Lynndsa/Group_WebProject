@@ -266,7 +266,7 @@ input[type="checkbox"].input-validation-error {
 
 /* Сообщения об ошибках */
 .error-message {
-    color: #c41e3a;
+    color: #e0e0e0;
     font-size: 0.85em;
     font-weight: 500;
     padding-left: 10px;
