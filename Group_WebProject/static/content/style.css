@@ -611,3 +611,243 @@ input[type="checkbox"].input-validation-error {
         gap: 10px;
     }
 }
+
+* {
+    box-sizing: border-box;
+}
+/* ===== СТРАНИЦА ДОБАВЛЕНИЯ КНИГ ===== */
+
+.admin-container {
+    display: flex;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 60px auto;
+    padding: 0 40px;
+    align-items: flex-start;
+}
+
+.form-section {
+    flex: 0 0 450px;
+    background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
+    padding: 40px;
+    border: 1px solid #1a1a1a;
+    border-radius: 3px;
+    position: sticky;
+    top: 40px;
+}
+
+.section-title-small {
+    color: #c41e3a;
+    font-size: 1.8em;
+    margin: 0 0 30px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 15px;
+}
+
+.book-form .form-group {
+    margin-bottom: 25px;
+}
+
+.book-form label {
+    display: block;
+    color: #c41e3a;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+/* ===== КРАСИВЫЙ FILE INPUT ===== */
+
+.book-form input[type="file"] {
+    position: relative;
+    padding: 14px;
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    color: #777;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .book-form input[type="file"]:hover {
+        border-color: #8b0000;
+        box-shadow: 0 0 15px rgba(196, 30, 58, 0.2);
+    }
+
+    /* КНОПКА ВНУТРИ INPUT */
+
+    .book-form input[type="file"]::file-selector-button {
+        background: linear-gradient(135deg, #8b0000, #c41e3a);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        margin-right: 15px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-weight: 700;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+    }
+
+        /* ХОВЕР */
+
+        .book-form input[type="file"]::file-selector-button:hover {
+            background: linear-gradient(135deg, #a00000, #d42e4a);
+            transform: translateY(-2px);
+        }
+
+    .book-form input:focus,
+    .book-form select:focus,
+    .book-form textarea:focus {
+        outline: none;
+        border-color: #c41e3a;
+        box-shadow: 0 0 15px rgba(196, 30, 58, 0.3);
+    }
+
+.book-form textarea {
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #8b0000, #c41e3a);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 700;
+    margin-top: 10px;
+}
+
+    .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(196, 30, 58, 0.5);
+        background: linear-gradient(135deg, #a00000, #d42e4a);
+    }
+
+/* ===== КАРТОЧКИ КНИГ (СПРАВА) ===== */
+.books-section {
+    flex: 1;
+    min-width: 0;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    gap: 30px;
+    align-items: start;
+}
+
+.book-card-new {
+    width: 100%;
+    box-sizing: border-box;
+}
+    .book-card-new:hover {
+        transform: translateY(-10px);
+        border-color: #8b0000;
+        box-shadow: 0 20px 60px rgba(196, 30, 58, 0.3);
+    }
+
+.book-cover-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.book-cover-new {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    transition: all 0.4s ease;
+    filter: grayscale(20%);
+}
+
+.book-card-new:hover .book-cover-new {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.age-rating {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #8b0000, #c41e3a);
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 0.9em;
+    letter-spacing: 2px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.book-info-new {
+    padding: 25px;
+}
+
+.book-title-new {
+    color: #fff;
+    font-size: 1.4em;
+    margin: 0 0 10px;
+    letter-spacing: 2px;
+    font-family: 'Georgia', serif;
+}
+
+.book-date-new {
+    color: #8b0000;
+    font-size: 0.9em;
+    margin: 0 0 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.book-desc-new {
+    color: #aaa;
+    font-size: 0.95em;
+    line-height: 1.7;
+    margin: 0;
+    text-align: justify;
+}
+
+#file-name {
+    margin-top: 10px;
+    color: #999;
+    font-size: 0.9em;
+    word-break: break-word;
+    line-height: 1.5;
+}
+.admin-container {
+    align-items: flex-start;
+}
+
+.form-section {
+    align-self: flex-start;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media (max-width: 1024px) {
+    .admin-container {
+        flex-direction: column;
+    }
+
+    .form-section {
+        flex: none;
+        width: 100%;
+        position: relative;
+        top: 0;
+    }
+}

@@ -75,6 +75,7 @@
     <Content Include="static\images\it2019_fight.jpg" />
     <Content Include="static\images\it2019_pennywise2.jpg" />
     <Content Include="static\images\it_cover.jpg" />
+    <Content Include="static\scripts\book_upload.js" />
     <Content Include="static\scripts\bootstrap.js" />
     <Content Include="static\scripts\bootstrap.min.js" />
     <Content Include="static\scripts\jquery-1.10.2.intellisense.js" />

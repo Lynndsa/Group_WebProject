@@ -25,7 +25,17 @@
             
             <div class="form-group">
                 <label for="cover">Фото обложки</label>
-                <input type="file" id="cover" name="cover" accept="image/*" required>
+                <label for="cover" class="custom-file-upload">
+                     Выбрать обложку
+                </label>
+
+                <input type="file"
+                   id="cover"
+                   name="cover"
+                   accept="image/*"
+                   required>
+
+                <p id="file-name">Файл не выбран</p>
             </div>
             
             <div class="form-group">

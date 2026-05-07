@@ -1,1 +1,37 @@
-[]
+[
+  {
+    "title": "Специалист по информационной безопасности: старт карьеры",
+    "release_date": "1010-02-05",
+    "description": "о попе",
+    "rating": "18+",
+    "cover": "/static/images/books/book_741f0ea6.jpg"
+  },
+  {
+    "title": "Специалист по информационной безопасности: старт карьеры",
+    "release_date": "1010-02-05",
+    "description": "о попе",
+    "rating": "18+",
+    "cover": "/static/images/books/book_29e37b6a.jpg"
+  },
+  {
+    "title": "залупень",
+    "release_date": "6767-07-06",
+    "description": "сиксевеееен",
+    "rating": "0+",
+    "cover": "/static/images/books/book_fddab1e2.png"
+  },
+  {
+    "title": "пвавы",
+    "release_date": "5555-05-05",
+    "description": "жопа",
+    "rating": "12+",
+    "cover": "/static/images/books/book_5b89fe66.png"
+  },
+  {
+    "title": "рпавпачмпати",
+    "release_date": "0555-05-05",
+    "description": "еравыффцкера",
+    "rating": "16+",
+    "cover": "/static/images/books/book_726cfa47.png"
+  }
+]
