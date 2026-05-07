@@ -6,24 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="/static/content/style.css">
+    <!-- стили -->
+    <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="/static/content/reviews.css">
 </head>
 <body>
-
-    <header class="main-header">
-        <div class="header-container">
-            <a href="/" class="logo">STEPHEN <span class="logo-accent">KING</span></a>
-            <nav class="nav-menu">
-                <a href="/books" class="nav-link">КНИГИ</a>
-                <a href="/reviews" class="nav-link">ОТЗЫВЫ</a>
-                <a href="/contact" class="nav-link">БИОГРАФИЯ</a>
-                <a href="/articles" class="nav-link">СТАТЬИ</a>
-                <a href="/creators" class="nav-link">КОНТАКТЫ</a>
-            </nav>
-        </div>
-    </header>
-
+    <!-- шапка  -->
     <div class="book-header">
         <h1 class="book-title">Отзывы о книгах</h1>
         <p class="book-original-title">База оценок и мнений</p>
@@ -31,10 +19,11 @@
 
     <div class="reviews-layout">
         
-        <!-- ЛЕВАЯ КОЛОНКА: ФОРМА -->
+        <!-- форма добавления -->
         <section class="add-article-section form-column">
             <h2>Добавить отзыв</h2>
             
+            <!-- если список ошибок не пуст, показывается -->
             % if errors:
             <div class="validation-summary-errors">
                 Пожалуйста, исправьте ошибки в форме.
@@ -43,8 +32,10 @@
             
             <form action="/reviews" method="POST" class="article-form">
                 
+                <!-- название книги -->
                 <div class="form-group">
                     <label for="book_title">Название книги:</label>
+                    <!-- сохраняет введённое при ошибке, класс добавляется динамически -->
                     <input type="text" id="book_title" name="book_title" 
                            value="{{ form_data.get('book_title', '') }}"
                            placeholder="Например: Оно"
@@ -54,6 +45,7 @@
                     % end
                 </div>
 
+                <!-- оценка -->
                 <div class="form-group">
                     <label for="rating">Оценка книги (0-10):</label>
                     <input type="number" id="rating" name="rating" min="0" max="10" step="1"
@@ -64,6 +56,7 @@
                     % end
                 </div>
 
+                <!-- автор -->
                 <div class="form-group">
                     <label for="author">Автор (Имя / Ник):</label>
                     <input type="text" id="author" name="author" 
@@ -74,6 +67,7 @@
                     % end
                 </div>
 
+                <!-- текст отзыва -->
                 <div class="form-group">
                     <label for="review_text">Текст отзыва:</label>
                     <textarea id="review_text" name="review_text" rows="5"
@@ -84,6 +78,7 @@
                     % end
                 </div>
 
+                <!-- телефон -->
                 <div class="form-group">
                     <label for="phone">Телефон:</label>
                     <input type="tel" id="phone" name="phone" 
@@ -98,11 +93,13 @@
             </form>
         </section>
 
-        <!-- ПРАВАЯ КОЛОНКА: ФИЛЬТРЫ + СПИСОК -->
+        <!-- ФИЛЬТРЫ + СПИСОК -->
         <section class="display-column">
             <h2>Все отзывы</h2>
             
+            <!-- Панель фильтрации -->
             <div class="filters-bar">
+                <!-- Список книг формируется динамически из всех сохранённых отзывов -->
                 <select id="filter-title">
                     <option value="">Все книги</option>
                     % for book in books_list:
@@ -120,13 +117,14 @@
                     <option value="5">5 и ниже</option>
                 </select>
                 
-                <!-- ДОБАВЛЕН id="apply-filters" -->
                 <button type="button" id="apply-filters" class="submit-btn" style="padding: 12px 24px; font-size: 0.9em;">Применить</button>
             </div>
 
+            <!-- Сетка отзывов -->
             <div class="reviews-grid-large">
-                % for review in reviews:
-                <!-- ДОБАВЛЕНЫ data-атрибуты для JS -->
+                <!-- Вложенный цикл: сначала пользователи, внутри каждого — его отзывы -->
+                % for user in users:
+                  % for review in user['reviews']:
                 <article class="review-card-large" 
                          data-book="{{ review['book_title'] }}" 
                          data-rating="{{ review.get('rating', '') }}">
@@ -142,13 +140,22 @@
                     <div class="card-footer">
                         <span class="card-author"> {{ review['author'] }}</span>
                         % if review.get('phone'):
-                        <span class="article-phone">📞 {{ review['phone'] }}</span>
+                        <span class="article-phone"> {{ review['phone'] }}</span>
                         % end
                     </div>
                 </article>
+                  % end
                 % end
                 
-                <!-- ДОБАВЛЕН id и display:none -->
+                <!-- Заглушка: показывается, если база отзывов пуста -->
+                % if not users:
+                <div style="grid-column: 1/-1; text-align: center; padding: 60px; color: #666; border: 2px dashed #333; border-radius: 8px;">
+                    <div style="font-size: 3em; margin-bottom: 10px;"></div>
+                    <p>Отзывов пока нет. Будьте первым!</p>
+                </div>
+                % end
+                
+                <!-- Сообщение "не найдено": скрыто по умолчанию, показывается JS после фильтрации -->
                 <div id="no-reviews-msg" style="display:none; grid-column: 1/-1; text-align: center; padding: 60px; color: #666; border: 2px dashed #333; border-radius: 8px;">
                     <div style="font-size: 3em; margin-bottom: 10px;">🔍</div>
                     <p>По выбранным фильтрам отзывов не найдено.</p>
@@ -161,7 +168,7 @@
         <p>&copy; {{ year }} Отзывы о книгах. Все права защищены.</p>
     </footer>
 
-    <!-- Подключение внешнего скрипта -->
+    <!-- Клиентский скрипт фильтрации (reviews.js) -->
     <script src="/static/scripts/reviews.js"></script>
 
 </body>

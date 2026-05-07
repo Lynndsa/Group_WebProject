@@ -13,11 +13,24 @@
     align-items: start;
 }
 
-/* Левая колонка с формой (прилипает при скролле) */
-.form-column {
-    position: sticky;
-    top: 100px;
+/* Скроллбар для колонки формы */
+.form-column::-webkit-scrollbar {
+    width: 6px;
 }
+
+.form-column::-webkit-scrollbar-track {
+    background: #0a0a0a;
+    border-radius: 3px;
+}
+
+.form-column::-webkit-scrollbar-thumb {
+    background: #8b0000;
+    border-radius: 3px;
+}
+
+    .form-column::-webkit-scrollbar-thumb:hover {
+        background: #c41e3a;
+    }
 
 .display-column h2 {
     margin-bottom: 20px;
