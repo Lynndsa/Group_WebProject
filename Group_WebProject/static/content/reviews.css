@@ -1,8 +1,8 @@
-/* =========================================
-   �������� ������� (reviews.css)
-   ========================================= */
+﻿
 
-/* ����� ����� ��������: ����� ����� (480px), ������ ������ */
+/* ДВУХКОЛОНОЧНЫЙ МАКЕТ СТРАНИЦЫ: CSS Grid делит область на фиксированную колонку формы (480px) 
+    и гибкую колонку отзывов (1fr). Максимальная ширина ограничена 1400px, 
+    контент центрируется. align-items: start предотвращает растягивание колонок по высоте самой высокой из них. */
 .reviews-layout {
     display: grid;
     grid-template-columns: 480px 1fr;
@@ -10,33 +10,38 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 40px 20px;
-    align-items: start;
+    align-items: start; /* Карточки не растягиваются по высоте колонки */
 }
 
-/* ��������� ��� ������� ����� */
+/* КАСТОМНЫЙ СКРОЛЛБАР ДЛЯ КОЛОНКИ ФОРМЫ (Webkit: Chrome, Safari, Edge, Opera) */
+/* Ширина полосы прокрутки уменьшается до 6px для компактности */
 .form-column::-webkit-scrollbar {
     width: 6px;
 }
 
+/* Фон трека: тёмный, со скруглёнными углами для плавного восприятия */
 .form-column::-webkit-scrollbar-track {
     background: #0a0a0a;
     border-radius: 3px;
 }
 
+/* Ползунок (thumb): тёмно-красный, скруглённый, соответствует общей палитре */
 .form-column::-webkit-scrollbar-thumb {
     background: #8b0000;
     border-radius: 3px;
 }
 
+    /* Ползунок при наведении: осветляется до акцентного красного для тактильной отдачи */
     .form-column::-webkit-scrollbar-thumb:hover {
-        background: #c41e3a;
+        background: #c41e3a; /* Подсветка при наведении */
     }
 
+/* ЗАГОЛОВОК ПРАВОЙ КОЛОНКИ: Стандартный отступ снизу для визуального отделения от контента */
 .display-column h2 {
     margin-bottom: 20px;
 }
 
-/* ������ �������� */
+/* ПАНЕЛЬ ФИЛЬТРОВ: Горизонтальный flex-контейнер с равномерным распределением элементов. Тёмный фон, тонкая граница, скруглённые углы. flex-wrap: wrap обеспечивает корректный перенос на мобильных экранах. */
 .filters-bar {
     display: flex;
     gap: 15px;
@@ -45,9 +50,10 @@
     background: #0f0f0f;
     border: 1px solid #1a1a1a;
     border-radius: 6px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Перенос на новую строку при нехватке места */
 }
 
+    /* ПОЛЯ ВНУТРИ ПАНЕЛИ ФИЛЬТРОВ: Единые стили для input и select, растягиваются равномерно (flex: 1), имеют минимальную ширину 140px для сохранения читаемости. Кастомный фон и граница, наследуемый шрифт. */
     .filters-bar input,
     .filters-bar select {
         padding: 12px;
@@ -55,44 +61,46 @@
         border: 1px solid #333;
         color: #e0e0e0;
         border-radius: 4px;
-        flex: 1;
-        min-width: 140px;
+        flex: 1; /* Растягиваются равномерно */
+        min-width: 140px; /* Минимальная ширина, чтобы не сжимались слишком сильно */
         font-family: inherit;
     }
 
+        /* СОСТОЯНИЕ ФОКУСА ПОЛЕЙ ФИЛЬТРОВ: Убирает стандартную обводку браузера, подсвечивает границу тёмно-красным цветом для ясности взаимодействия */
         .filters-bar input:focus,
         .filters-bar select:focus {
             outline: none;
-            border-color: #8b0000;
+            border-color: #8b0000; /* Акцент при фокусе */
         }
 
-/* ����� �������� ������� */
+/* АДАПТИВНАЯ СЕТКА КАРТОЧЕК: CSS Grid с auto-fill автоматически создаёт столько колонок, сколько помещается в контейнер. minmax(340px, 1fr) гарантирует минимальную ширину карточки 340px, а оставшееся пространство распределяется поровну. Media-запросы не требуются до определённого порога. */
 .reviews-grid-large {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 25px;
 }
 
-/* ������� �������� ������ */
+/* КАРТОЧКА ОТЗЫВА: Вертикальный flex-контейнер с фиксированным контекстом позиционирования (position: relative) для внутренних абсолютных элементов. Градиентный фон, скругление, плавные переходы. min-height задаёт минимальную высоту, flex-direction: column позволяет прижать футер к низу через flex-grow у текста. */
 .review-card-large {
     background: linear-gradient(135deg, #0a0a0a 0%, #0f0f0f 100%);
     border: 1px solid #1a1a1a;
     border-radius: 8px;
     padding: 25px;
-    position: relative;
+    position: relative; /* Для абсолютного позиционирования бейджа */
     transition: all 0.3s ease;
     min-height: 220px;
     display: flex;
     flex-direction: column;
 }
 
+    /* ЭФФЕКТ НАВЕДЕНИЯ НА КАРТОЧКУ: Лёгкий подъём (translateY), изменение цвета границы, усиление тени. Transition обеспечивает плавность анимации. */
     .review-card-large:hover {
         transform: translateY(-5px);
         border-color: #8b0000;
         box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
 
-/* ����� � ��������� */
+/* БЕЙДЖ С РЕЙТИНГОМ: Абсолютно позиционирован в правом верхнем углу (top: 15px, right: 15px). Градиентный фон, белый текст, скруглённые углы, тень. Не влияет на поток документа благодаря absolute. */
 .card-rating-badge {
     position: absolute;
     top: 15px;
@@ -107,9 +115,10 @@
     box-shadow: 0 4px 10px rgba(139, 0, 0, 0.4);
 }
 
+/* ШАПКА КАРТОЧКИ: Отступ снизу, правый padding (70px)预留 пространство, чтобы заголовок не перекрывался бейджем рейтинга. Типографика: крупный белый шрифт, минимальный отступ от названия до текста. */
 .card-header {
     margin-bottom: 15px;
-    padding-right: 70px; /* ������ ������, ����� ����� �� ������� ��� ����� */
+    padding-right: 70px;
 }
 
     .card-header h3 {
@@ -118,6 +127,7 @@
         margin-bottom: 5px;
     }
 
+/* ТЕКСТ ОТЗЫВА: Занимает всё доступное пространство между шапкой и футером благодаря flex-grow: 1. Серый цвет, увеличенный межстрочный интервал, курсив для стилистического контраста. */
 .card-text {
     color: #ccc;
     line-height: 1.7;
@@ -126,6 +136,7 @@
     font-style: italic;
 }
 
+/* ФУТЕР КАРТОЧКИ: Flex-раскладка, распределение элементов по краям (space-between), верхняя разделительная линия, приглушённый шрифт. Прижимается к низу карточки за счёт flex-grow у .card-text. */
 .card-footer {
     display: flex;
     justify-content: space-between;
@@ -136,23 +147,27 @@
     color: #888;
 }
 
+/* ИМЯ АВТОРА: Акцентный красный цвет, полужирное начертание для визуального выделения */
 .card-author {
     color: #c41e3a;
     font-weight: 600;
 }
 
+/* ДАТА ПУБЛИКАЦИИ: Моноширинный шрифт (Courier Prime) для точного выравнивания цифр, приглушённый серый цвет */
 .card-date {
     color: #666;
-    font-family: 'Courier Prime', monospace;
+    font-family: 'Courier Prime', monospace; /* Моноширинный шрифт для даты */
 }
 
-/* ������������ */
+/* АДАПТИВНОСТЬ: ПЛАНШЕТЫ И МОБИЛЬНЫЕ (до 950px) */
 @media (max-width: 950px) {
+    /* Переключение макета в одну колонку: форма и отзывы располагаются вертикально */
     .reviews-layout {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Одна колонка */
     }
 
+    /* Сброс фиксированного/липкого позиционирования, если оно было задано глобально */
     .form-column {
-        position: static;
+        position: static; /* Сбрасываем позиционирование, если было sticky/fixed */
     }
 }
