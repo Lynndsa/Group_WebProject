@@ -260,8 +260,58 @@ def reviews_post():
     return render(success_message='Отзыв успешно опубликован!')
 
 # НОВИНКИ
-
-# ===== ФУНКЦИИ ДЛЯ РАБОТЫ С JSON =====
+@post('/add_book')
+def save_new_book():
+    # 1. Получаем данные
+    title = request.forms.get('title', '').strip()
+    release_date = request.forms.get('release_date', '').strip()
+    description = request.forms.get('description', '').strip()
+    rating = request.forms.get('rating', '').strip()
+    cover = request.files.get('cover')
+    
+    # 2. Валидация
+    errors = {}
+    
+    ok, err = validate_book_title(title)
+    if not ok:
+        errors['title'] = err
+        print(f"❌ Ошибка названия: {err}")  # Для отладки
+    
+    ok, err = validate_book_date(release_date)
+    if not ok:
+        errors['release_date'] = err
+        print(f"❌ Ошибка даты: {err}")
+    
+    ok, err = validate_book_description(description)
+    if not ok:
+        errors['description'] = err
+        print(f"❌ Ошибка описания: {err}") 
+    
+    ok, err = validate_age_rating(rating)
+    if not ok:
+        errors['rating'] = err
+        print(f"❌ Ошибка рейтинга: {err}")
+    
+    ok, err = validate_cover(cover, required=True)
+    if not ok:
+        errors['cover'] = err
+        print(f"❌ Ошибка обложки: {err}")
+    
+    # 3. яяяяяяяяпри наличии ошибок возвращаем форму
+    if errors:
+        print(f"Найдены ошибки: {errors}")
+        books = load_books()
+        return template('add_book', 
+                       books=books, 
+                       year=2026, 
+                       title='Добавить книгу',
+                       errors=errors,
+                       form_data=request.forms)
+    
+    # 4. 🔥 ТОЛЬКО ЕСЛИ ОШИБОК НЕТ — сохраняем
+    print("Все проверки пройдены, сохраняем книгу...")
+    
+# Функции для работы с JSON
 def load_books():
     """Загрузить книги из JSON файла"""
     if not os.path.exists(BOOKS_FILE):
@@ -279,7 +329,7 @@ def save_books(books):
     with open(BOOKS_FILE, 'w', encoding='utf-8') as f:
         json.dump(books, f, ensure_ascii=False, indent=2)
 
-# ===== МАРШРУТЫ =====
+# Маршруты к файлам
 @route('/static/<filepath:path>')
 def server_static(filepath):
     return static_file(filepath, root=STATIC_DIR)
@@ -290,7 +340,7 @@ def index():
 
 @route('/add_book_page')
 def show_add_form():
-    books = load_books()  # ← Загружаем из файла при каждом открытии
+    books = load_books()  # Загружаем из файла при каждом открытии
     return template('add_book', title='Добавить книгу',  books=books, year=2026, encoding='utf-8')
 
 @post('/add_book')
@@ -307,14 +357,14 @@ def save_new_book():
     
     if upload:
         ext = upload.filename.split('.')[-1]
-        # ✅ Генерируем уникальное имя
+        # Генерируем уникальное имя
         unique_id = uuid.uuid4().hex[:8]  # Первые 8 символов UUID
         new_filename = f"book_{unique_id}.{ext}"
     
         save_path = os.path.join(STATIC_DIR, 'images', 'books', new_filename)
         os.makedirs(os.path.dirname(save_path), exist_ok=True)
     
-        upload.save(save_path)  # ← Теперь ошибки не будет
+        upload.save(save_path)
         cover_url = f"/static/images/books/{new_filename}"
     
     # Загружаем текущие книги, добавляем новую, сохраняем
@@ -329,4 +379,6 @@ def save_new_book():
     save_books(books)  # ← Сохраняем в JSON файл!
     
     redirect('/add_book_page')
+
+
 

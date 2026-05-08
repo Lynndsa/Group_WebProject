@@ -33,5 +33,33 @@
     "description": "еравыффцкера",
     "rating": "16+",
     "cover": "/static/images/books/book_726cfa47.png"
+  },
+  {
+    "title": "аоарпв",
+    "release_date": "7632-08-05",
+    "description": "гшноекпаы",
+    "rating": "12+",
+    "cover": "/static/images/books/book_45660ed9.jpg"
+  },
+  {
+    "title": "Оно",
+    "release_date": "2007-01-05",
+    "description": "987678765",
+    "rating": "18+",
+    "cover": "/static/images/default_book.jpg"
+  },
+  {
+    "title": "Оно",
+    "release_date": "2008-08-05",
+    "description": "656434",
+    "rating": "18+",
+    "cover": "/static/images/default_book.jpg"
+  },
+  {
+    "title": "Оно",
+    "release_date": "2009-06-09",
+    "description": "87654",
+    "rating": "18+",
+    "cover": "/static/images/default_book.jpg"
   }
 ]
