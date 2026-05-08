@@ -35,6 +35,9 @@
   <ItemGroup>
     <Compile Include="app.py" />
     <Compile Include="routes.py" />
+    <Compile Include="tests\test_book.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="validator.py" />
   </ItemGroup>
   <ItemGroup>

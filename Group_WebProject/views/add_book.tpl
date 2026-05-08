@@ -6,7 +6,11 @@
     <div class="form-section">
         <h2 class="section-title-small">Добавить новинку</h2>
 
-        <form action="/add_book" method="POST" enctype="multipart/form-data" class="book-form">
+        <form action="/add_book"
+      method="POST"
+      enctype="multipart/form-data"
+      class="book-form"
+      id="book-form">
 
             <div class="form-group">
                 <label for="title">Название книги</label>
@@ -31,7 +35,7 @@
 
                 <label class="file-upload-btn">
 
-                    <input
+                   <input
                         type="file"
                         id="cover"
                         name="cover"
@@ -43,7 +47,7 @@
                     <span class="upload-icon">📁</span>
 
                 </label>
-
+                <p id="file-error" class="file-error"></p>
             </div>
 
             <div class="form-group">
@@ -85,29 +89,52 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const form = document.getElementById('book-form');
 
     const input = document.getElementById('cover');
-    const fileName = document.getElementById('file-name');
+
+    const fileError = document.getElementById('file-error');
+
     const uploadBtn = document.querySelector('.file-upload-btn');
 
-    input.addEventListener('change', function () {
+    const fileName = document.getElementById('file-name');
 
-        if (this.files.length > 0) {
+    form.addEventListener('submit', (e) => {
 
-            fileName.textContent = this.files[0].name;
+        if (input.files.length === 0) {
 
-            uploadBtn.classList.add('file-selected');
+            e.preventDefault();
+
+            fileError.textContent = 'Загрузите изображение обложки';
+
+            uploadBtn.classList.add('file-error-state');
+
+            return;
+        }
+
+    });
+
+    input.addEventListener('change', () => {
+
+        if (input.files.length > 0) {
+
+            fileName.textContent = input.files[0].name;
+
+            fileError.textContent = '';
+
+            uploadBtn.classList.remove('file-error-state');
 
         } else {
 
             fileName.textContent = 'Файл не загружен';
-
-            uploadBtn.classList.remove('file-selected');
 
         }
 
     });
 
 });
+
 </script>

@@ -297,7 +297,7 @@ def save_new_book():
         errors['cover'] = err
         print(f"❌ Ошибка обложки: {err}")
     
-    # 3. яяяяяяяяпри наличии ошибок возвращаем форму
+    # 3. при наличии ошибок возвращаем форму
     if errors:
         print(f"Найдены ошибки: {errors}")
         books = load_books()
@@ -307,6 +307,26 @@ def save_new_book():
                        title='Добавить книгу',
                        errors=errors,
                        form_data=request.forms)
+        # ЕСЛИ ЕСТЬ ОШИБКИ
+    if errors:
+
+        return template(
+            'admin',
+            books=get_books(),
+            errors=errors,
+            form=request.forms,
+            year=2026
+        )
+
+    # ТОЛЬКО ЕСЛИ ОШИБОК НЕТ
+
+    title = request.forms.get('title')
+    release_date = request.forms.get('release_date')
+    description = request.forms.get('description')
+    rating = request.forms.get('rating')
+
+    cover = request.files.get('cover')
+
     
     # 4. 🔥 ТОЛЬКО ЕСЛИ ОШИБОК НЕТ — сохраняем
     print("Все проверки пройдены, сохраняем книгу...")
@@ -343,41 +363,7 @@ def show_add_form():
     books = load_books()  # Загружаем из файла при каждом открытии
     return template('add_book', title='Добавить книгу',  books=books, year=2026, encoding='utf-8')
 
-@post('/add_book')
-def save_new_book():
-    # Получаем данные из формы
-    title = request.forms.get('title')
-    release_date = request.forms.get('release_date')
-    description = request.forms.get('description')
-    rating = request.forms.get('rating')
-    
-    # Обработка фото
-    upload = request.files.get('cover')
-    cover_url = "/static/images/default_book.jpg"
-    
-    if upload:
-        ext = upload.filename.split('.')[-1]
-        # Генерируем уникальное имя
-        unique_id = uuid.uuid4().hex[:8]  # Первые 8 символов UUID
-        new_filename = f"book_{unique_id}.{ext}"
-    
-        save_path = os.path.join(STATIC_DIR, 'images', 'books', new_filename)
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    
-        upload.save(save_path)
-        cover_url = f"/static/images/books/{new_filename}"
-    
-    # Загружаем текущие книги, добавляем новую, сохраняем
-    books = load_books()
-    books.append({
-        'title': title,
-        'release_date': release_date,
-        'description': description,
-        'rating': rating,
-        'cover': cover_url
-    })
-    save_books(books)  # ← Сохраняем в JSON файл!
-    
+
     redirect('/add_book_page')
 
 

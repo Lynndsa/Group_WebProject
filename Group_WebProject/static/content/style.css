@@ -735,8 +735,12 @@ input[type="checkbox"].input-validation-error {
 /* ===== КАСТОМНЫЙ FILE INPUT (только один!) ===== */
 
 /* Скрываем стандартный инпут */
-#cover {
-    display: none;
+.file-upload-btn input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    overflow: hidden;
 }
 
 .file-upload-btn {
@@ -926,6 +930,18 @@ input[type="checkbox"].input-validation-error {
     .books-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}
+
+.file-error {
+    margin-top: 8px;
+    color: #ff4d4d;
+    font-size: 0.85em;
+    letter-spacing: 1px;
+}
+
+.file-error-state {
+    border-color: #ff4d4d !important;
+    box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.15);
 }
 
 @media (max-width: 600px) {

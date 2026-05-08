@@ -61,5 +61,47 @@
     "description": "87654",
     "rating": "18+",
     "cover": "/static/images/default_book.jpg"
+  },
+  {
+    "title": "Оно",
+    "release_date": "2002-02-02",
+    "description": "о попе",
+    "rating": "18+",
+    "cover": "/static/images/default_book.jpg"
+  },
+  {
+    "title": "kjkhtr",
+    "release_date": "2008-05-09",
+    "description": "jgtredsfghjuy6y5tres",
+    "rating": "18+",
+    "cover": "/static/images/books/book_d26065b4.jpg"
+  },
+  {
+    "title": "оно",
+    "release_date": "2005-05-05",
+    "description": "нреукцвыапроьлшгнека",
+    "rating": "18+",
+    "cover": "/static/images/books/book_fd2b313b.jpg"
+  },
+  {
+    "title": "765434567",
+    "release_date": "9999-09-09",
+    "description": "4345678654",
+    "rating": "18+",
+    "cover": "/static/images/books/book_b427b8f0.jpg"
+  },
+  {
+    "title": "765434567",
+    "release_date": "9999-09-09",
+    "description": "4345678654",
+    "rating": "18+",
+    "cover": "/static/images/books/book_dad50189.jpg"
+  },
+  {
+    "title": "876543",
+    "release_date": "2002-02-09",
+    "description": "64323456",
+    "rating": "18+",
+    "cover": "/static/images/books/book_a2ac869b.png"
   }
 ]
