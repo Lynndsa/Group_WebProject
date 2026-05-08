@@ -160,3 +160,186 @@ def validate_review_form(form_data):
     if not ok: errors['phone'] = err
     
     return errors
+
+def validate_age_rating(rating):
+    """Проверка возрастного ограничения книги"""
+    if not rating:
+        return False, 'Возрастной рейтинг обязателен для заполнения'
+    
+    allowed_ratings = ['0+', '6+', '12+', '16+', '18+']
+    
+    if rating not in allowed_ratings:
+        return False, f'Рейтинг должен быть одним из: {", ".join(allowed_ratings)}'
+    
+    return True, None
+
+# Проверка файла обложки
+def validate_cover(upload, required=True):
+    """Проверка загружаемого файла обложки"""
+    
+    # ПРОВЕРКА 1: Если upload вообще нет
+    if not upload:
+        if required:
+            return False, 'Обложка книги обязательна'
+        else:
+            return True, None
+    
+    # ПРОВЕРКА 2: Если filename пустой (файл не выбран!)
+    if not upload.filename or upload.filename.strip() == '':
+        if required:
+            return False, 'Обложка книги обязательна'
+        else:
+            return True, None
+    
+    # Проверка расширения
+    allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']
+    ext = upload.filename.split('.')[-1].lower()
+    
+    if ext not in allowed_extensions:
+        return False, f'Разрешены только изображения: {", ".join(allowed_extensions)}'
+    
+    # Проверка размера (максимум 5 МБ)
+    MAX_SIZE = 5 * 1024 * 1024  # 5 MB
+    
+    try:
+        content = upload.file.read()
+        file_size = len(content)
+        
+        if file_size > MAX_SIZE:
+            return False, 'Размер файла не должен превышать 5 МБ'
+        
+        if file_size == 0:
+            return False, 'Файл пустой'
+        
+        # Возвращаем файл обратно в начало
+        upload.file.seek(0)
+    except Exception as e:
+        return False, f'Ошибка чтения файла: {str(e)}'
+    
+    return True, None
+
+# Проверка названия книги (Стивен Кинг)
+def validate_book_title(title):
+    """Специфичная проверка для названия книги"""
+    if not title:
+        return False, 'Название книги обязательно для заполнения'
+    
+    title = title.strip()
+    
+    if len(title) < 3:
+        return False, 'Название должно содержать минимум 3 символа'
+    
+    if len(title) > 150:
+        return False, 'Название не должно превышать 150 символов'
+    
+    # Запрещаем только цифры
+    if title.isdigit():
+        return False, 'Название не может состоять только из цифр'
+    
+    # Разрешаем кириллицу, латиницу, цифры, пробелы и базовую пунктуацию
+    if not re.match(r'^[а-яА-ЯёЁa-zA-Z0-9\s\-\.\,\:\!\?]+$', title):
+        return False, 'Название содержит недопустимые символы'
+    
+    return True, None
+
+# Проверка даты выхода книги
+def validate_book_date(date_str):
+    """Проверка даты выхода книги (может быть в прошлом или будущем)"""
+    s = date_str.strip()
+    if not s:
+        return False, 'Дата выхода обязательна для заполнения'
+    
+    try:
+        input_date = datetime.strptime(s, '%Y-%m-%d').date()
+    except ValueError:
+        return False, 'Дата должна быть в формате ГГГГ-ММ-ДД'
+    
+    # Для книг можно указывать будущие даты (анонсы)
+    # Но не раньше 1900 года
+    if input_date.year < 1900:
+        return False, 'Год не может быть раньше 1900'
+    
+    # Не слишком далеко в будущем (максимум +5 лет)
+    max_future = datetime.now().date()
+    max_future = max_future.replace(year=max_future.year + 5)
+    
+    if input_date > max_future:
+        return False, 'Дата выхода не может быть более чем на 5 лет в будущем'
+    
+    return True, None
+
+# Проверка описания книги
+def validate_book_description(description):
+    if not description:
+        return False, 'Описание обязательно для заполнения'
+    
+    description = description.strip()
+    
+    if len(description) < 20:
+        return False, 'Описание должно содержать минимум 20 символов'
+    
+    if len(description) > 1000:
+        return False, 'Описание не должно превышать 1000 символов'
+    
+    # Считаем буквы
+    letters = re.findall(r'[а-яА-ЯёЁa-zA-Z]', description)
+    if len(letters) < 10:
+        return False, 'Описание должно содержать минимум 10 букв'
+    
+    # не больше 50% цифр
+    digits = re.findall(r'[0-9]', description)
+    if len(digits) > len(description) * 0.5:
+        return False, 'Описание не может состоять преимущественно из цифр'
+    
+    # не только цифры и пробелы
+    if re.match(r'^[0-9\s]+$', description):
+        return False, 'Описание должно содержать хотя бы несколько букв'
+    
+    return True, None
+
+def validate_book_form(form_data, file_data=None):
+    """
+    Полная валидация формы добавления книги
+    
+    form_data: request.forms (Bottle)
+    file_data: request.files (Bottle)
+    """
+    errors = {}
+    
+    # Получаем данные
+    title = form_data.get('title', '').strip()
+    release_date = form_data.get('release_date', '').strip()
+    description = form_data.get('description', '').strip()
+    rating = form_data.get('rating', '').strip()
+    
+    # Получаем файл (если есть)
+    cover = None
+    if file_data:
+        cover = file_data.get('cover')
+    
+    # 1. Название книги
+    ok, err = validate_book_title(title)
+    if not ok:
+        errors['title'] = err
+    
+    # 2. Дата выхода
+    ok, err = validate_book_date(release_date)
+    if not ok:
+        errors['release_date'] = err
+    
+    # 3. Описание
+    ok, err = validate_book_description(description)
+    if not ok:
+        errors['description'] = err
+    
+    # 4. Возрастной рейтинг
+    ok, err = validate_age_rating(rating)
+    if not ok:
+        errors['rating'] = err
+    
+    # 5. Обложка
+    ok, err = validate_cover(cover, required=True)
+    if not ok:
+        errors['cover'] = err
+    
+    return errors
