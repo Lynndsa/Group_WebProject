@@ -295,7 +295,7 @@ def save_new_book():
     ok, err = validate_cover(cover, required=True)
     if not ok:
         errors['cover'] = err
-        print(f"❌ Ошибка обложки: {err}")
+        print(f"Ошибка обложки: {err}")
     
     # 3. при наличии ошибок возвращаем форму
     if errors:
