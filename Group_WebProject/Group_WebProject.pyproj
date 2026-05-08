@@ -65,6 +65,8 @@
     <Content Include="static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="static\images\books\i %281%29.jpg" />
+    <Content Include="static\images\books\kniga_protivostoyanie_king_s_1638458863_1.jpg" />
     <Content Include="static\images\it1990_beverly.jpg" />
     <Content Include="static\images\it1990_losers.jpg" />
     <Content Include="static\images\it1990_pennywise.jpg" />

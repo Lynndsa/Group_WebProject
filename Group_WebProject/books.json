@@ -1,107 +1,16 @@
 [
-  {
-    "title": "Специалист по информационной безопасности: старт карьеры",
-    "release_date": "1010-02-05",
-    "description": "о попе",
-    "rating": "18+",
-    "cover": "/static/images/books/book_741f0ea6.jpg"
-  },
-  {
-    "title": "Специалист по информационной безопасности: старт карьеры",
-    "release_date": "1010-02-05",
-    "description": "о попе",
-    "rating": "18+",
-    "cover": "/static/images/books/book_29e37b6a.jpg"
-  },
-  {
-    "title": "залупень",
-    "release_date": "6767-07-06",
-    "description": "сиксевеееен",
-    "rating": "0+",
-    "cover": "/static/images/books/book_fddab1e2.png"
-  },
-  {
-    "title": "пвавы",
-    "release_date": "5555-05-05",
-    "description": "жопа",
-    "rating": "12+",
-    "cover": "/static/images/books/book_5b89fe66.png"
-  },
-  {
-    "title": "рпавпачмпати",
-    "release_date": "0555-05-05",
-    "description": "еравыффцкера",
-    "rating": "16+",
-    "cover": "/static/images/books/book_726cfa47.png"
-  },
-  {
-    "title": "аоарпв",
-    "release_date": "7632-08-05",
-    "description": "гшноекпаы",
-    "rating": "12+",
-    "cover": "/static/images/books/book_45660ed9.jpg"
-  },
-  {
-    "title": "Оно",
-    "release_date": "2007-01-05",
-    "description": "987678765",
-    "rating": "18+",
-    "cover": "/static/images/default_book.jpg"
-  },
-  {
-    "title": "Оно",
-    "release_date": "2008-08-05",
-    "description": "656434",
-    "rating": "18+",
-    "cover": "/static/images/default_book.jpg"
-  },
-  {
-    "title": "Оно",
-    "release_date": "2009-06-09",
-    "description": "87654",
-    "rating": "18+",
-    "cover": "/static/images/default_book.jpg"
-  },
-  {
-    "title": "Оно",
-    "release_date": "2002-02-02",
-    "description": "о попе",
-    "rating": "18+",
-    "cover": "/static/images/default_book.jpg"
-  },
-  {
-    "title": "kjkhtr",
-    "release_date": "2008-05-09",
-    "description": "jgtredsfghjuy6y5tres",
-    "rating": "18+",
-    "cover": "/static/images/books/book_d26065b4.jpg"
-  },
-  {
-    "title": "оно",
-    "release_date": "2005-05-05",
-    "description": "нреукцвыапроьлшгнека",
-    "rating": "18+",
-    "cover": "/static/images/books/book_fd2b313b.jpg"
-  },
-  {
-    "title": "765434567",
-    "release_date": "9999-09-09",
-    "description": "4345678654",
-    "rating": "18+",
-    "cover": "/static/images/books/book_b427b8f0.jpg"
-  },
-  {
-    "title": "765434567",
-    "release_date": "9999-09-09",
-    "description": "4345678654",
-    "rating": "18+",
-    "cover": "/static/images/books/book_dad50189.jpg"
-  },
-  {
-    "title": "876543",
-    "release_date": "2002-02-09",
-    "description": "64323456",
-    "rating": "18+",
-    "cover": "/static/images/books/book_a2ac869b.png"
-  }
+    {
+        "title": "Оно",
+        "release_date": "1986-02-09",
+        "description": "Оно» — роман Стивена Кинга в жанре ужасов, впервые опубликованный в 1986 году.",
+        "rating": "18+",
+        "cover": "/static/images/books/i (1).jpg"
+    },
+    {
+        "title": "Противостояние",
+        "release_date": "1986-02-09",
+        "description": "Противостояние» — роман Стивена Кинга в жанре фэнтези, впервые опубликованный в 1997 году.",
+        "rating": "18+",
+        "cover": "/static/images/books/kniga_protivostoyanie_king_s_1638458863_1.jpg"
+    }
 ]
