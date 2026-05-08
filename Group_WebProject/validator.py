@@ -167,14 +167,14 @@ def validate_age_rating(rating):
 def validate_cover(upload, required=True):
     """Проверка загружаемого файла обложки"""
     
-    # ✅ ПРОВЕРКА 1: Если upload вообще нет
+    # ПРОВЕРКА 1: Если upload вообще нет
     if not upload:
         if required:
             return False, 'Обложка книги обязательна'
         else:
             return True, None
     
-    # ✅ ПРОВЕРКА 2: Если filename пустой (файл не выбран!)
+    # ПРОВЕРКА 2: Если filename пустой (файл не выбран!)
     if not upload.filename or upload.filename.strip() == '':
         if required:
             return False, 'Обложка книги обязательна'
