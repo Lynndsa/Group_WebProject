@@ -2,50 +2,49 @@
 import re
 from datetime import datetime
 
-
-def validate_author(author: str) -> tuple[bool, str | None]:
+#Проверка имени
+def validate_author(author):
     # Валидация имени автора
     if not author:
         return False, 'Поле Автор обязательно для заполнения'
-    if len(author.strip()) < 2:
-        return False, 'Имя автора должно содержать минимум 2 символа'
-    
-    # Только буквы и пробелы
-    if not re.match(r'^[а-яА-ЯёЁ\s]+$', author.strip()):
-        return False, 'Имя может содержать только русские буквы и пробелы'
-        
+    if len(author.strip()) < 3 or len(author.strip()) > 30:
+        return False, 'Имя автора должно не может быть меньше 3 символов или больше 30 симоволов '
+    # Только буквы,цифры и пробелы
+    if not re.match(r'^[а-яА-ЯёЁ0-9\s]+$', author.strip()):
+        return False, 'Имя может содержать только русские буквы,цифры и пробелы'
     return True, None
 
-
-def validate_title(title: str, field_name: str = 'Наименование', min_length: int = 5) -> tuple[bool, str | None]:
+#Проверка названия
+def validate_title(title,field_name = "Название"):
     if not title:
         return False, f'Поле {field_name} обязательно для заполнения'
-    if len(title.strip()) < min_length:
-        return False, f'{field_name} должно содержать минимум {min_length} символов'
+    if len(title.strip()) < 5:
+        return False, f'{field_name} должно содержать минимум {5} символов'
     return True, None
 
-
-def validate_description(description: str, min_letters: int = 10) -> tuple[bool, str | None]:
-    # Валидация текстового описания / отзыва
+#Проверка Описания
+def validate_description(description ) :
+    # Валидация текстового описания
     if not description:
         return False, 'Поле Описание обязательно для заполнения'
-
-    # Считаем ТОЛЬКО буквы (кириллица и латиница)
+    # Считаем только буквы (кириллица)
     letters = re.findall(r'[а-яА-ЯёЁ]', description)
-    if len(letters) < min_letters:
-        return False, f'Текст должен содержать минимум {min_letters} русских букв'
-        
+    if len(letters) < 10:
+        return False, f'Текст должен содержать минимум {10} русских букв'
     # Разрешаем буквы, цифры, пробелы, пунктуацию и кавычки (включая «» для цитат)
-    allowed_pattern = r'^[а-яА-ЯёЁ0-9\s.,!?;:\-\'"()\[\]«»]+$'
+    allowed_pattern = r'^[а-яА-ЯёЁ0-9\s.,!?;:\-\'"()«»]+$'
     if not re.match(allowed_pattern, description.strip()):
         return False, 'Текст может содержать только русские буквы, цифры, знаки препинания и кавычки'
         
     return True, None
 
 
-def validate_date(date_str: str) -> tuple[bool, str | None]:
-    if not date_str:
+#Проверка даты
+def validate_date(date_str):
+    s = date_str.strip()
+    if not s:
         return False, 'Поле Дата обязательно для заполнения'
+    
     try:
         date_obj = datetime.strptime(date_str, '%Y-%m-%d')
 
@@ -61,14 +60,22 @@ def validate_date(date_str: str) -> tuple[bool, str | None]:
         return True, None
     except ValueError:
         return False, 'Дата должна быть в формате ГГГГ-ММ-ДД'
-
-
-def validate_phone(phone: str, required: bool = True) -> tuple[bool, str | None]:
-    if not phone:
-        if required:
-            return False, 'Поле Телефон обязательно для заполнения'
-        return True, None
     
+    # Получаем текущую дату (без времени)
+    today = datetime.now().date()
+    
+    # Проверяем, не является ли дата будущей (год, месяц и день)
+    if input_date > today:
+        return False, 'Дата не может быть в будущем'
+        
+    return True, None
+
+#Проверка номера телефона
+def validate_phone(phone) :
+     # Валидация номера
+    if not phone:
+        return False, 'Поле Телефон обязательно для заполнения'
+    #Паттерн на проверку номера
     cleaned = re.sub(r'[\s\(\)\-]', '', phone)
     pattern = r'^(\+7|8)\d{10}$'
     
@@ -76,8 +83,8 @@ def validate_phone(phone: str, required: bool = True) -> tuple[bool, str | None]
         return True, None
     return False, 'Телефон должен начинаться с +7 или 8 и содержать 11 цифр'
 
-
-def validate_rating(rating: str) -> tuple[bool, str | None]:
+#Проверка рейтинга
+def validate_rating(rating) :
     if not rating:
         return False, 'Оценка обязательна для заполнения'
     try:
@@ -88,8 +95,8 @@ def validate_rating(rating: str) -> tuple[bool, str | None]:
     except ValueError:
         return False, 'Оценка должна быть целым числом'
 
-
-def validate_article_form(form_data: dict) -> dict[str, str]:
+#Валидация формы со статьями
+def validate_article_form(form_data):
     errors = {}
     
     author = form_data.get('author', '').strip()
@@ -105,19 +112,19 @@ def validate_article_form(form_data: dict) -> dict[str, str]:
     if not ok: errors['title'] = err
     
     # Для статей, возможно, стоит оставить проверку по символам, но можно и по буквам
-    ok, err = validate_description(description, min_letters=20)
+    ok, err = validate_description(description)
     if not ok: errors['description'] = err
     
     ok, err = validate_date(date)
     if not ok: errors['date'] = err
     
-    ok, err = validate_phone(phone, required=True)
+    ok, err = validate_phone(phone)
     if not ok: errors['phone'] = err
     
     return errors
 
-
-def validate_review_form(form_data: dict) -> dict[str, str]:
+#Валидация формы с отзывами
+def validate_review_form(form_data):
     errors = {}
     
     author = form_data.get('author', '').strip()
@@ -133,21 +140,23 @@ def validate_review_form(form_data: dict) -> dict[str, str]:
     # 2. Название книги
     if not book_title:
         errors['book_title'] = 'Название книги обязательно'
+    elif book_title.isdigit():
+        errors['book_title'] = 'Название не может состоять только из цифр'
     elif len(book_title) < 3:
         errors['book_title'] = 'Название должно быть длиннее 3 символов'
     elif not re.match(r'^[а-яА-ЯёЁ0-9\s/]+$', book_title):
-        errors['book_title'] = 'Название может содержать только кириллицу, цифры и пробелы'
+        errors['book_title'] = 'Название может содержать только кириллицу и цифры '
         
     # 3. Оценка
     ok, err = validate_rating(rating)
     if not ok: errors['rating'] = err
     
     # 4. Текст отзыва 
-    ok, err = validate_description(review_text, min_letters=10)
+    ok, err = validate_description(review_text)
     if not ok: errors['review_text'] = err
     
     # 5. Телефон
-    ok, err = validate_phone(phone, required=True)
+    ok, err = validate_phone(phone)
     if not ok: errors['phone'] = err
     
     return errors
