@@ -46,8 +46,18 @@ def validate_date(date_str):
         return False, 'Поле Дата обязательно для заполнения'
     
     try:
-        # Превращаем строку в объект даты (отсекаем время)
-        input_date = datetime.strptime(s, '%Y-%m-%d').date()
+        date_obj = datetime.strptime(date_str, '%Y-%m-%d')
+
+        current_date = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        min_date = datetime(1960,1,1)
+
+        if date_obj < min_date:
+            return False, "Дата должна быть раньше 1960 года"
+
+        if date_obj > current_date:
+            return False, "Дата не может быть позже текущей"
+
+        return True, None
     except ValueError:
         return False, 'Дата должна быть в формате ГГГГ-ММ-ДД'
     
