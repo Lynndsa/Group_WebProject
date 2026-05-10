@@ -2,7 +2,7 @@
 import re 
 from bottle import route, view, request, static_file, template, redirect, post, run
 from datetime import datetime
-from validator import validate_article_form, validate_review_form
+from validator import *
 import json
 import os
 import uuid
@@ -262,74 +262,62 @@ def reviews_post():
 # НОВИНКИ
 @post('/add_book')
 def save_new_book():
-    # 1. Получаем данные
-    title = request.forms.get('title', '').strip()
-    release_date = request.forms.get('release_date', '').strip()
-    description = request.forms.get('description', '').strip()
-    rating = request.forms.get('rating', '').strip()
-    cover = request.files.get('cover')
-    
-    # 2. Валидация
-    errors = {}
-    
-    ok, err = validate_book_title(title)
-    if not ok:
-        errors['title'] = err
-        print(f"❌ Ошибка названия: {err}")  # Для отладки
-    
-    ok, err = validate_book_date(release_date)
-    if not ok:
-        errors['release_date'] = err
-        print(f"❌ Ошибка даты: {err}")
-    
-    ok, err = validate_book_description(description)
-    if not ok:
-        errors['description'] = err
-        print(f"❌ Ошибка описания: {err}") 
-    
-    ok, err = validate_age_rating(rating)
-    if not ok:
-        errors['rating'] = err
-        print(f"❌ Ошибка рейтинга: {err}")
-    
-    ok, err = validate_cover(cover, required=True)
-    if not ok:
-        errors['cover'] = err
-        print(f"Ошибка обложки: {err}")
-    
-    # 3. при наличии ошибок возвращаем форму
-    if errors:
-        print(f"Найдены ошибки: {errors}")
-        books = load_books()
-        return template('add_book', 
-                       books=books, 
-                       year=2026, 
-                       title='Добавить книгу',
-                       errors=errors,
-                       form_data=request.forms)
-        # ЕСЛИ ЕСТЬ ОШИБКИ
-    if errors:
 
+    books = load_books()
+
+    form_data = {
+        'title': request.forms.getunicode('title', '').strip(),
+        'release_date': request.forms.getunicode('release_date', '').strip(),
+        'description': request.forms.getunicode('description', '').strip(),
+        'rating': request.forms.getunicode('rating', '').strip(),
+    }
+
+    cover = request.files.get('cover')
+
+    # Валидация
+    errors = validate_book_form(request.forms, request.files)
+
+    if errors:
         return template(
-            'admin',
-            books=get_books(),
+            'add_book',
+            books=books,
+            year=2026,
+            title='Добавить книгу',
             errors=errors,
-            form=request.forms,
-            year=2026
+            form_data=form_data
         )
 
-    # ТОЛЬКО ЕСЛИ ОШИБОК НЕТ
+    # ===== СОХРАНЕНИЕ ФАЙЛА =====
 
-    title = request.forms.get('title')
-    release_date = request.forms.get('release_date')
-    description = request.forms.get('description')
-    rating = request.forms.get('rating')
+    upload_dir = os.path.join(STATIC_DIR, 'uploads')
 
-    cover = request.files.get('cover')
+    if not os.path.exists(upload_dir):
+        os.makedirs(upload_dir)
 
-    
-    # 4. 🔥 ТОЛЬКО ЕСЛИ ОШИБОК НЕТ — сохраняем
-    print("Все проверки пройдены, сохраняем книгу...")
+    ext = cover.filename.split('.')[-1].lower()
+
+    filename = f"{uuid.uuid4()}.{ext}"
+
+    file_path = os.path.join(upload_dir, filename)
+
+    cover.save(file_path)
+
+    # ===== СОЗДАЁМ КНИГУ =====
+
+    new_book = {
+        'id': len(books) + 1,
+        'title': form_data['title'],
+        'release_date': form_data['release_date'],
+        'description': form_data['description'],
+        'rating': form_data['rating'],
+        'cover': f'/static/uploads/{filename}'
+    }
+
+    books.append(new_book)
+
+    save_books(books)
+
+    redirect('/add_book_page')
     
 # Функции для работы с JSON
 def load_books():
@@ -354,15 +342,20 @@ def save_books(books):
 def server_static(filepath):
     return static_file(filepath, root=STATIC_DIR)
 
-@route('/')
-def index():
-    return template('index', title='Главная', year=2026, encoding='utf-8')
 
 @route('/add_book_page')
 def show_add_form():
-    books = load_books()  # Загружаем из файла при каждом открытии
-    return template('add_book', title='Добавить книгу',  books=books, year=2026, encoding='utf-8')
 
+    books = load_books()
+
+    return template(
+        'add_book',
+        title='Добавить книгу',
+        books=books,
+        year=2026,
+        errors={},
+        form_data={}
+    )
 
     redirect('/add_book_page')
 
