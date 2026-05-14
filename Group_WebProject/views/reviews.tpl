@@ -23,10 +23,23 @@
         <section class="add-article-section form-column">
             <h2>Добавить отзыв</h2>
             
-            <!-- если список ошибок не пуст, показывается -->
             % if errors:
             <div class="validation-summary-errors">
+                % if len(errors) > 1 or not errors.get('duplicate'):
                 Пожалуйста, исправьте ошибки в форме.
+                % end
+    
+                % if errors.get('duplicate'):
+                <div >
+                    {{ errors['duplicate'] }}
+                </div>
+                % end
+    
+                % for field, message in errors.items():
+                    % if field != 'duplicate':
+                    <div></div>
+                    % end
+                % end
             </div>
             % end
             

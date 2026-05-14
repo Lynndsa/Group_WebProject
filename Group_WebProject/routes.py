@@ -182,7 +182,7 @@ def reviews_get():
 @view('reviews')
 def reviews_post():
     users_list = load_reviews()
-    
+
     # собираем данные формы
     form_data = {
         'book_title': request.forms.getunicode('book_title', '').strip(),
@@ -196,16 +196,24 @@ def reviews_post():
     #валидация полей
     errors = validate_review_form(form_data)
     
-    #проверка уникальности телефона 
+     #проверка уникальности телефона и дубликатов
     if not errors:
         form_data['phone'] = normalize_phone(form_data['phone'])  # +7...
         user_idx = find_user_by_phone(users_list, form_data['phone'])
         
-        #если телефон уже есть, но имя не совпадает — ошибка
+        # если пользователь уже есть в базе
         if user_idx != -1:
+            #проверка совпадения имени
             existing_author = users_list[user_idx].get('author')
             if existing_author != form_data['author']:
                 errors['phone'] = f'Номер {form_data["phone"]} уже зарегистрирован на пользователя "{existing_author}"'
+            
+            #проверка дубликата отзыва 
+            if not errors:
+                for rev in users_list[user_idx]['reviews']:
+                    if rev.get('book_title') == form_data['book_title']:
+                        errors['duplicate'] = f'Вы уже оставляли отзыв на книгу "{form_data["book_title"]}"'
+                        break
     
     #функция-сборщик данных 
     def render(**kwargs):
