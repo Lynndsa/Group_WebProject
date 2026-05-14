@@ -39,21 +39,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\__init__.py">
->>>>>>>>> Temporary merge branch 2
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\test_reviews.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\__init__.py">
->>>>>>>>> Temporary merge branch 2
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\test_reviews.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\__init__.py">
->>>>>>>>> Temporary merge branch 2
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="validator.py" />
