@@ -611,3 +611,346 @@ input[type="checkbox"].input-validation-error {
         gap: 10px;
     }
 }
+
+* {
+    box-sizing: border-box;
+}
+
+/* ===== СТРАНИЦА ДОБАВЛЕНИЯ КНИГ ===== */
+
+.admin-container {
+    display: flex;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 60px auto;
+    padding: 0 40px;
+    align-items: flex-start;
+}
+
+/* ===== ЛЕВАЯ КОЛОНКА: ФОРМА ===== */
+
+.form-section {
+    flex: 0 0 450px;
+    background: linear-gradient(160deg, #0d0d0d 0%, #0a0a0a 100%);
+    padding: 40px;
+    border: 1px solid #1e1e1e;
+    border-radius: 3px;
+    position: sticky;
+    top: 40px;
+    align-self: flex-start;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+}
+
+    .form-section::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .form-section::-webkit-scrollbar-track {
+        background: #0a0a0a;
+    }
+
+    .form-section::-webkit-scrollbar-thumb {
+        background: #8b0000;
+        border-radius: 2px;
+    }
+
+.section-title-small {
+    color: #c41e3a;
+    font-size: 1.6em;
+    margin: 0 0 30px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-family: 'Playfair Display', 'Georgia', serif;
+    border-bottom: 1px solid #1e1e1e;
+    padding-bottom: 15px;
+}
+
+/* ===== ФОРМА ===== */
+
+.book-form .form-group {
+    margin-bottom: 22px;
+}
+
+.book-form label {
+    display: block;
+    color: #c41e3a;
+    margin-bottom: 8px;
+    font-size: 0.78em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.book-form input[type="text"],
+.book-form input[type="date"],
+.book-form textarea,
+.book-form select {
+    width: 100%;
+    background: #080808;
+    border: 1px solid #1e1e1e;
+    color: #d4d4d4;
+    padding: 13px 16px;
+    font-size: 0.95em;
+    border-radius: 3px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Crimson Text', Georgia, serif;
+}
+
+    .book-form input[type="text"]:focus,
+    .book-form input[type="date"]:focus,
+    .book-form textarea:focus,
+    .book-form select:focus {
+        outline: none;
+        border-color: #c41e3a;
+        box-shadow: 0 0 0 2px rgba(196, 30, 58, 0.15);
+    }
+
+    .book-form input[type="text"]::placeholder,
+    .book-form textarea::placeholder {
+        color: #3a3a3a;
+    }
+
+.book-form textarea {
+    resize: vertical;
+    line-height: 1.6;
+    min-height: 120px;
+}
+
+.book-form select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238b0000' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+}
+
+    .book-form select option {
+        background: #0d0d0d;
+        color: #d4d4d4;
+    }
+
+/* ===== КАСТОМНЫЙ FILE INPUT (только один!) ===== */
+
+/* Скрываем стандартный инпут */
+.file-upload-btn input[type="file"] {
+    position: absolute;
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    overflow: hidden;
+}
+
+.file-upload-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 13px 16px;
+    background: #080808;
+    border: 1px dashed #2a2a2a;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+    color: #444;
+    font-size: 0.9em;
+    font-family: 'Crimson Text', Georgia, serif;
+}
+
+    .file-upload-btn:hover {
+        border-color: #8b0000;
+        background: #0d0808;
+        color: #aaa;
+    }
+
+    .file-upload-btn.file-selected {
+        border-style: solid;
+        border-color: #c41e3a;
+        color: #d4d4d4;
+        background: #0d0808;
+    }
+
+#file-name {
+    flex: 1;
+    min-width: 0;
+    white-space: normal; /* разрешаем перенос */
+    word-break: break-word; /* переносим длинные имена файлов */
+    line-height: 1.4;
+    color: inherit;
+}
+
+.upload-icon {
+    font-size: 1.2em;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+/* ===== КНОПКА ОТПРАВКИ ===== */
+
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #8b0000, #c41e3a);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    font-weight: 700;
+    margin-top: 8px;
+    font-family: inherit;
+}
+
+    .submit-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(196, 30, 58, 0.5);
+        background: linear-gradient(135deg, #a00000, #d42e4a);
+    }
+
+    .submit-btn:active {
+        transform: translateY(-1px);
+    }
+
+/* ===== ПРАВАЯ КОЛОНКА: КАРТОЧКИ КНИГ ===== */
+
+.books-section {
+    flex: 1;
+    min-width: 0;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(250px, 1fr));
+    gap: 30px;
+    align-items: start;
+}
+
+.book-card-new {
+    width: 100%;
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    border-radius: 3px;
+    overflow: hidden;
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+    .book-card-new:hover {
+        transform: translateY(-8px);
+        border-color: #8b0000;
+        box-shadow: 0 20px 60px rgba(196, 30, 58, 0.25);
+    }
+
+.book-cover-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.book-cover-new {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: grayscale(20%);
+}
+
+.book-card-new:hover .book-cover-new {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+}
+
+.age-rating {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #8b0000, #c41e3a);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 0.85em;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+}
+
+.book-info-new {
+    padding: 25px;
+}
+
+.book-title-new {
+    color: #fff;
+    font-size: 1.3em;
+    margin: 0 0 8px;
+    letter-spacing: 2px;
+    font-family: 'Playfair Display', 'Georgia', serif;
+    font-weight: 700;
+}
+
+.book-date-new {
+    color: #8b0000;
+    font-size: 0.85em;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.book-desc-new {
+    color: #888;
+    font-size: 0.95em;
+    line-height: 1.7;
+    margin: 0;
+    text-align: justify;
+    font-family: 'Crimson Text', Georgia, serif;
+}
+
+/* ===== АДАПТИВНОСТЬ ===== */
+
+@media (max-width: 1024px) {
+    .admin-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .form-section {
+        flex: none;
+        width: 100%;
+        position: relative;
+        top: 0;
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.file-error {
+    margin-top: 8px;
+    color: #ff4d4d;
+    font-size: 0.85em;
+    letter-spacing: 1px;
+}
+
+.file-error-state {
+    border-color: #ff4d4d !important;
+    box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.15);
+}
+
+@media (max-width: 600px) {
+    .admin-container {
+        padding: 0 20px;
+        margin: 30px auto;
+    }
+
+    .books-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -18,8 +18,7 @@
     <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
     <Name>Group_WebProject</Name>
     <RootNamespace>Group_WebProject</RootNamespace>
-    <InterpreterId>
-    </InterpreterId>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
     <SuppressEnvironmentCreationPrompt>True</SuppressEnvironmentCreationPrompt>
     <TestFramework>unittest</TestFramework>
     <UnitTestPattern>test*.py</UnitTestPattern>
@@ -36,9 +35,31 @@
   <ItemGroup>
     <Compile Include="app.py" />
     <Compile Include="routes.py" />
+    <Compile Include="tests\test_reviews.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\__init__.py">
+>>>>>>>>> Temporary merge branch 2
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\test_reviews.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\__init__.py">
+>>>>>>>>> Temporary merge branch 2
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\test_reviews.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tests\__init__.py">
+>>>>>>>>> Temporary merge branch 2
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="validator.py" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="static\images\books\" />
     <Folder Include="tests\" />
     <Folder Include="static\" />
     <Folder Include="static\content\" />
@@ -48,6 +69,7 @@
     <Folder Include="views\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="books.json" />
     <Content Include="requirements.txt" />
     <Content Include="static\content\bio.css">
       <SubType>Code</SubType>
@@ -61,6 +83,8 @@
     <Content Include="static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="static\images\books\i %281%29.jpg" />
+    <Content Include="static\images\books\kniga_protivostoyanie_king_s_1638458863_1.jpg" />
     <Content Include="static\images\it1990_beverly.jpg" />
     <Content Include="static\images\it1990_losers.jpg" />
     <Content Include="static\images\it1990_pennywise.jpg" />
@@ -74,6 +98,7 @@
     <Content Include="static\images\it2019_fight.jpg" />
     <Content Include="static\images\it2019_pennywise2.jpg" />
     <Content Include="static\images\it_cover.jpg" />
+    <Content Include="static\scripts\book_upload.js" />
     <Content Include="static\scripts\bootstrap.js" />
     <Content Include="static\scripts\bootstrap.min.js" />
     <Content Include="static\scripts\jquery-1.10.2.intellisense.js" />
@@ -91,6 +116,7 @@
     <Content Include="static\scripts\respond.min.js" />
     <Content Include="static\scripts\reviews.js" />
     <Content Include="static\scripts\_references.js" />
+    <Content Include="views\add_book.tpl" />
     <Content Include="views\articles.tpl">
       <SubType>Code</SubType>
     </Content>
@@ -100,6 +126,17 @@
     <Content Include="views\index.tpl" />
     <Content Include="views\layout.tpl" />
     <Content Include="views\reviews.tpl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.12</Version>
+      <Description>env (Python 3.12 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
   <!-- Specify pre- and post-build commands in the BeforeBuild and 

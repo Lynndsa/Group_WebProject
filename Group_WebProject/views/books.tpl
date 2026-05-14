@@ -9,7 +9,7 @@
 <!-- Основной контент: обложка и описание -->
 <div class="book-main-content">
     
-    <!-- Обложка книги слева -->
+    <!-- Обложка книги слева, список -->
     <div class="book-cover-section">
         <img src="/static/images/it_cover.jpg" alt="Обложка книги Оно" class="book-cover-large">
         <div class="book-meta-info">

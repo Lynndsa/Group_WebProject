@@ -28,6 +28,33 @@ Frontend:
   - JavaScript (ES6+)
   - Google Fonts (Playfair Display, Inter, Courier Prime)
 
+СТРУКТУРА ПРОЕКТА
+-----------------
+stephen-king-site/
+├── views/
+│   ├── layout.tpl          # Основной шаблон
+│   ├── index.tpl           # Главная страница
+│   ├── bio.tpl             # Страница биографии
+│   ├── books.tpl           # Страница книг
+│   └── news.tpl            # Страница новостей
+├── static/
+│   ├── content/
+│   │   ├── bootstrap.min.css
+│   │   ├── site.css
+│   │   └── bio.css         # Стили биографии
+│   ├── scripts/
+│   │   ├── modernizr-2.6.2.js
+│   │   ├── jquery-1.10.2.js
+│   │   ├── bootstrap.js
+│   │   ├── respond.js
+│   │   └── modal.js        # Скрипт модального окна
+│   └── images/
+│       ├── stephenking.jpg
+│       ├── stephenkingchild.jpg
+│       └── ...             # Другие изображения
+├── app.py                  # Основное приложение
+├── README.txt              # Этот файл
+└── requirements.txt        # Зависимости Python
 
 ФУНКЦИОНАЛ
 ----------
@@ -59,6 +86,8 @@ Frontend:
 ЛИЦЕНЗИЯ
 --------
 Этот проект создан в учебных целях. Все права на изображения и текстовые материалы принадлежат их правообладателям.
+
+
 
 ДАТА ОБНОВЛЕНИЯ
 ---------------

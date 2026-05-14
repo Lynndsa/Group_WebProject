@@ -1,0 +1,16 @@
+[
+    {
+        "title": "Оно",
+        "release_date": "1986-02-09",
+        "description": "Оно» — роман Стивена Кинга в жанре ужасов, впервые опубликованный в 1986 году.",
+        "rating": "18+",
+        "cover": "/static/images/books/i (1).jpg"
+    },
+    {
+        "title": "Противостояние",
+        "release_date": "1986-02-09",
+        "description": "Противостояние» — роман Стивена Кинга в жанре фэнтези, впервые опубликованный в 1997 году.",
+        "rating": "18+",
+        "cover": "/static/images/books/kniga_protivostoyanie_king_s_1638458863_1.jpg"
+    }
+]
