@@ -1,16 +1,32 @@
 [
-    {
-        "title": "Оно",
-        "release_date": "1986-02-09",
-        "description": "Оно» — роман Стивена Кинга в жанре ужасов, впервые опубликованный в 1986 году.",
-        "rating": "18+",
-        "cover": "/static/images/books/i (1).jpg"
-    },
-    {
-        "title": "Противостояние",
-        "release_date": "1986-02-09",
-        "description": "Противостояние» — роман Стивена Кинга в жанре фэнтези, впервые опубликованный в 1997 году.",
-        "rating": "18+",
-        "cover": "/static/images/books/kniga_protivostoyanie_king_s_1638458863_1.jpg"
-    }
+  {
+    "title": "Оно",
+    "release_date": "1986-02-09",
+    "description": "Оно» — роман Стивена Кинга в жанре ужасов, впервые опубликованный в 1986 году.",
+    "rating": "18+",
+    "cover": "/static/images/books/i (1).jpg"
+  },
+  {
+    "title": "Противостояние",
+    "release_date": "1986-02-09",
+    "description": "Противостояние» — роман Стивена Кинга в жанре фэнтези, впервые опубликованный в 1997 году.",
+    "rating": "18+",
+    "cover": "/static/images/books/kniga_protivostoyanie_king_s_1638458863_1.jpg"
+  },
+  {
+    "id": 3,
+    "title": "Институт",
+    "release_date": "2019-09-10",
+    "description": "«Институт» (англ. The Institute) — роман американского писателя Стивена Кинга в жанрах научной фантастики и ужасов. Опубликован 10 сентября 2019 года.",
+    "rating": "16+",
+    "cover": "/static/uploads/e7368ab4-c499-4dad-9bc6-c3971ce66cb1.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Институт",
+    "release_date": "2019-09-10",
+    "description": "«Институт» (англ. The Institute) — роман американского писателя Стивена Кинга в жанрах научной фантастики и ужасов. Опубликован 10 сентября 2019 года.",
+    "rating": "16+",
+    "cover": "/static/uploads/c8dbfc4c-8ac0-45e1-af9b-5f93ae795964.jpg"
+  }
 ]
