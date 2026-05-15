@@ -277,7 +277,22 @@ def save_new_book():
     # Валидация
     errors = validate_book_form(request.forms, request.files)
 
+    # Проверка уникальности названия
+
+    for book in books:
+
+        existing_title = book.get('title', '').strip().lower()
+
+        new_title = form_data['title'].strip().lower()
+
+        if existing_title == new_title:
+
+            errors['title'] = 'Такая книга уже существует'
+
+            break
+
     if errors:
+
         return template(
             'add_book',
             books=books,
@@ -286,6 +301,16 @@ def save_new_book():
             errors=errors,
             form_data=form_data
         )
+
+        if errors:
+            return template(
+                'add_book',
+                books=books,
+                year=2026,
+                title='Добавить книгу',
+                errors=errors,
+                form_data=form_data
+            )
 
     # ===== СОХРАНЕНИЕ ФАЙЛА =====
 
