@@ -275,29 +275,29 @@ def validate_book_date(date_str):
 # Проверка описания книги
 def validate_book_description(description):
     if not description:
-        return False, 'Описание обязательно для заполнения'
+        return False, 'Предисловие обязательно для заполнения'
     
     description = description.strip()
     
     if len(description) < 20:
-        return False, 'Описание должно содержать минимум 20 символов'
+        return False, 'Предисловие должно содержать минимум 20 символов'
     
     if len(description) > 1000:
-        return False, 'Описание не должно превышать 1000 символов'
+        return False, 'Предисловие не должно превышать 1000 символов'
     
     # Считаем буквы
     letters = re.findall(r'[а-яА-ЯёЁa-zA-Z]', description)
     if len(letters) < 10:
-        return False, 'Описание должно содержать минимум 10 букв'
+        return False, 'Предисловие должно содержать минимум 10 букв'
     
     # не больше 50% цифр
     digits = re.findall(r'[0-9]', description)
     if len(digits) > len(description) * 0.5:
-        return False, 'Описание не может состоять преимущественно из цифр'
+        return False, 'Предисловие не может состоять преимущественно из цифр'
     
     # не только цифры и пробелы
     if re.match(r'^[0-9\s]+$', description):
-        return False, 'Описание должно содержать хотя бы несколько букв'
+        return False, 'Предисловие должно содержать хотя бы несколько букв'
     
     return True, None
 

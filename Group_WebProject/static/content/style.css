@@ -616,6 +616,42 @@ input[type="checkbox"].input-validation-error {
     box-sizing: border-box;
 }
 
+/* Текст ошибки под полями и в общем блоке */
+.field-validation-error,
+.validation-summary-errors,
+.error-message {
+    color: #ffffff !important;
+}
+
+/* Рамка и свечение полей с ошибкой */
+.input-validation-error,
+.article-form input.error,
+.article-form textarea.error,
+.book-form input.input-validation-error,
+.book-form textarea.input-validation-error {
+    border-color: #ffffff !important;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Фон блока ошибок (левая полоска останется красной из style.css) */
+.validation-summary-errors {
+    background: rgba(255, 255, 255, 0.1) !important;
+    /* border-left НЕ переопределяем — остаётся красным */
+}
+
+/* Левая полоска у сообщения об ошибке — тоже оставляем красной */
+/* Просто не переопределяем border-left */
+
+/* Ошибка загрузки файла */
+.file-error-state {
+    border-color: #ffffff !important;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15) !important;
+}
+
+.file-error {
+    color: #ffffff !important;
+}
+
 /* ===== СТРАНИЦА ДОБАВЛЕНИЯ КНИГ ===== */
 
 .admin-container {
@@ -732,7 +768,7 @@ input[type="checkbox"].input-validation-error {
         color: #d4d4d4;
     }
 
-/* ===== КАСТОМНЫЙ FILE INPUT (только один!) ===== */
+/* ===== КАСТОМНЫЙ FILE INPUT  ===== */
 
 /* Скрываем стандартный инпут */
 .file-upload-btn input[type="file"] {
